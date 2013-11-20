@@ -22,14 +22,14 @@ ColourDesired Platform::Chrome()
     return ColourDesired(0xE0, 0xE0, 0xE0);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 ColourDesired Platform::ChromeHighlight()
 {
     return ColourDesired(0xFF, 0xFF, 0xFF);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Returns the currently set system font for the user.
@@ -40,7 +40,7 @@ const char *Platform::DefaultFont()
     return [name UTF8String];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Returns the currently set system font size for the user.
@@ -51,7 +51,7 @@ int Platform::DefaultFontSize()
                              integerForKey: @"NSFixedPitchFontSize"]);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Returns the time span in which two consecutive mouse clicks must occur to be considered as
@@ -68,14 +68,14 @@ unsigned int Platform::DoubleClickTime()
     return static_cast<unsigned int>(threshold * 1000.0);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 bool Platform::MouseButtonBounce()
 {
     return false;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Helper method for the backend to reach through to the scintilla window.
@@ -85,7 +85,7 @@ long Platform::SendScintilla(WindowID w, unsigned int msg, unsigned long wParam,
     return scintilla_send_message(w, msg, wParam, lParam);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Helper method for the backend to reach through to the scintilla window.
@@ -95,7 +95,7 @@ long Platform::SendScintillaPointer(WindowID w, unsigned int msg, unsigned long 
     return scintilla_send_message(w, msg, wParam, (long) lParam);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 bool Platform::IsDBCSLeadByte(int codePage, char ch)
 {
@@ -127,7 +127,7 @@ bool Platform::IsDBCSLeadByte(int codePage, char ch)
     return false;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 int Platform::DBCSCharLength(int /* codePage */, const char* /* s */)
 {
@@ -135,28 +135,28 @@ int Platform::DBCSCharLength(int /* codePage */, const char* /* s */)
     return 1;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 int Platform::DBCSCharMaxLength()
 {
     return 2;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 int Platform::Minimum(int a, int b)
 {
     return (a < b) ? a : b;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 int Platform::Maximum(int a, int b)
 {
     return (a > b) ? a : b;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 //#define TRACE
 #ifdef TRACE
@@ -166,7 +166,7 @@ void Platform::DebugDisplay(const char *s)
     fprintf( stderr, "%s", s );
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 void Platform::DebugPrintf(const char *format, ...)
 {
@@ -188,7 +188,7 @@ void Platform::DebugPrintf(const char *, ...) {}
 
 #endif
 
-//--------------------------------------------------------------------------------------------------
+
 
 static bool assertionPopUps = true;
 
@@ -199,7 +199,7 @@ bool Platform::ShowAssertionPopUps(bool assertionPopUps_)
     return ret;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 void Platform::Assert(const char *c, const char *file, int line)
 {
@@ -213,7 +213,7 @@ void Platform::Assert(const char *c, const char *file, int line)
 #endif
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 int Platform::Clamp(int val, int minVal, int maxVal)
 {

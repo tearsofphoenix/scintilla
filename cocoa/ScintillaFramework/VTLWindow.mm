@@ -38,7 +38,7 @@ Window::~Window()
 {
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 void Window::Destroy()
 {
@@ -54,7 +54,7 @@ void Window::Destroy()
     wid = 0;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 bool Window::HasFocus()
 {
@@ -62,7 +62,7 @@ bool Window::HasFocus()
     return [[container window] firstResponder] == container;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 static int ScreenMax(NSWindow* win)
 {
@@ -104,7 +104,7 @@ PRectangle Window::GetPosition()
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 void Window::SetPosition(PRectangle rc)
 {
@@ -132,7 +132,7 @@ void Window::SetPosition(PRectangle rc)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 void Window::SetPositionRelative(PRectangle rc, Window window)
 {
@@ -144,7 +144,7 @@ void Window::SetPositionRelative(PRectangle rc, Window window)
     SetPosition(rc);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 PRectangle Window::GetClientPosition()
 {
@@ -152,7 +152,7 @@ PRectangle Window::GetClientPosition()
     return GetPosition();
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 void Window::Show(bool show)
 {
@@ -162,19 +162,20 @@ void Window::Show(bool show)
         if ([idWin isKindOfClass: [NSWindow class]])
         {
             NSWindow* win = reinterpret_cast<NSWindow*>(idWin);
+            
             if (show)
             {
-                [win orderFront:nil];
-            }
-            else
+                [win orderFront: nil];
+                
+            }else
             {
-                [win orderOut:nil];
+                [win orderOut: nil];
             }
         }
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Invalidates the entire window or view so it is completely redrawn.
@@ -200,7 +201,7 @@ void Window::InvalidateAll()
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Invalidates part of the window or view so only this part redrawn.
@@ -225,14 +226,14 @@ void Window::InvalidateRectangle(PRectangle rc)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 void Window::SetFont(Font&)
 {
     // Implemented on list subclass on Cocoa.
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Converts the Scintilla cursor enum into an NSCursor and stores it in the associated NSView,
@@ -251,7 +252,7 @@ void Window::SetCursor(Cursor curs)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 void Window::SetTitle(const char* s)
 {
@@ -261,13 +262,12 @@ void Window::SetTitle(const char* s)
         if ([idWin isKindOfClass: [NSWindow class]])
         {
             NSWindow* win = reinterpret_cast<NSWindow*>(idWin);
-            NSString* sTitle = [NSString stringWithUTF8String:s];
-            [win setTitle:sTitle];
+            [win setTitle: @(s)];
         }
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 PRectangle Window::GetMonitorRect(Point)
 {
@@ -279,10 +279,11 @@ PRectangle Window::GetMonitorRect(Point)
             NSWindow* win = reinterpret_cast<NSWindow*>(idWin);
             NSScreen* screen = [win screen];
             NSRect rect = [screen frame];
+
             int screenHeight = rect.origin.y + rect.size.height;
             // Invert screen positions to match Scintilla
-            return PRectangle(
-                              NSMinX(rect), screenHeight - NSMaxY(rect),
+            //
+            return PRectangle(NSMinX(rect), screenHeight - NSMaxY(rect),
                               NSMaxX(rect), screenHeight - NSMinY(rect));
         }
     }

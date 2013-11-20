@@ -11,6 +11,13 @@
 #import "ScintillaView.h"
 #import "ScintillaCocoa.h"
 
+@interface SCIMarginView ()
+{
+@private
+    NSMutableArray *_currentCursors;
+}
+@end
+
 @implementation SCIMarginView
 
 - (id)initWithScrollView:(NSScrollView *)aScrollView

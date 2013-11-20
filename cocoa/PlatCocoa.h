@@ -25,14 +25,7 @@ NSRect PRectangleToNSRect(Scintilla::PRectangle& rc);
 Scintilla::PRectangle NSRectToPRectangle(NSRect& rc);
 CFStringEncoding EncodingFromCharacterSet(bool unicode, int characterSet);
 
-@interface ScintillaContextMenu : NSMenu
-{
-    Scintilla::ScintillaCocoa* owner;
-}
-- (void) handleCommand: (NSMenuItem*) sender;
-- (void) setOwner: (Scintilla::ScintillaCocoa*) newOwner;
 
-@end
 
 namespace Scintilla {
     

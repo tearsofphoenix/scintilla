@@ -362,6 +362,7 @@
 		6085317E183B9D3E0084C214 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -371,6 +372,7 @@
 				GCC_PREFIX_HEADER = "VEBundle/VEBundle-Prefix.pch";
 				INFOPLIST_FILE = "VEBundle/VEBundle-Info.plist";
 				INSTALL_PATH = "@rpath";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -379,6 +381,7 @@
 		6085317F183B9D3E0084C214 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -388,6 +391,7 @@
 				GCC_PREFIX_HEADER = "VEBundle/VEBundle-Prefix.pch";
 				INFOPLIST_FILE = "VEBundle/VEBundle-Info.plist";
 				INSTALL_PATH = "@rpath";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -452,6 +456,7 @@
 				6085317F183B9D3E0084C214 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		60853180183B9D3E0084C214 /* Build configuration list for PBXNativeTarget "VEBundleTests" */ = {
 			isa = XCConfigurationList;
@@ -460,6 +465,7 @@
 				60853182183B9D3E0084C214 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

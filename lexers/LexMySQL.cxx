@@ -55,7 +55,7 @@ static inline bool IsANumberChar(int ch) {
              ch == '.' || ch == '-' || ch == '+');
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Check if the current content context represent a keyword and set the context state if so.
@@ -91,7 +91,7 @@ static void CheckForKeyword(StyleContext& sc, WordList* keywordlists[], int acti
   delete [] s;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 #define HIDDENCOMMAND_STATE 0x40 // Offset for states within a hidden command.
 #define MASKACTIVE(style) (style & ~HIDDENCOMMAND_STATE)
@@ -319,7 +319,7 @@ static void ColouriseMySQLDoc(unsigned int startPos, int length, int initStyle, 
   sc.Complete();
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Helper function to determine if we have a foldable comment currently.
@@ -329,7 +329,7 @@ static bool IsStreamCommentStyle(int style)
 	return MASKACTIVE(style) == SCE_MYSQL_COMMENT;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Code copied from StyleContext and modified to work here. Should go into Accessor as a
@@ -346,7 +346,7 @@ bool MatchIgnoreCase(Accessor &styler, int currentPos, const char *s)
   return true;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 // Store both the current line's fold level and the next lines in the
 // level store to make it easy to pick up with each increment.
@@ -562,7 +562,7 @@ static void FoldMySQLDoc(unsigned int startPos, int length, int initStyle, WordL
   }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 static const char * const mysqlWordListDesc[] = {
 	"Major Keywords",

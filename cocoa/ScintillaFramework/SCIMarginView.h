@@ -13,10 +13,6 @@
  * SCIMarginView draws line numbers and other margins next to the text view.
  */
 @interface SCIMarginView : NSRulerView
-{
-@private
-    NSMutableArray *_currentCursors;
-}
 
 @property (assign) int marginWidth;
 @property (assign) ScintillaView *owner;

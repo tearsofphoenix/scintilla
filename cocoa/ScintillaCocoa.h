@@ -52,6 +52,7 @@
 
 #include "ScintillaBase.h"
 #include "CaseConvert.h"
+#include "ScintillaNotificationProtocol.h"
 
 extern "C" NSString* ScintillaRecPboardType;
 
@@ -60,20 +61,8 @@ extern "C" NSString* ScintillaRecPboardType;
 @class ScintillaView;
 
 @class FindHighlightLayer;
+@class TimerTarget;
 
-/**
- * Helper class to be used as timer target (NSTimer).
- */
-@interface TimerTarget : NSObject
-{
-    void* mTarget;
-    NSNotificationQueue* notificationQueue;
-}
-- (id) init: (void*) target;
-- (void) timerFired: (NSTimer*) timer;
-- (void) idleTimerFired: (NSTimer*) timer;
-- (void) idleTriggered: (NSNotification*) notification;
-@end
 
 namespace Scintilla
 {    

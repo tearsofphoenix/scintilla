@@ -206,6 +206,18 @@
 		60D21404183BB5380038D3C7 /* VTLWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60D21403183BB5380038D3C7 /* VTLWindow.mm */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
+		925957A9183C3C920044DA6D /* ScintillaContextMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957A7183C3C920044DA6D /* ScintillaContextMenu.h */; };
+		925957AA183C3C920044DA6D /* ScintillaContextMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */; };
+		925957AD183C3DEB0044DA6D /* ScintillaNotificationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */; };
+		925957AF183C56F00044DA6D /* VEListBox.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957AE183C56F00044DA6D /* VEListBox.mm */; };
+		925957B1183C582C0044DA6D /* ScintillaPrivate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957B0183C582C0044DA6D /* ScintillaPrivate.mm */; };
+		925957B3183C5E5E0044DA6D /* SCIMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957B2183C5E5E0044DA6D /* SCIMenu.mm */; };
+		925957B6183C71240044DA6D /* FindHighlightLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957B4183C71240044DA6D /* FindHighlightLayer.h */; };
+		925957B7183C71240044DA6D /* FindHighlightLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957B5183C71240044DA6D /* FindHighlightLayer.mm */; };
+		925957BA183C749E0044DA6D /* TimerTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957B8183C749E0044DA6D /* TimerTarget.h */; };
+		925957BB183C749E0044DA6D /* TimerTarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957B9183C749E0044DA6D /* TimerTarget.mm */; };
+		925957BE183C75A30044DA6D /* SCICallTipView.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957BC183C75A30044DA6D /* SCICallTipView.h */; };
+		925957BF183C75A30044DA6D /* SCICallTipView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957BD183C75A30044DA6D /* SCICallTipView.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -437,6 +449,18 @@
 		60D21403183BB5380038D3C7 /* VTLWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VTLWindow.mm; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Scintilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Scintilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		925957A7183C3C920044DA6D /* ScintillaContextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaContextMenu.h; sourceTree = "<group>"; };
+		925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScintillaContextMenu.mm; sourceTree = "<group>"; };
+		925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaNotificationProtocol.h; sourceTree = "<group>"; };
+		925957AE183C56F00044DA6D /* VEListBox.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VEListBox.mm; sourceTree = "<group>"; };
+		925957B0183C582C0044DA6D /* ScintillaPrivate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScintillaPrivate.mm; sourceTree = "<group>"; };
+		925957B2183C5E5E0044DA6D /* SCIMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCIMenu.mm; sourceTree = "<group>"; };
+		925957B4183C71240044DA6D /* FindHighlightLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindHighlightLayer.h; sourceTree = "<group>"; };
+		925957B5183C71240044DA6D /* FindHighlightLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FindHighlightLayer.mm; sourceTree = "<group>"; };
+		925957B8183C749E0044DA6D /* TimerTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerTarget.h; sourceTree = "<group>"; };
+		925957B9183C749E0044DA6D /* TimerTarget.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TimerTarget.mm; sourceTree = "<group>"; };
+		925957BC183C75A30044DA6D /* SCICallTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCICallTipView.h; sourceTree = "<group>"; };
+		925957BD183C75A30044DA6D /* SCICallTipView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCICallTipView.mm; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -504,11 +528,13 @@
 				2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */,
 				2744E59E0FC168A100E85C33 /* PlatCocoa.h */,
 				2744E5AE0FC168C500E85C33 /* PlatCocoa.mm */,
+				925957B2183C5E5E0044DA6D /* SCIMenu.mm */,
 				2744E4850FC1678600E85C33 /* Platform.h */,
 				2744E59F0FC168A100E85C33 /* QuartzTextLayout.h */,
 				119FF1BE13C9D1820007CE42 /* QuartzTextStyle.h */,
 				2744E5A00FC168A100E85C33 /* VTLFont.h */,
 				60D213FD183BA90D0038D3C7 /* VTLFont.mm */,
+				925957AE183C56F00044DA6D /* VEListBox.mm */,
 				6085318F183B9ED20084C214 /* SCIContentView.h */,
 				60853190183B9ED20084C214 /* SCIContentView.mm */,
 				2744E4870FC1678600E85C33 /* SciLexer.h */,
@@ -517,11 +543,21 @@
 				2744E4880FC1678600E85C33 /* Scintilla.h */,
 				2744E5A20FC168A100E85C33 /* ScintillaCocoa.h */,
 				2744E5B00FC168C500E85C33 /* ScintillaCocoa.mm */,
+				925957BC183C75A30044DA6D /* SCICallTipView.h */,
+				925957BD183C75A30044DA6D /* SCICallTipView.mm */,
+				925957B4183C71240044DA6D /* FindHighlightLayer.h */,
+				925957B5183C71240044DA6D /* FindHighlightLayer.mm */,
+				925957B8183C749E0044DA6D /* TimerTarget.h */,
+				925957B9183C749E0044DA6D /* TimerTarget.mm */,
 				60853197183BA2470084C214 /* ScintillaPrivate.h */,
+				925957B0183C582C0044DA6D /* ScintillaPrivate.mm */,
 				2744E5A30FC168A100E85C33 /* ScintillaView.h */,
 				2744E5B10FC168C500E85C33 /* ScintillaView.mm */,
+				925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */,
 				60D213FF183BB3860038D3C7 /* VTLPlatform.mm */,
 				60D21403183BB5380038D3C7 /* VTLWindow.mm */,
+				925957A7183C3C920044DA6D /* ScintillaContextMenu.h */,
+				925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -780,6 +816,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2744E5A40FC168A100E85C33 /* InfoBar.h in Headers */,
+				925957B6183C71240044DA6D /* FindHighlightLayer.h in Headers */,
 				2744E5AC0FC168B200E85C33 /* InfoBarCommunicator.h in Headers */,
 				2791F3C60FC19F71009DBCF9 /* PlatCocoa.h in Headers */,
 				2791F3E30FC1A3AE009DBCF9 /* QuartzTextLayout.h in Headers */,
@@ -797,6 +834,7 @@
 				114B6FC111FA7623004FB6AB /* CharClassify.h in Headers */,
 				114B6FC211FA7623004FB6AB /* ContractionState.h in Headers */,
 				114B6FC311FA7623004FB6AB /* Decoration.h in Headers */,
+				925957A9183C3C920044DA6D /* ScintillaContextMenu.h in Headers */,
 				114B6FC411FA7623004FB6AB /* Document.h in Headers */,
 				60853191183B9ED20084C214 /* SCIContentView.h in Headers */,
 				114B6FC511FA7623004FB6AB /* Editor.h in Headers */,
@@ -811,6 +849,7 @@
 				6085319D183BA2DE0084C214 /* SCIMarginView.h in Headers */,
 				114B6FCE11FA7623004FB6AB /* RESearch.h in Headers */,
 				114B6FCF11FA7623004FB6AB /* RunStyles.h in Headers */,
+				925957BE183C75A30044DA6D /* SCICallTipView.h in Headers */,
 				114B6FD011FA7623004FB6AB /* ScintillaBase.h in Headers */,
 				114B6FD111FA7623004FB6AB /* Selection.h in Headers */,
 				114B6FD211FA7623004FB6AB /* SplitVector.h in Headers */,
@@ -831,10 +870,12 @@
 				114B6FEC11FA7645004FB6AB /* StyleContext.h in Headers */,
 				114B6FED11FA7645004FB6AB /* WordList.h in Headers */,
 				119FF1BF13C9D1820007CE42 /* QuartzTextStyle.h in Headers */,
+				925957AD183C3DEB0044DA6D /* ScintillaNotificationProtocol.h in Headers */,
 				11FBA39E17817DA00048C071 /* CharacterCategory.h in Headers */,
 				1100F1EC178E393200105727 /* CaseConvert.h in Headers */,
 				1100F1EE178E393200105727 /* CaseFolder.h in Headers */,
 				1100F1EF178E393200105727 /* UnicodeFromUTF8.h in Headers */,
+				925957BA183C749E0044DA6D /* TimerTarget.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,6 +1047,7 @@
 				114B6F4E11FA7526004FB6AB /* LexSorcus.cxx in Sources */,
 				114B6F4F11FA7526004FB6AB /* LexSpecman.cxx in Sources */,
 				114B6F5011FA7526004FB6AB /* LexSpice.cxx in Sources */,
+				925957BF183C75A30044DA6D /* SCICallTipView.mm in Sources */,
 				114B6F5111FA7526004FB6AB /* LexSQL.cxx in Sources */,
 				114B6F5211FA7526004FB6AB /* LexTACL.cxx in Sources */,
 				114B6F5311FA7526004FB6AB /* LexTADS3.cxx in Sources */,
@@ -1017,6 +1059,7 @@
 				114B6F5911FA7526004FB6AB /* LexVerilog.cxx in Sources */,
 				114B6F5A11FA7526004FB6AB /* LexVHDL.cxx in Sources */,
 				114B6F5B11FA7526004FB6AB /* LexYAML.cxx in Sources */,
+				925957B3183C5E5E0044DA6D /* SCIMenu.mm in Sources */,
 				114B6F7711FA7598004FB6AB /* AutoComplete.cxx in Sources */,
 				114B6F7811FA7598004FB6AB /* CallTip.cxx in Sources */,
 				114B6F7911FA7598004FB6AB /* Catalogue.cxx in Sources */,
@@ -1039,6 +1082,7 @@
 				114B6F8911FA7598004FB6AB /* Selection.cxx in Sources */,
 				114B6F8A11FA7598004FB6AB /* Style.cxx in Sources */,
 				114B6F8B11FA7598004FB6AB /* UniConversion.cxx in Sources */,
+				925957AA183C3C920044DA6D /* ScintillaContextMenu.mm in Sources */,
 				114B6F8C11FA7598004FB6AB /* ViewStyle.cxx in Sources */,
 				114B6F8D11FA7598004FB6AB /* XPM.cxx in Sources */,
 				114B6F9711FA75BE004FB6AB /* Accessor.cxx in Sources */,
@@ -1050,12 +1094,15 @@
 				114B6F9C11FA75BE004FB6AB /* LexerSimple.cxx in Sources */,
 				114B6F9D11FA75BE004FB6AB /* PropSetSimple.cxx in Sources */,
 				114B6F9E11FA75BE004FB6AB /* StyleContext.cxx in Sources */,
+				925957B7183C71240044DA6D /* FindHighlightLayer.mm in Sources */,
+				925957AF183C56F00044DA6D /* VEListBox.mm in Sources */,
 				114B6F9F11FA75BE004FB6AB /* WordList.cxx in Sources */,
 				11F35FDB12AEFAF100F0236D /* LexA68k.cxx in Sources */,
 				11BB124D12FF9C1300F6BCF7 /* LexModula.cxx in Sources */,
 				11A0A8A1148602DF0018D143 /* LexCoffeeScript.cxx in Sources */,
 				117ACE9114A29A1E002876F9 /* LexTCMD.cxx in Sources */,
 				11126B8214CD3A6200803C49 /* LexAVS.cxx in Sources */,
+				925957B1183C582C0044DA6D /* ScintillaPrivate.mm in Sources */,
 				11BEB6A214EF189600BDE92A /* LexECL.cxx in Sources */,
 				11594BE9155B91DF0099E1FA /* LexOScript.cxx in Sources */,
 				11594BEA155B91DF0099E1FA /* LexVisualProlog.cxx in Sources */,
@@ -1066,6 +1113,7 @@
 				1100F1EB178E393200105727 /* CaseConvert.cxx in Sources */,
 				1100F1ED178E393200105727 /* CaseFolder.cxx in Sources */,
 				11FDD0E017C480D4001541B9 /* LexKVIrc.cxx in Sources */,
+				925957BB183C749E0044DA6D /* TimerTarget.mm in Sources */,
 				1160E0381803651C00BCEBCB /* LexRust.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1096,6 +1144,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1126,6 +1175,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;

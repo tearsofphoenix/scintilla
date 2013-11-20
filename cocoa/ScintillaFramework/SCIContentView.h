@@ -14,15 +14,6 @@
  * provides a canvas for painting the output.
  */
 @interface SCIContentView : NSView <NSTextInputClient, NSUserInterfaceValidations>
-{
-@private
-    NSCursor* mCurrentCursor;
-    NSTrackingRectTag mCurrentTrackingRect;
-    
-    // Set when we are in composition mode and partial input is displayed.
-    NSRange mMarkedTextRange;
-    BOOL undoCollectionWasActive;
-}
 
 @property (nonatomic, assign) ScintillaView* owner;
 

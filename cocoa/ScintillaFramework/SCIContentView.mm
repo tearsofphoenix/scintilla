@@ -19,6 +19,18 @@
 
 using namespace Scintilla;
 
+@interface SCIContentView ()
+{
+@private
+    NSCursor* mCurrentCursor;
+    NSTrackingRectTag mCurrentTrackingRect;
+    
+    // Set when we are in composition mode and partial input is displayed.
+    NSRange mMarkedTextRange;
+    BOOL undoCollectionWasActive;
+}
+@end
+
 @implementation SCIContentView
 
 - (NSView*) initWithFrame: (NSRect) frame
@@ -41,7 +53,7 @@ using namespace Scintilla;
     return self;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * When the view is resized we need to update our tracking rectangle and let the backend know.
@@ -63,7 +75,7 @@ using namespace Scintilla;
     _owner.backend->Resize();
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Called by the backend if a new cursor must be set for the view.
@@ -79,7 +91,7 @@ using namespace Scintilla;
     [[self window] invalidateCursorRectsForView: self];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * This method is called to give us the opportunity to define our mouse sensitive rectangle.
@@ -93,7 +105,7 @@ using namespace Scintilla;
     [mCurrentCursor setOnMouseEntered: YES];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Gets called by the runtime when the view needs repainting.
@@ -112,7 +124,7 @@ using namespace Scintilla;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Windows uses a client coordinate system where the upper left corner is the origin in a window
@@ -126,14 +138,14 @@ using namespace Scintilla;
     return YES;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (BOOL) isOpaque
 {
     return YES;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Implement the "click through" behavior by telling the caller we accept the first mouse event too.
@@ -144,7 +156,7 @@ using namespace Scintilla;
     return YES;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Make this view accepting events as first responder.
@@ -154,7 +166,7 @@ using namespace Scintilla;
     return YES;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Called by the framework if it wants to show a context menu for the editor.
@@ -167,7 +179,7 @@ using namespace Scintilla;
         return [_owner menuForEvent: theEvent];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 // Adoption of NSTextInputClient protocol.
 
@@ -177,14 +189,14 @@ using namespace Scintilla;
     return nil;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (NSUInteger) characterIndexForPoint: (NSPoint) point
 {
     return NSNotFound;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) doCommandBySelector: (SEL) selector
 {
@@ -192,7 +204,7 @@ using namespace Scintilla;
         [self performSelector: selector withObject: nil];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (NSRect) firstRectForCharacterRange: (NSRange) aRange actualRange: (NSRangePointer) actualRange
 {
@@ -231,14 +243,14 @@ using namespace Scintilla;
     return rect;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (BOOL) hasMarkedText
 {
     return mMarkedTextRange.length > 0;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * General text input. Used to insert new text at the current input position, replacing the current
@@ -272,14 +284,14 @@ using namespace Scintilla;
 	_owner.backend->InsertText(newText);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (NSRange) markedRange
 {
     return mMarkedTextRange;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (NSRange) selectedRange
 {
@@ -288,7 +300,7 @@ using namespace Scintilla;
     return NSMakeRange(begin, end - begin);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Called by the input manager to set text which might be combined with further input to form
@@ -376,7 +388,7 @@ using namespace Scintilla;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) unmarkText
 {
@@ -394,7 +406,7 @@ using namespace Scintilla;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Removes any currently marked text.
@@ -417,7 +429,7 @@ using namespace Scintilla;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (NSArray*) validAttributesForMarkedText
 {
@@ -426,7 +438,7 @@ using namespace Scintilla;
 
 // End of the NSTextInputClient protocol adoption.
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Generic input method. It is used to pass on keyboard input to Scintilla. The control itself only
@@ -443,49 +455,49 @@ using namespace Scintilla;
     [self interpretKeyEvents: @[theEvent]];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) mouseDown: (NSEvent *) theEvent
 {
     _owner.backend->MouseDown(theEvent);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) mouseDragged: (NSEvent *) theEvent
 {
     _owner.backend->MouseMove(theEvent);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) mouseUp: (NSEvent *) theEvent
 {
     _owner.backend->MouseUp(theEvent);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) mouseMoved: (NSEvent *) theEvent
 {
     _owner.backend->MouseMove(theEvent);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) mouseEntered: (NSEvent *) theEvent
 {
     _owner.backend->MouseEntered(theEvent);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) mouseExited: (NSEvent *) theEvent
 {
     _owner.backend->MouseExited(theEvent);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Mouse wheel with command key magnifies text.
@@ -501,7 +513,7 @@ using namespace Scintilla;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Ensure scrolling is aligned to whole lines instead of starting part-way through a line
@@ -520,7 +532,7 @@ using namespace Scintilla;
     return rc;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * The editor is getting the foreground control (the one getting the input focus).
@@ -531,7 +543,7 @@ using namespace Scintilla;
     return YES;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * The editor is losing the input focus.
@@ -542,7 +554,7 @@ using namespace Scintilla;
     return YES;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Called when an external drag operation enters the view.
@@ -552,7 +564,7 @@ using namespace Scintilla;
     return _owner.backend->DraggingEntered(sender);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Called frequently during an external drag operation if we are the target.
@@ -562,7 +574,7 @@ using namespace Scintilla;
     return _owner.backend->DraggingUpdated(sender);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Drag image left the view. Clean up if necessary.
@@ -572,7 +584,7 @@ using namespace Scintilla;
     _owner.backend->DraggingExited(sender);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (BOOL) prepareForDragOperation: (id <NSDraggingInfo>) sender
 {
@@ -580,14 +592,14 @@ using namespace Scintilla;
     return YES;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (BOOL) performDragOperation: (id <NSDraggingInfo>) sender
 {
     return _owner.backend->PerformDragOperation(sender);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Returns operations we allow as drag source.
@@ -597,7 +609,7 @@ using namespace Scintilla;
     return NSDragOperationCopy | NSDragOperationMove | NSDragOperationDelete;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Finished a drag: may need to delete selection.
@@ -609,7 +621,7 @@ using namespace Scintilla;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Drag operation is done. Notify editor.
@@ -620,7 +632,7 @@ using namespace Scintilla;
     _owner.backend->DraggingExited(sender);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 // NSResponder actions.
 
@@ -679,18 +691,26 @@ using namespace Scintilla;
 - (BOOL) validateUserInterfaceItem: (id <NSValidatedUserInterfaceItem>) anItem
 {
     SEL action = [anItem action];
-    if (action==@selector(undo:)) {
+    
+    if (action==@selector(undo:))
+    {
         return [self canUndo];
-    }
-    else if (action==@selector(redo:)) {
+        
+    }else if (action==@selector(redo:))
+    {
         return [self canRedo];
-    }
-    else if (action==@selector(cut:) || action==@selector(copy:) || action==@selector(clear:)) {
+        
+    }else if (action==@selector(cut:)
+              || action==@selector(copy:)
+              || action==@selector(clear:))
+    {
         return _owner.backend->HasSelection();
-    }
-    else if (action==@selector(paste:)) {
+        
+    }else if (action==@selector(paste:))
+    {
         return _owner.backend->CanPaste();
     }
+    
     return YES;
 }
 
@@ -704,7 +724,7 @@ using namespace Scintilla;
     return _owner.backend->WndProc(SCI_GETREADONLY, 0, 0) == 0;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) dealloc
 {

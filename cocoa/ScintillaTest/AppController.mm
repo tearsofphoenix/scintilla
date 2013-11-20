@@ -11,12 +11,12 @@
 #import "VEBundle.h"
 
 const char major_keywords[] =
-"and       break     do        else      elseif    end"
-"false     for       function  goto      if        in"
-"local     nil       not       or        repeat    return"
-"then      true      until     while";
+"and       break     do        else      elseif    end "
+" false     for       function  goto      if        in "
+" local     nil       not       or        repeat    return "
+" then      true      until     while";
 
-//--------------------------------------------------------------------------------------------------
+
 
 @implementation AppController
 
@@ -58,7 +58,7 @@ const char major_keywords[] =
     [self setupEditor];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Initialize scintilla editor (styles, colors, markers, folding etc.].
@@ -100,56 +100,38 @@ const char major_keywords[] =
     [mEditor setGeneralProperty: SCI_STYLECLEARALL parameter: 0 value: 0];
     
     [mEditor setColorProperty: SCI_STYLESETFORE
-                    parameter: SCE_MYSQL_DEFAULT
+                    parameter: SCE_LUA_DEFAULT
                         value: [NSColor blackColor]];
     [mEditor setColorProperty: SCI_STYLESETFORE
-                    parameter: SCE_MYSQL_COMMENT
+                    parameter: SCE_LUA_COMMENT
                      fromHTML: @"#097BF7"];
     [mEditor setColorProperty: SCI_STYLESETFORE
-                    parameter: SCE_MYSQL_COMMENTLINE
+                    parameter: SCE_LUA_COMMENTLINE
                      fromHTML: @"#097BF7"];
-    [mEditor setColorProperty: SCI_STYLESETFORE
-                    parameter: SCE_MYSQL_HIDDENCOMMAND
-                     fromHTML: @"#097BF7"];
-    [mEditor setColorProperty: SCI_STYLESETBACK
-                    parameter: SCE_MYSQL_HIDDENCOMMAND
-                     fromHTML: @"#F0F0F0"];
     
+    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_LUA_NUMBER fromHTML: @"#7F7F00"];
     [mEditor setColorProperty: SCI_STYLESETFORE
-                    parameter: SCE_MYSQL_VARIABLE
-                     fromHTML: @"378EA5"];
+                    parameter: SCE_LUA_STRING
+                     fromHTML: @"#D13D9C"];
     [mEditor setColorProperty: SCI_STYLESETFORE
-                    parameter: SCE_MYSQL_SYSTEMVARIABLE
-                     fromHTML: @"378EA5"];
+                    parameter: SCE_LUA_LITERALSTRING
+                     fromHTML: @"#D13D9C"];
+
     [mEditor setColorProperty: SCI_STYLESETFORE
-                    parameter: SCE_MYSQL_KNOWNSYSTEMVARIABLE
-                     fromHTML: @"#3A37A5"];
+                    parameter: SCE_LUA_CHARACTER
+                     fromHTML: @"#D13D9C"];
+
     
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_NUMBER fromHTML: @"#7F7F00"];
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_SQSTRING fromHTML: @"#FFAA3E"];
     
     // Note: if we were using ANSI quotes we would set the DQSTRING to the same color as the
     //       the back tick string.
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_DQSTRING fromHTML: @"#274A6D"];
     
     // Keyword highlighting.
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_MAJORKEYWORD fromHTML: @"#007F00"];
-    [mEditor setGeneralProperty: SCI_STYLESETBOLD parameter: SCE_MYSQL_MAJORKEYWORD value: 1];
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_KEYWORD fromHTML: @"#007F00"];
-    [mEditor setGeneralProperty: SCI_STYLESETBOLD parameter: SCE_MYSQL_KEYWORD value: 1];
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_PROCEDUREKEYWORD fromHTML: @"#56007F"];
-    [mEditor setGeneralProperty: SCI_STYLESETBOLD parameter: SCE_MYSQL_PROCEDUREKEYWORD value: 1];
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_USER1 fromHTML: @"#808080"];
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_USER2 fromHTML: @"#808080"];
-    [mEditor setColorProperty: SCI_STYLESETBACK parameter: SCE_MYSQL_USER2 fromHTML: @"#F0E0E0"];
-    
+    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_LUA_WORD fromHTML: @"#007F00"];
+
     // The following 3 styles have no impact as we did not set a keyword list for any of them.
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_DATABASEOBJECT value: [NSColor redColor]];
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_FUNCTION value: [NSColor redColor]];
-    
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_IDENTIFIER value: [NSColor blackColor]];
-    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_MYSQL_QUOTEDIDENTIFIER fromHTML: @"#274A6D"];
-    [mEditor setGeneralProperty: SCI_STYLESETBOLD parameter: SCE_SQL_OPERATOR value: 1];
+
+    [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_LUA_IDENTIFIER value: [NSColor blackColor]];
     
     // Line number style.
     [mEditor setColorProperty: SCI_STYLESETFORE parameter: STYLE_LINENUMBER fromHTML: @"#F0F0F0"];
@@ -177,8 +159,8 @@ const char major_keywords[] =
     [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDERTAIL value: SC_MARK_LCORNER];
     [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDEREND value: SC_MARK_BOXPLUSCONNECTED];
     [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDEROPENMID value: SC_MARK_BOXMINUSCONNECTED];
-    [mEditor setGeneralProperty
-     : SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDERMIDTAIL value: SC_MARK_TCORNER];
+    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDERMIDTAIL value: SC_MARK_TCORNER];
+    
     for (int n= 25; n < 32; ++n) // Markers 25..31 are reserved for folding.
     {
         [mEditor setColorProperty: SCI_MARKERSETFORE parameter: n value: [NSColor whiteColor]];
@@ -203,7 +185,7 @@ const char major_keywords[] =
     [mEditor setStatusText: @"Operation complete"];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /* XPM */
 static const char * box_xpm[] =
@@ -271,5 +253,5 @@ static const char * box_xpm[] =
 
 @end
 
-//--------------------------------------------------------------------------------------------------
+
 

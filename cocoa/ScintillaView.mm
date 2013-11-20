@@ -49,7 +49,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
 }
 
 
-//--------------------------------------------------------------------------------------------------
+
 
 @implementation ScintillaView
 
@@ -61,7 +61,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
  * (scrollers, info bar).
  */
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Initialize custom cursor.
@@ -82,7 +82,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Specify the SCIContentView class. Can be overridden in a subclass to provide an SCIContentView subclass.
@@ -93,7 +93,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return [SCIContentView class];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Receives zoom messages, for example when a "pinch zoom" is performed on the trackpad.
@@ -114,7 +114,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     zoomDelta = 0.0;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Sends a new notification of the given type to the default notification center.
@@ -125,7 +125,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     [center postNotificationName: notificationName object: self];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Called by a connected component (usually the info bar) if something changed there.
@@ -153,7 +153,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     };
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Prevents drawing of the inner view to avoid flickering when doing many visual updates
@@ -167,7 +167,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         [[self window] enableFlushWindow];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Method receives notifications from Scintilla (e.g. for handling clicks on the
@@ -240,7 +240,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Initialization of the view. Used to setup a few other things we need.
@@ -310,7 +310,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return self;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) dealloc
 {
@@ -320,21 +320,21 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     [super dealloc];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) applicationDidResignActive: (NSNotification *)note
 {
     _backend->ActiveStateChanged(false);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) applicationDidBecomeActive: (NSNotification *)note
 {
     _backend->ActiveStateChanged(true);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) viewDidMoveToWindow
 {
@@ -346,7 +346,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     [[self window] setAcceptsMouseMovedEvents: YES];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Used to position and size the parts of the editor (content, scrollers, info bar).
@@ -385,7 +385,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         [mInfoBar setFrame: barFrame];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Set the width of the margin.
@@ -399,7 +399,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Triggered by one of the scrollers when it gets manipulated by the user. Notify the backend
@@ -410,7 +410,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     _backend->UpdateForScroll();
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Used to reposition our content depending on the size of the view.
@@ -425,7 +425,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Getter for the currently selected text in raw form (no formatting information included).
@@ -443,7 +443,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         {
             _backend->WndProc(SCI_GETSELTEXT, length + 1, (sptr_t) &buffer[0]);
             
-            result = [NSString stringWithUTF8String: buffer.c_str()];
+            result = @(buffer.c_str());
         }
         catch (...)
         {
@@ -453,7 +453,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return result;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Getter for the current text in raw form (no formatting information included).
@@ -471,7 +471,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         {
             _backend->WndProc(SCI_GETTEXT, length + 1, (sptr_t) &buffer[0]);
             
-            result = [NSString stringWithUTF8String: buffer.c_str()];
+            result = @( buffer.c_str() );
         }
         catch (...)
         {
@@ -481,7 +481,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return result;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Setter for the current text (no formatting included).
@@ -492,7 +492,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     _backend->WndProc(SCI_SETTEXT, 0, (long) text);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) insertString: (NSString*) aString atOffset: (int)offset
 {
@@ -500,28 +500,28 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     _backend->WndProc(SCI_ADDTEXT, offset, (long) text);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) setEditable: (BOOL) editable
 {
     _backend->WndProc(SCI_SETREADONLY, editable ? 0 : 1, 0);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (BOOL) isEditable
 {
     return _backend->WndProc(SCI_GETREADONLY, 0, 0) == 0;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (SCIContentView*) content
 {
     return mContent;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Direct call into the backend to allow uninterpreted access to it. The values to be passed in and
@@ -549,7 +549,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return _backend->WndProc(message, 0, 0);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * This is a helper method to set properties in the backend, with native parameters.
@@ -563,7 +563,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     _backend->WndProc(property, parameter, value);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * A simplified version for setting properties which only require one parameter.
@@ -576,7 +576,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     _backend->WndProc(property, value, 0);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * This is a helper method to get a property in the backend, with native parameters.
@@ -591,7 +591,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return _backend->WndProc(property, parameter, extra);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Convenience function to avoid unneeded extra parameter.
@@ -601,7 +601,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return _backend->WndProc(property, parameter, 0);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Convenience function to avoid unneeded parameters.
@@ -611,7 +611,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return _backend->WndProc(property, 0, 0);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Use this variant if you have to pass in a reference to something (e.g. a text range).
@@ -621,7 +621,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return _backend->WndProc(property, 0, (sptr_t) ref);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Specialized property setter for colors.
@@ -638,7 +638,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     _backend->WndProc(property, parameter, color);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Another color property setting, which allows to specify the color as string like in HTML
@@ -659,7 +659,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
             value[1] = value[0];
         
         unsigned rawRed;
-        [[NSScanner scannerWithString: [NSString stringWithUTF8String: value]] scanHexInt: &rawRed];
+        [[NSScanner scannerWithString: @(value)] scanHexInt: &rawRed];
         
         value[0] = [fromHTML characterAtIndex: index++];
         if (longVersion)
@@ -668,7 +668,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
             value[1] = value[0];
         
         unsigned rawGreen;
-        [[NSScanner scannerWithString: [NSString stringWithUTF8String: value]] scanHexInt: &rawGreen];
+        [[NSScanner scannerWithString: @(value)] scanHexInt: &rawGreen];
         
         value[0] = [fromHTML characterAtIndex: index++];
         if (longVersion)
@@ -677,14 +677,14 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
             value[1] = value[0];
         
         unsigned rawBlue;
-        [[NSScanner scannerWithString: [NSString stringWithUTF8String: value]] scanHexInt: &rawBlue];
+        [[NSScanner scannerWithString: @(value)] scanHexInt: &rawBlue];
         
         long color = (rawBlue << 16) + (rawGreen << 8) + rawRed;
         _backend->WndProc(property, parameter, color);
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Specialized property getter for colors.
@@ -699,7 +699,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return result;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Specialized property setter for references (pointers, addresses).
@@ -711,7 +711,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     _backend->WndProc(property, parameter, (sptr_t) value);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Specialized property getter for references (pointers, addresses).
@@ -721,7 +721,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return (const void*) _backend->WndProc(property, parameter, 0);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Specialized property setter for string values.
@@ -735,7 +735,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
 }
 
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Specialized property getter for string values.
@@ -743,10 +743,10 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
 - (NSString*) getStringProperty: (int) property parameter: (long) parameter
 {
     const char* rawValue = (const char*) _backend->WndProc(property, parameter, 0);
-    return [NSString stringWithUTF8String: rawValue];
+    return @(rawValue);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Specialized property setter for lexer properties, which are commonly passed as strings.
@@ -758,7 +758,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     _backend->WndProc(SCI_SETPROPERTY, (sptr_t) rawName, (sptr_t) rawValue);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Specialized property getter for references (pointers, addresses).
@@ -767,10 +767,10 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
 {
     const char* rawName = [name UTF8String];
     const char* result = (const char*) _backend->WndProc(SCI_SETPROPERTY, (sptr_t) rawName, 0);
-    return [NSString stringWithUTF8String: result];
+    return @(result);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Sets the notification callback
@@ -781,7 +781,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
 }
 
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Sets the new control which is displayed as info bar at the top or bottom of the editor.
@@ -806,7 +806,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Sets the edit's info bar status message. This call only has an effect if there is an info bar.
@@ -817,21 +817,21 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         [mInfoBar notify: IBNStatusChanged message: text location: NSZeroPoint value: 0];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (NSRange) selectedRange
 {
     return [mContent selectedRange];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void)insertText: (NSString*)text
 {
     _backend->InsertText(text);
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * For backwards compatibility.
@@ -850,7 +850,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
                             backwards: NO];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Searches and marks the first occurrence of the given text and optionally scrolls it into view.
@@ -935,7 +935,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return (result >= 0) ? YES : NO;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Searches the given text and replaces
@@ -1022,7 +1022,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return replaceCount;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) setFontName: (NSString*) font
                 size: (int) size
@@ -1046,7 +1046,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 @end
 

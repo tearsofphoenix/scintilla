@@ -8,6 +8,9 @@
 
 #import "Scintilla.h"
 #import "VTLFont.h"
+#import "Platform.h"
+#import "QuartzTextStyle.h"
+//#import "ScintillaCocoa.h"
 
 CTFontRef VTLFontCreate(const char* name,
                         size_t length,
@@ -74,5 +77,48 @@ CTFontRef VTLFontCreate(const char* name,
     CFRelease(fontName);
     
     return _fontRef;
+}
+
+//----------------- Font ---------------------------------------------------------------------------
+using namespace Scintilla;
+
+Font::Font(): fid(0)
+{
+}
+
+
+
+Font::~Font()
+{
+    Release();
+}
+
+
+
+/**
+ * Creates a CTFontRef with the given properties.
+ */
+void Font::Create(const FontParameters &fp)
+{
+	Release();
+    
+	QuartzTextStyle* style = new QuartzTextStyle();
+	fid = style;
+    
+	// Create the font with attributes
+	CTFontRef fontRef = VTLFontCreate(fp.faceName, strlen(fp.faceName), fp.size, fp.weight, fp.italic);
+    
+	style->setFontRef(fontRef, fp.characterSet);
+    
+    CFRelease(fontRef);
+}
+
+
+
+void Font::Release()
+{
+    if (fid)
+        delete reinterpret_cast<QuartzTextStyle*>( fid );
+    fid = 0;
 }
 

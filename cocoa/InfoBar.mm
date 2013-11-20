@@ -23,7 +23,7 @@
 
 @end
 
-//--------------------------------------------------------------------------------------------------
+
 
 @implementation VerticallyCenteredTextFieldCell
 
@@ -54,7 +54,7 @@
 	return newRect;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) selectWithFrame: (NSRect) aRect inView: (NSView*) controlView editor: (NSText*) textObj
                 delegate:(id) anObject start: (NSInteger) selStart length: (NSInteger) selLength
@@ -70,7 +70,7 @@
 	_isEditingOrSelecting = NO;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) editWithFrame: (NSRect) aRect inView: (NSView*) controlView editor: (NSText*) textObj
               delegate: (id) anObject event: (NSEvent*) theEvent
@@ -87,7 +87,7 @@
 
 @end
 
-//--------------------------------------------------------------------------------------------------
+
 
 @implementation InfoBar
 
@@ -113,7 +113,7 @@
     return self;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Called by a connected component (usually the info bar) if something changed there.
@@ -140,7 +140,7 @@
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 static NSString *DefaultScaleMenuLabels[] = {
     @"20%", @"30%", @"50%", @"75%", @"100%", @"130%", @"160%", @"200%", @"250%", @"300%"
@@ -228,7 +228,7 @@ static float BarFontSize = 10.0;
     [NSTextField setCellClass: oldCellClass];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) dealloc
 {
@@ -236,7 +236,7 @@ static float BarFontSize = 10.0;
     [super dealloc];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Fill the background.
@@ -282,14 +282,14 @@ static float BarFontSize = 10.0;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (BOOL) isOpaque
 {
     return YES;
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Used to reposition our content depending on the size of the view.
@@ -300,7 +300,7 @@ static float BarFontSize = 10.0;
     [self positionSubViews];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) positionSubViews
 {
@@ -336,7 +336,7 @@ static float BarFontSize = 10.0;
         [mStatusTextLabel setHidden: YES];
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Used to switch the visible parts of the info bar.
@@ -353,7 +353,7 @@ static float BarFontSize = 10.0;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Handler for selection changes in the zoom menu.
@@ -373,7 +373,7 @@ static float BarFontSize = 10.0;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 - (void) setScaleFactor: (float) newScaleFactor adjustPopup: (BOOL) flag
 {
@@ -410,7 +410,7 @@ static float BarFontSize = 10.0;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Called from the notification method to update the caret position display.
@@ -430,7 +430,7 @@ static float BarFontSize = 10.0;
     }
 }
 
-//--------------------------------------------------------------------------------------------------
+
 
 /**
  * Makes the bar resize to the smallest width that can accommodate the currently enabled items.

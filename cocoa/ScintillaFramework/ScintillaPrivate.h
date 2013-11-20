@@ -10,3 +10,5 @@
 #import <Cocoa/Cocoa.h>
 
 extern NSCursor *NSCursorFromEnum(Scintilla::Window::Cursor cursor);
+
+extern CGImageRef ImageCreateFromRGBA(int width, int height, const unsigned char *pixelsImage, bool invert);
