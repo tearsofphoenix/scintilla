@@ -14,7 +14,7 @@
 
 @interface AppController : NSObject
 {
-    IBOutlet NSBox *mEditHost;
+    IBOutlet NSView *mEditHost;
     ScintillaView* mEditor;
 }
 

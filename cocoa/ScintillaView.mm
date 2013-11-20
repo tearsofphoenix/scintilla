@@ -48,9 +48,6 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     }
 }
 
-
-
-
 @implementation ScintillaView
 
 @synthesize scrollView = _scrollView;

@@ -34,7 +34,7 @@ const char major_keywords[] =
     
     mEditor = [[ScintillaView alloc] initWithFrame: newFrame];
     
-    [mEditHost.contentView addSubview: mEditor];
+    [mEditHost addSubview: mEditor];
     [mEditor setAutoresizesSubviews: YES];
     [mEditor setAutoresizingMask: NSViewWidthSizable | NSViewHeightSizable];
     

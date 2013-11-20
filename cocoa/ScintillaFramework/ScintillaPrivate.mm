@@ -43,7 +43,9 @@ CGImageRef ImageCreateFromRGBA(int width, int height, const unsigned char *pixel
                                                         NULL, pixelsImage, bitmapByteCount, NULL);
 			
 		}
-		if (dataProvider) {
+		
+        if (dataProvider)
+        {
 			// Create the CGImage.
 			image = CGImageCreate(width,
                                   height,

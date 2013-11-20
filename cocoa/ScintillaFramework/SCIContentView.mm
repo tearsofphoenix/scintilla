@@ -33,7 +33,7 @@ using namespace Scintilla;
 
 @implementation SCIContentView
 
-- (NSView*) initWithFrame: (NSRect) frame
+- (id)initWithFrame: (NSRect) frame
 {
     self = [super initWithFrame: frame];
     

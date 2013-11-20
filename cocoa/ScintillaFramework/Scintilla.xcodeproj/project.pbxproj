@@ -527,43 +527,21 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				2744E59D0FC168A100E85C33 /* InfoBar.h */,
-				2744E5AD0FC168C500E85C33 /* InfoBar.mm */,
-				2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */,
+				9291C217183CAE4100CAD257 /* View */,
 				2744E59E0FC168A100E85C33 /* PlatCocoa.h */,
 				2744E5AE0FC168C500E85C33 /* PlatCocoa.mm */,
-				925957B2183C5E5E0044DA6D /* SCIMenu.mm */,
 				2744E4850FC1678600E85C33 /* Platform.h */,
-				2744E59F0FC168A100E85C33 /* VTLayout.h */,
-				9291C211183CA1BD00CAD257 /* VTLayout.mm */,
-				119FF1BE13C9D1820007CE42 /* VTLStyle.h */,
-				9291C214183CA78800CAD257 /* VTLStyle.mm */,
-				2744E5A00FC168A100E85C33 /* VTLFont.h */,
-				60D213FD183BA90D0038D3C7 /* VTLFont.mm */,
-				925957AE183C56F00044DA6D /* VEListBox.mm */,
-				6085318F183B9ED20084C214 /* SCIContentView.h */,
-				60853190183B9ED20084C214 /* SCIContentView.mm */,
 				2744E4870FC1678600E85C33 /* SciLexer.h */,
-				6085319B183BA2DE0084C214 /* SCIMarginView.h */,
-				6085319C183BA2DE0084C214 /* SCIMarginView.mm */,
+				925957B2183C5E5E0044DA6D /* SCIMenu.mm */,
 				2744E4880FC1678600E85C33 /* Scintilla.h */,
 				2744E5A20FC168A100E85C33 /* ScintillaCocoa.h */,
 				2744E5B00FC168C500E85C33 /* ScintillaCocoa.mm */,
-				925957BC183C75A30044DA6D /* SCICallTipView.h */,
-				925957BD183C75A30044DA6D /* SCICallTipView.mm */,
-				925957B4183C71240044DA6D /* FindHighlightLayer.h */,
-				925957B5183C71240044DA6D /* FindHighlightLayer.mm */,
-				925957B8183C749E0044DA6D /* TimerTarget.h */,
-				925957B9183C749E0044DA6D /* TimerTarget.mm */,
+				925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */,
 				60853197183BA2470084C214 /* ScintillaPrivate.h */,
 				925957B0183C582C0044DA6D /* ScintillaPrivate.mm */,
-				2744E5A30FC168A100E85C33 /* ScintillaView.h */,
-				2744E5B10FC168C500E85C33 /* ScintillaView.mm */,
-				925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */,
-				60D213FF183BB3860038D3C7 /* VTLPlatform.mm */,
-				60D21403183BB5380038D3C7 /* VTLWindow.mm */,
-				925957A7183C3C920044DA6D /* ScintillaContextMenu.h */,
-				925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */,
+				925957B8183C749E0044DA6D /* TimerTarget.h */,
+				925957B9183C749E0044DA6D /* TimerTarget.mm */,
+				9291C216183CAE1800CAD257 /* VTL */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -812,6 +790,44 @@
 				6085318B183B9D3F0084C214 /* VEBundleTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9291C216183CAE1800CAD257 /* VTL */ = {
+			isa = PBXGroup;
+			children = (
+				925957AE183C56F00044DA6D /* VEListBox.mm */,
+				2744E59F0FC168A100E85C33 /* VTLayout.h */,
+				9291C211183CA1BD00CAD257 /* VTLayout.mm */,
+				2744E5A00FC168A100E85C33 /* VTLFont.h */,
+				60D213FD183BA90D0038D3C7 /* VTLFont.mm */,
+				60D213FF183BB3860038D3C7 /* VTLPlatform.mm */,
+				119FF1BE13C9D1820007CE42 /* VTLStyle.h */,
+				9291C214183CA78800CAD257 /* VTLStyle.mm */,
+				60D21403183BB5380038D3C7 /* VTLWindow.mm */,
+			);
+			name = VTL;
+			sourceTree = "<group>";
+		};
+		9291C217183CAE4100CAD257 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				925957B4183C71240044DA6D /* FindHighlightLayer.h */,
+				925957B5183C71240044DA6D /* FindHighlightLayer.mm */,
+				2744E59D0FC168A100E85C33 /* InfoBar.h */,
+				2744E5AD0FC168C500E85C33 /* InfoBar.mm */,
+				2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */,
+				925957BC183C75A30044DA6D /* SCICallTipView.h */,
+				925957BD183C75A30044DA6D /* SCICallTipView.mm */,
+				6085318F183B9ED20084C214 /* SCIContentView.h */,
+				60853190183B9ED20084C214 /* SCIContentView.mm */,
+				6085319B183BA2DE0084C214 /* SCIMarginView.h */,
+				6085319C183BA2DE0084C214 /* SCIMarginView.mm */,
+				925957A7183C3C920044DA6D /* ScintillaContextMenu.h */,
+				925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */,
+				2744E5A30FC168A100E85C33 /* ScintillaView.h */,
+				2744E5B10FC168C500E85C33 /* ScintillaView.mm */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
