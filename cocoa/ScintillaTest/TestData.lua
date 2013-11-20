@@ -2,7 +2,7 @@
 -- licensed under the terms of the LGPL2
 
 -- character table string
-local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/测试字符串'
 
 -- encoding
 function enc(data)

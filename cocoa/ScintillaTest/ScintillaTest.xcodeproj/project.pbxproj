@@ -11,7 +11,6 @@
 		271FA52C0F850BE20033D021 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 271FA52B0F850BE20033D021 /* AppController.mm */; };
 		2791F4490FC1A8E9009DBCF9 /* TestData.lua in Resources */ = {isa = PBXBuildFile; fileRef = 2791F4480FC1A8E9009DBCF9 /* TestData.lua */; };
 		605504AA183BA61500B3AB51 /* Scintilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 605504A7183BA5D200B3AB51 /* Scintilla.framework */; };
-		60853145183B8F4B0084C214 /* VEStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 60853144183B8F4B0084C214 /* VEStyle.m */; };
 		60853147183B92960084C214 /* Lua.tmbundle in Resources */ = {isa = PBXBuildFile; fileRef = 60853146183B92960084C214 /* Lua.tmbundle */; };
 		6085319A183BA2A60084C214 /* VEBundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60853199183BA2A60084C214 /* VEBundle.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -61,8 +60,6 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* ScintillaTest_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaTest_Prefix.pch; sourceTree = "<group>"; };
-		60853143183B8F4B0084C214 /* VEStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VEStyle.h; sourceTree = "<group>"; };
-		60853144183B8F4B0084C214 /* VEStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VEStyle.m; sourceTree = "<group>"; };
 		60853146183B92960084C214 /* Lua.tmbundle */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Lua.tmbundle; sourceTree = "<group>"; };
 		60853199183BA2A60084C214 /* VEBundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VEBundle.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/ScintillaTest-cvusymbtpzcsshgvbcavxwvcbhxz/Build/Products/Debug/VEBundle.framework"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -88,8 +85,6 @@
 			children = (
 				271FA52A0F850BE20033D021 /* AppController.h */,
 				271FA52B0F850BE20033D021 /* AppController.mm */,
-				60853143183B8F4B0084C214 /* VEStyle.h */,
-				60853144183B8F4B0084C214 /* VEStyle.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -259,7 +254,6 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				271FA52C0F850BE20033D021 /* AppController.mm in Sources */,
-				60853145183B8F4B0084C214 /* VEStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

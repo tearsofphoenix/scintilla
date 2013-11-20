@@ -29,6 +29,8 @@
 #include "XPM.h"
 #import "ScintillaContextMenu.h"
 #import "ScintillaPrivate.h"
+#import "VTLayout.h"
+#import "VTLStyle.h"
 
 #import <Foundation/NSGeometry.h>
 
@@ -105,7 +107,7 @@ SurfaceImpl::SurfaceImpl()
     y = 0;
     gc = NULL;
     
-    textLayout = new QuartzTextLayout(NULL);
+    textLayout = [[VTLayout alloc] initWithContext: NULL];
     codePage = 0;
     verticalDeviceResolution = 0;
     
@@ -121,14 +123,14 @@ SurfaceImpl::SurfaceImpl()
 SurfaceImpl::~SurfaceImpl()
 {
     Release();
-    delete textLayout;
+    [textLayout release];
 }
 
 
 
 void SurfaceImpl::Release()
 {
-    textLayout->setContext (NULL);
+    [textLayout setContext: NULL];
     if ( bitmapData != NULL )
     {
         delete[] bitmapData;
@@ -173,7 +175,7 @@ void SurfaceImpl::Init(SurfaceID sid, WindowID)
     Release();
     gc = reinterpret_cast<CGContextRef>(sid);
     CGContextSetLineWidth(gc, 1.0);
-    textLayout->setContext(gc);
+    [textLayout setContext: gc];
 }
 
 
@@ -212,7 +214,8 @@ void SurfaceImpl::InitPixMap(int width, int height, Surface* /* surface_ */, Win
         delete[] bitmapData;
         bitmapData = NULL;
     }
-    textLayout->setContext (gc);
+    
+    [textLayout setContext: gc];
     
     // the context retains the color space, so we can release it
     CGColorSpaceRelease(colorSpace);
@@ -861,7 +864,7 @@ CFStringEncoding EncodingFromCharacterSet(bool unicode, int characterSet)
 
 static int FontCharacterSet(Font &f)
 {
-	return reinterpret_cast<QuartzTextStyle *>(f.GetID())->getCharacterSet();
+	return [reinterpret_cast<VTLStyle *>(f.GetID()) getCharacterSet];
 }
 
 void SurfaceImpl::DrawTextTransparent(PRectangle rc, Font &font_, XYPOSITION ybase, const char *s, int len,
@@ -871,23 +874,33 @@ void SurfaceImpl::DrawTextTransparent(PRectangle rc, Font &font_, XYPOSITION yba
 	ColourDesired colour(fore.AsLong());
 	CGColorRef color = CGColorCreateGenericRGB(colour.GetRed()/255.0,colour.GetGreen()/255.0,colour.GetBlue()/255.0,1.0);
     
-	QuartzTextStyle* style = reinterpret_cast<QuartzTextStyle*>(font_.GetID());
-	style->setCTStyleColor(color);
+	VTLStyle *style = reinterpret_cast<VTLStyle *>(font_.GetID());
+	[style setCTStyleColor: color];
 	
 	CGColorRelease(color);
     
-	textLayout->setText (reinterpret_cast<const UInt8*>(s), len, encoding, *reinterpret_cast<QuartzTextStyle*>(font_.GetID()));
-	textLayout->draw(rc.left, ybase);
+	[textLayout setText: s
+                 length: len
+               encoding: encoding
+                  style:  [reinterpret_cast<VTLStyle *>(font_.GetID()) getCTStyle]];
+    
+	[textLayout drawAt: rc.left
+                     y: ybase];;
 }
 
-static size_t utf8LengthFromLead(unsigned char uch) {
-	if (uch >= (0x80 + 0x40 + 0x20 + 0x10)) {
+static size_t utf8LengthFromLead(unsigned char uch)
+{
+	if (uch >= (0x80 + 0x40 + 0x20 + 0x10))
+    {
 		return 4;
-	} else if (uch >= (0x80 + 0x40 + 0x20)) {
+	} else if (uch >= (0x80 + 0x40 + 0x20))
+    {
 		return 3;
-	} else if (uch >= (0x80)) {
+	} else if (uch >= (0x80))
+    {
 		return 2;
-	} else {
+	} else
+    {
 		return 1;
 	}
 }
@@ -897,14 +910,19 @@ static size_t utf8LengthFromLead(unsigned char uch) {
 void SurfaceImpl::MeasureWidths(Font &font_, const char *s, int len, XYPOSITION *positions)
 {
 	CFStringEncoding encoding = EncodingFromCharacterSet(unicodeMode, FontCharacterSet(font_));
-	textLayout->setText (reinterpret_cast<const UInt8*>(s), len, encoding, *reinterpret_cast<QuartzTextStyle*>(font_.GetID()));
+    
+	[textLayout setText: s
+                 length: len
+               encoding: encoding
+                  style: [reinterpret_cast<VTLStyle *>(font_.GetID()) getCTStyle]];
 	
-	CTLineRef mLine = textLayout->getCTLine();
+	CTLineRef mLine = [textLayout getCTLine];
 	assert(mLine != NULL);
 	
-	if (unicodeMode) {
+	if (unicodeMode)
+    {
 		// Map the widths given for UTF-16 characters back onto the UTF-8 input string
-		CFIndex fit = textLayout->getStringLength();
+		CFIndex fit = [textLayout stringLength];
 		int ui=0;
 		const unsigned char *us = reinterpret_cast<const unsigned char *>(s);
 		int i=0;
@@ -946,21 +964,31 @@ XYPOSITION SurfaceImpl::WidthText(Font &font_, const char *s, int len) {
     if (font_.GetID())
     {
         CFStringEncoding encoding = EncodingFromCharacterSet(unicodeMode, FontCharacterSet(font_));
-        textLayout->setText (reinterpret_cast<const UInt8*>(s), len, encoding, *reinterpret_cast<QuartzTextStyle*>(font_.GetID()));
         
-        return textLayout->MeasureStringWidth();
+        [textLayout setText: s
+                     length: len
+                   encoding: encoding
+                      style: [reinterpret_cast<VTLStyle *>(font_.GetID()) getCTStyle]];
+        
+        return [textLayout MeasureStringWidth];
     }
     return 1;
 }
 
-XYPOSITION SurfaceImpl::WidthChar(Font &font_, char ch) {
+XYPOSITION SurfaceImpl::WidthChar(Font &font_, char ch)
+{
     char str[2] = { ch, '\0' };
+    
     if (font_.GetID())
     {
         CFStringEncoding encoding = EncodingFromCharacterSet(unicodeMode, FontCharacterSet(font_));
-        textLayout->setText (reinterpret_cast<const UInt8*>(str), 1, encoding, *reinterpret_cast<QuartzTextStyle*>(font_.GetID()));
+
+        [textLayout setText: str
+                     length: 1
+                   encoding: encoding
+                      style: [reinterpret_cast<VTLStyle *>(font_.GetID()) getCTStyle]];
         
-        return textLayout->MeasureStringWidth();
+        return [textLayout MeasureStringWidth];
     }
     else
         return 1;
@@ -974,7 +1002,7 @@ XYPOSITION SurfaceImpl::Ascent(Font &font_) {
     if (!font_.GetID())
         return 1;
     
-	float ascent = reinterpret_cast<QuartzTextStyle*>( font_.GetID() )->getAscent();
+	float ascent = [reinterpret_cast<VTLStyle *>( font_.GetID() ) getAscent];
 	return ascent + 0.5;
     
 }
@@ -983,7 +1011,7 @@ XYPOSITION SurfaceImpl::Descent(Font &font_) {
     if (!font_.GetID())
         return 1;
     
-	float descent = reinterpret_cast<QuartzTextStyle*>( font_.GetID() )->getDescent();
+	float descent = [reinterpret_cast<VTLStyle *>( font_.GetID() ) getDescent];
 	return descent + 0.5;
     
 }
@@ -996,7 +1024,7 @@ XYPOSITION SurfaceImpl::ExternalLeading(Font &font_) {
     if (!font_.GetID())
         return 1;
     
-	float leading = reinterpret_cast<QuartzTextStyle*>( font_.GetID() )->getLeading();
+	float leading = [reinterpret_cast<VTLStyle *>( font_.GetID() ) getLeading];
 	return leading + 0.5;
     
 }

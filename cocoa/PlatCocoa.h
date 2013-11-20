@@ -16,7 +16,6 @@
 #include <sys/time.h>
 
 #include <Cocoa/Cocoa.h>
-#include "QuartzTextLayout.h"
 
 #include "Platform.h"
 #include "Scintilla.h"
@@ -25,7 +24,7 @@ NSRect PRectangleToNSRect(Scintilla::PRectangle& rc);
 Scintilla::PRectangle NSRectToPRectangle(NSRect& rc);
 CFStringEncoding EncodingFromCharacterSet(bool unicode, int characterSet);
 
-
+@class VTLayout;
 
 namespace Scintilla {
     
@@ -40,7 +39,7 @@ namespace Scintilla {
         CGContextRef gc;
         
         /** The text layout instance */
-        QuartzTextLayout*	textLayout;
+        VTLayout*	textLayout;
         int codePage;
         int verticalDeviceResolution;
         

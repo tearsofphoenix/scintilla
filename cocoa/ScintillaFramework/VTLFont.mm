@@ -9,8 +9,7 @@
 #import "Scintilla.h"
 #import "VTLFont.h"
 #import "Platform.h"
-#import "QuartzTextStyle.h"
-//#import "ScintillaCocoa.h"
+#import "VTLStyle.h"
 
 CTFontRef VTLFontCreate(const char* name,
                         size_t length,
@@ -102,13 +101,15 @@ void Font::Create(const FontParameters &fp)
 {
 	Release();
     
-	QuartzTextStyle* style = new QuartzTextStyle();
+	VTLStyle* style = [[VTLStyle alloc] init];
+
 	fid = style;
     
 	// Create the font with attributes
 	CTFontRef fontRef = VTLFontCreate(fp.faceName, strlen(fp.faceName), fp.size, fp.weight, fp.italic);
     
-	style->setFontRef(fontRef, fp.characterSet);
+	[style setFontRef: fontRef
+         characterSet: fp.characterSet];
     
     CFRelease(fontRef);
 }
@@ -118,7 +119,10 @@ void Font::Create(const FontParameters &fp)
 void Font::Release()
 {
     if (fid)
-        delete reinterpret_cast<QuartzTextStyle*>( fid );
+    {
+        [reinterpret_cast<VTLStyle *>( fid ) release];
+    }
+    
     fid = 0;
 }
 
