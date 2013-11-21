@@ -10,7 +10,7 @@
 #import "Platform.h"
 #import "ScintillaView.h"
 #import "ScintillaContextMenu.h"
-#import "ScintillaCocoa.h"
+#import "SCIController.h"
 
 @implementation ScintillaContextMenu : NSMenu
 
@@ -19,7 +19,7 @@
 
 - (void) handleCommand: (NSMenuItem *) sender
 {
-    Scintilla::ScintillaCocoa* temp = (Scintilla::ScintillaCocoa *)_owner;
+    Scintilla::SCIController* temp = (Scintilla::SCIController *)_owner;
     temp->HandleCommand([sender tag]);
 }
 

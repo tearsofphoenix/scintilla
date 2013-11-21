@@ -14,7 +14,7 @@
 
 #import "Platform.h"
 #import "ScintillaView.h"
-#import "ScintillaCocoa.h"
+#import "SCIController.h"
 #import "PlatCocoa.h"
 
 #include <cstring>

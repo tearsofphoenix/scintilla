@@ -9,7 +9,7 @@
 #include "Platform.h"
 #include "Scintilla.h"
 #include "ScintillaView.h"
-#include "ScintillaCocoa.h"
+#include "SCIController.h"
 #include "PlatCocoa.h"
 #import "SCIContentView.h"
 

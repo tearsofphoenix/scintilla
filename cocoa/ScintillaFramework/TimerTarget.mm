@@ -9,7 +9,7 @@
 #import "TimerTarget.h"
 #import "Platform.h"
 #import "Scintilla.h"
-#import "ScintillaCocoa.h"
+#import "SCIController.h"
 
 using namespace Scintilla;
 
@@ -47,12 +47,12 @@ using namespace Scintilla;
 
 
 /**
- * Method called by a timer installed by ScintillaCocoa. This two step approach is needed because
+ * Method called by a timer installed by SCIController. This two step approach is needed because
  * a native Obj-C class is required as target for the timer.
  */
 - (void) timerFired: (NSTimer*) timer
 {
-    reinterpret_cast<ScintillaCocoa*>(mTarget)->TimerFired(timer);
+    reinterpret_cast<SCIController*>(mTarget)->TimerFired(timer);
 }
 
 
@@ -85,7 +85,7 @@ using namespace Scintilla;
 - (void) idleTriggered: (NSNotification*) notification
 {
 #pragma unused(notification)
-    reinterpret_cast<ScintillaCocoa*>(mTarget)->IdleTimerFired();
+    reinterpret_cast<SCIController*>(mTarget)->IdleTimerFired();
 }
 
 @end

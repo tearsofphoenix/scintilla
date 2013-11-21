@@ -183,13 +183,13 @@
 		2744E5AC0FC168B200E85C33 /* InfoBarCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2744E5B20FC168C500E85C33 /* InfoBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5AD0FC168C500E85C33 /* InfoBar.mm */; };
 		2744E5B30FC168C500E85C33 /* PlatCocoa.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5AE0FC168C500E85C33 /* PlatCocoa.mm */; };
-		2744E5B50FC168C500E85C33 /* ScintillaCocoa.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5B00FC168C500E85C33 /* ScintillaCocoa.mm */; };
+		2744E5B50FC168C500E85C33 /* SCIController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5B00FC168C500E85C33 /* SCIController.mm */; };
 		2744E5B60FC168C500E85C33 /* ScintillaView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5B10FC168C500E85C33 /* ScintillaView.mm */; };
 		2791F3C60FC19F71009DBCF9 /* PlatCocoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E59E0FC168A100E85C33 /* PlatCocoa.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2791F3C70FC19F71009DBCF9 /* Platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E4850FC1678600E85C33 /* Platform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2791F3C80FC19F71009DBCF9 /* SciLexer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E4870FC1678600E85C33 /* SciLexer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2791F3C90FC19F71009DBCF9 /* Scintilla.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E4880FC1678600E85C33 /* Scintilla.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2791F3E00FC1A390009DBCF9 /* ScintillaCocoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5A20FC168A100E85C33 /* ScintillaCocoa.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2791F3E00FC1A390009DBCF9 /* SCIController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5A20FC168A100E85C33 /* SCIController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2791F3E30FC1A3AE009DBCF9 /* VTLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E59F0FC168A100E85C33 /* VTLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2791F3E40FC1A3AE009DBCF9 /* VTLFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5A00FC168A100E85C33 /* VTLFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		27FEF4540FC1B413005E115A /* info_bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 27FEF4510FC1B413005E115A /* info_bar_bg.png */; };
@@ -220,6 +220,9 @@
 		925957BF183C75A30044DA6D /* SCICallTipView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957BD183C75A30044DA6D /* SCICallTipView.mm */; };
 		9291C212183CA1BD00CAD257 /* VTLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9291C211183CA1BD00CAD257 /* VTLayout.mm */; };
 		9291C215183CA78800CAD257 /* VTLStyle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9291C214183CA78800CAD257 /* VTLStyle.mm */; };
+		92D62517183D8E00005E0A59 /* SCIDebugServer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 92D62515183D8E00005E0A59 /* SCIDebugServer.mm */; };
+		92D62518183D8E00005E0A59 /* SCIDebugServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 92D62516183D8E00005E0A59 /* SCIDebugServer.h */; };
+		92DE181C183DC85A0045F8BC /* DevToolsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D62561183D9186005E0A59 /* DevToolsFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -243,6 +246,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 60853154183B9D3E0084C214;
 			remoteInfo = VEBundle;
+		};
+		92D62560183D9186005E0A59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 92D6252D183D9185005E0A59;
+			remoteInfo = DevToolsFoundation;
+		};
+		92D62562183D9186005E0A59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 92D62544183D9185005E0A59;
+			remoteInfo = DevToolsFoundationTests;
+		};
+		92DE180E183DB0160045F8BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 92D6252C183D9185005E0A59;
+			remoteInfo = DevToolsFoundation;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -429,12 +453,12 @@
 		2744E59E0FC168A100E85C33 /* PlatCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatCocoa.h; path = ../PlatCocoa.h; sourceTree = SOURCE_ROOT; };
 		2744E59F0FC168A100E85C33 /* VTLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTLayout.h; path = ../VTLayout.h; sourceTree = SOURCE_ROOT; };
 		2744E5A00FC168A100E85C33 /* VTLFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTLFont.h; path = ../VTLFont.h; sourceTree = SOURCE_ROOT; };
-		2744E5A20FC168A100E85C33 /* ScintillaCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScintillaCocoa.h; path = ../ScintillaCocoa.h; sourceTree = "<group>"; };
+		2744E5A20FC168A100E85C33 /* SCIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCIController.h; path = ../SCIController.h; sourceTree = "<group>"; };
 		2744E5A30FC168A100E85C33 /* ScintillaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScintillaView.h; path = ../ScintillaView.h; sourceTree = "<group>"; };
 		2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoBarCommunicator.h; path = ../InfoBarCommunicator.h; sourceTree = SOURCE_ROOT; };
 		2744E5AD0FC168C500E85C33 /* InfoBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = InfoBar.mm; path = ../InfoBar.mm; sourceTree = SOURCE_ROOT; };
 		2744E5AE0FC168C500E85C33 /* PlatCocoa.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlatCocoa.mm; path = ../PlatCocoa.mm; sourceTree = SOURCE_ROOT; };
-		2744E5B00FC168C500E85C33 /* ScintillaCocoa.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ScintillaCocoa.mm; path = ../ScintillaCocoa.mm; sourceTree = "<group>"; };
+		2744E5B00FC168C500E85C33 /* SCIController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SCIController.mm; path = ../SCIController.mm; sourceTree = "<group>"; };
 		2744E5B10FC168C500E85C33 /* ScintillaView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ScintillaView.mm; path = ../ScintillaView.mm; sourceTree = "<group>"; };
 		27FEF4510FC1B413005E115A /* info_bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_bar_bg.png; sourceTree = "<group>"; };
 		27FEF4520FC1B413005E115A /* mac_cursor_busy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac_cursor_busy.png; sourceTree = "<group>"; };
@@ -465,6 +489,9 @@
 		925957BD183C75A30044DA6D /* SCICallTipView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCICallTipView.mm; sourceTree = "<group>"; };
 		9291C211183CA1BD00CAD257 /* VTLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VTLayout.mm; sourceTree = "<group>"; };
 		9291C214183CA78800CAD257 /* VTLStyle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VTLStyle.mm; sourceTree = "<group>"; };
+		92D62515183D8E00005E0A59 /* SCIDebugServer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SCIDebugServer.mm; sourceTree = "<group>"; };
+		92D62516183D8E00005E0A59 /* SCIDebugServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIDebugServer.h; sourceTree = "<group>"; };
+		92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DevToolsFoundation.xcodeproj; path = DevToolsFoundation/DevToolsFoundation.xcodeproj; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -473,6 +500,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92DE181C183DC85A0045F8BC /* DevToolsFoundation.framework in Frameworks */,
 				6085318E183B9D590084C214 /* VEBundle.framework in Frameworks */,
 				8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */,
 				1152A77315313E58000D4E1A /* QuartzCore.framework in Frameworks */,
@@ -493,6 +521,7 @@
 		0867D691FE84028FC02AAC07 /* Scintilla */ = {
 			isa = PBXGroup;
 			children = (
+				92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */,
 				60853183183B9D3E0084C214 /* VEBundle.xcodeproj */,
 				2744E47D0FC1674E00E85C33 /* Lexers */,
 				2744E47C0FC1674100E85C33 /* Backend */,
@@ -534,8 +563,10 @@
 				2744E4870FC1678600E85C33 /* SciLexer.h */,
 				925957B2183C5E5E0044DA6D /* SCIMenu.mm */,
 				2744E4880FC1678600E85C33 /* Scintilla.h */,
-				2744E5A20FC168A100E85C33 /* ScintillaCocoa.h */,
-				2744E5B00FC168C500E85C33 /* ScintillaCocoa.mm */,
+				2744E5A20FC168A100E85C33 /* SCIController.h */,
+				2744E5B00FC168C500E85C33 /* SCIController.mm */,
+				92D62516183D8E00005E0A59 /* SCIDebugServer.h */,
+				92D62515183D8E00005E0A59 /* SCIDebugServer.mm */,
 				925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */,
 				60853197183BA2470084C214 /* ScintillaPrivate.h */,
 				925957B0183C582C0044DA6D /* ScintillaPrivate.mm */,
@@ -830,6 +861,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		92D6255C183D9186005E0A59 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				92D62561183D9186005E0A59 /* DevToolsFoundation.framework */,
+				92D62563183D9186005E0A59 /* DevToolsFoundationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -843,7 +883,7 @@
 				2791F3C60FC19F71009DBCF9 /* PlatCocoa.h in Headers */,
 				2791F3E30FC1A3AE009DBCF9 /* VTLayout.h in Headers */,
 				2791F3E40FC1A3AE009DBCF9 /* VTLFont.h in Headers */,
-				2791F3E00FC1A390009DBCF9 /* ScintillaCocoa.h in Headers */,
+				2791F3E00FC1A390009DBCF9 /* SCIController.h in Headers */,
 				2744E5AA0FC168A100E85C33 /* ScintillaView.h in Headers */,
 				2791F3C70FC19F71009DBCF9 /* Platform.h in Headers */,
 				2791F3C80FC19F71009DBCF9 /* SciLexer.h in Headers */,
@@ -898,6 +938,7 @@
 				1100F1EE178E393200105727 /* CaseFolder.h in Headers */,
 				1100F1EF178E393200105727 /* UnicodeFromUTF8.h in Headers */,
 				925957BA183C749E0044DA6D /* TimerTarget.h in Headers */,
+				92D62518183D8E00005E0A59 /* SCIDebugServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,6 +957,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				92DE180F183DB0160045F8BC /* PBXTargetDependency */,
 				6085318D183B9D510084C214 /* PBXTargetDependency */,
 			);
 			name = Scintilla;
@@ -947,6 +989,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 92D6255C183D9186005E0A59 /* Products */;
+					ProjectRef = 92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */;
+				},
+				{
 					ProductGroup = 60853184183B9D3E0084C214 /* Products */;
 					ProjectRef = 60853183183B9D3E0084C214 /* VEBundle.xcodeproj */;
 				},
@@ -973,6 +1019,20 @@
 			remoteRef = 6085318A183B9D3F0084C214 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		92D62561183D9186005E0A59 /* DevToolsFoundation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DevToolsFoundation.framework;
+			remoteRef = 92D62560183D9186005E0A59 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		92D62563183D9186005E0A59 /* DevToolsFoundationTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = DevToolsFoundationTests.xctest;
+			remoteRef = 92D62562183D9186005E0A59 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -996,7 +1056,7 @@
 			files = (
 				2744E5B20FC168C500E85C33 /* InfoBar.mm in Sources */,
 				2744E5B30FC168C500E85C33 /* PlatCocoa.mm in Sources */,
-				2744E5B50FC168C500E85C33 /* ScintillaCocoa.mm in Sources */,
+				2744E5B50FC168C500E85C33 /* SCIController.mm in Sources */,
 				2744E5B60FC168C500E85C33 /* ScintillaView.mm in Sources */,
 				114B6F0D11FA7526004FB6AB /* LexAbaqus.cxx in Sources */,
 				114B6F0E11FA7526004FB6AB /* LexAda.cxx in Sources */,
@@ -1054,6 +1114,7 @@
 				114B6F3E11FA7526004FB6AB /* LexPascal.cxx in Sources */,
 				114B6F3F11FA7526004FB6AB /* LexPB.cxx in Sources */,
 				114B6F4011FA7526004FB6AB /* LexPerl.cxx in Sources */,
+				92D62517183D8E00005E0A59 /* SCIDebugServer.mm in Sources */,
 				114B6F4111FA7526004FB6AB /* LexPLM.cxx in Sources */,
 				114B6F4211FA7526004FB6AB /* LexPOV.cxx in Sources */,
 				114B6F4311FA7526004FB6AB /* LexPowerPro.cxx in Sources */,
@@ -1149,6 +1210,11 @@
 			isa = PBXTargetDependency;
 			name = VEBundle;
 			targetProxy = 6085318C183B9D510084C214 /* PBXContainerItemProxy */;
+		};
+		92DE180F183DB0160045F8BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DevToolsFoundation;
+			targetProxy = 92DE180E183DB0160045F8BC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -624,7 +624,10 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	static const char *StringFromEOLMode(int eolMode);
 
 	static sptr_t StringResult(sptr_t lParam, const char *val);
-
+    
+    //debug support
+    virtual void didClickedMarginAtLineNumber(int lineAnchorPosition);
+    
 public:
 	// Public so the COM thunks can access it.
 	bool IsUnicodeMode() const;

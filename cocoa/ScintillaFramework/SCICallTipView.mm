@@ -9,7 +9,7 @@
 #import "SCICallTipView.h"
 #import "Platform.h"
 #import "Scintilla.h"
-#import "ScintillaCocoa.h"
+#import "SCIController.h"
 
 using namespace Scintilla;
 
@@ -34,7 +34,7 @@ using namespace Scintilla;
 
 - (void) drawRect: (NSRect) needsDisplayInRect
 {
-    ScintillaCocoa *controller = (ScintillaCocoa *)_scintillaController;
+    SCIController *controller = (SCIController *)_scintillaController;
     
     if (controller)
     {
@@ -45,7 +45,7 @@ using namespace Scintilla;
 
 - (void) mouseDown: (NSEvent *) event
 {
-    ScintillaCocoa *controller = (ScintillaCocoa *)_scintillaController;
+    SCIController *controller = (SCIController *)_scintillaController;
 
     if (controller)
     {

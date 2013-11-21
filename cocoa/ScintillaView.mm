@@ -11,7 +11,7 @@
 
 #import "Platform.h"
 #import "ScintillaView.h"
-#import "ScintillaCocoa.h"
+#import "SCIController.h"
 #import "SCIContentView.h"
 #import "SCIMarginView.h"
 
@@ -273,7 +273,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         [_scrollView setHasVerticalRuler:YES];
         [_scrollView setRulersVisible:YES];
         
-        _backend = new ScintillaCocoa(mContent, marginView);
+        _backend = new SCIController(mContent, marginView);
         
         // Establish a connection from the back end to this container so we can handle situations
         // which require our attention.
@@ -528,7 +528,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
 + (sptr_t) directCall: (ScintillaView*) sender message: (unsigned int) message wParam: (uptr_t) wParam
                lParam: (sptr_t) lParam
 {
-    return ScintillaCocoa::DirectFunction(sender->_backend, message, wParam, lParam);
+    return SCIController::DirectFunction(sender->_backend, message, wParam, lParam);
 }
 
 - (sptr_t) message: (unsigned int) message wParam: (uptr_t) wParam lParam: (sptr_t) lParam

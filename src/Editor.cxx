@@ -6384,15 +6384,21 @@ void Editor::ButtonDown(Point pt, unsigned int curTime, bool shift, bool ctrl, b
 			if (PositionIsHotspot(newPos.Position()))
 				NotifyHotSpotDoubleClicked(newPos.Position(), shift, ctrl, alt);
 		}
-	} else {	// Single click
-		if (inSelMargin) {
+	} else
+    {	// Single click
+		if (inSelMargin)
+        {
 			sel.selType = Selection::selStream;
-			if (!shift) {
+			if (!shift)
+            {
 				// Single click in margin: select whole line or only subline if word wrap is enabled
 				lineAnchorPos = newPos.Position();
 				selectionType = (Wrapping() && (marginOptions & SC_MARGINOPTION_SUBLINESELECT)) ? selSubLine : selWholeLine;
 				LineSelection(lineAnchorPos, lineAnchorPos, selectionType == selWholeLine);
-			} else {
+                didClickedMarginAtLineNumber(lineAnchorPos);
+                
+			} else
+            {
 				// Single shift+click in margin: select from line anchor to clicked line
 				if (sel.MainAnchor() > sel.MainCaret())
 					lineAnchorPos = sel.MainAnchor() - 1;
@@ -9652,4 +9658,9 @@ sptr_t Editor::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam) {
 	}
 	//Platform::DebugPrintf("end wnd proc\n");
 	return 0l;
+}
+
+void Editor::didClickedMarginAtLineNumber(int lineAnchorPosition)
+{
+    
 }

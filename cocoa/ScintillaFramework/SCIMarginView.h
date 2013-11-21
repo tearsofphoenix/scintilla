@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class ScintillaView;
+@class PBXBreakpoint;
 /**
  * SCIMarginView draws line numbers and other margins next to the text view.
  */
@@ -18,6 +19,9 @@
 @property (assign) ScintillaView *owner;
 
 - (id)initWithScrollView: (NSScrollView *)aScrollView;
+
+- (void)addBreakpoint: (PBXBreakpoint *)breakpoint
+         atLineNumber: (int)lineNumber;
 
 @end
 

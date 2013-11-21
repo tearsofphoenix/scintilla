@@ -18,13 +18,13 @@ namespace Scintilla
      * ScintillaView registerNotifyCallback() to register such a handler.
      * Message format is:
      * <br>
-     * WM_COMMAND: HIWORD (wParam) = notification code, LOWORD (wParam) = control ID, lParam = ScintillaCocoa*
+     * WM_COMMAND: HIWORD (wParam) = notification code, LOWORD (wParam) = control ID, lParam = SCIController*
      * <br>
-     * WM_NOTIFY: wParam = control ID, lParam = ptr to SCNotification structure, with hwndFrom set to ScintillaCocoa*
+     * WM_NOTIFY: wParam = control ID, lParam = ptr to SCNotification structure, with hwndFrom set to SCIController*
      */
     typedef void(*SciNotifyFunc) (intptr_t windowid, unsigned int iMessage, uintptr_t wParam, uintptr_t lParam);
     
-    class ScintillaCocoa;
+    class SCIController;
 }
 
 @protocol ScintillaNotificationProtocol

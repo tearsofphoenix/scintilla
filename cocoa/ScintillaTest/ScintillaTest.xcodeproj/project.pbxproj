@@ -16,6 +16,7 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		92DE1814183DB0210045F8BC /* DevToolsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DE1813183DB0210045F8BC /* DevToolsFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		60853199183BA2A60084C214 /* VEBundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VEBundle.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/ScintillaTest-cvusymbtpzcsshgvbcavxwvcbhxz/Build/Products/Debug/VEBundle.framework"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* ScintillaTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScintillaTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92DE1813183DB0210045F8BC /* DevToolsFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevToolsFoundation.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ScintillaTest-bjwinxceoraxirctqrstaqwjbdvs/Build/Products/Debug/DevToolsFoundation.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92DE1814183DB0210045F8BC /* DevToolsFoundation.framework in Frameworks */,
 				605504AA183BA61500B3AB51 /* Scintilla.framework in Frameworks */,
 				6085319A183BA2A60084C214 /* VEBundle.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
@@ -152,6 +155,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				92DE1813183DB0210045F8BC /* DevToolsFoundation.framework */,
 				60853199183BA2A60084C214 /* VEBundle.framework */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
@@ -293,7 +297,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/ScintillaTest-bjwinxceoraxirctqrstaqwjbdvs/Build/Products/Debug",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -320,7 +327,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/ScintillaTest-bjwinxceoraxirctqrstaqwjbdvs/Build/Products/Debug",
+				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ScintillaTest_Prefix.pch;

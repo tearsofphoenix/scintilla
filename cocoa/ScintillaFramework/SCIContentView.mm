@@ -14,7 +14,7 @@
 #import "InfoBarCommunicator.h"
 #import "Platform.h"
 #import "ScintillaView.h"
-#import "ScintillaCocoa.h"
+#import "SCIController.h"
 #import "ScintillaPrivate.h"
 
 using namespace Scintilla;

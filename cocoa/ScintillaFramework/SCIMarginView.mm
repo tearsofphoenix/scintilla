@@ -9,7 +9,9 @@
 #import "SCIMarginView.h"
 #import "ScintillaPrivate.h"
 #import "ScintillaView.h"
-#import "ScintillaCocoa.h"
+#import "SCIController.h"
+
+#import <DevToolsFoundation/DevToolsFoundation.h>
 
 @interface SCIMarginView ()
 {
@@ -29,7 +31,7 @@
         _owner = nil;
         _marginWidth = 20;
         _currentCursors = [[NSMutableArray alloc] init];
-
+        
         for (size_t i=0; i<5; i++)
         {
             [_currentCursors addObject: NSCursorFromEnum(Scintilla::Window::Cursor::cursorReverseArrow)];
@@ -78,6 +80,12 @@
 - (void) mouseDown: (NSEvent *) theEvent
 {
     _owner.backend->MouseDown(theEvent);
+    
+    dispatch_async(dispatch_get_main_queue(),
+                   (^
+                    {
+                        [self setNeedsDisplay: YES];
+                    }));
 }
 
 - (void) mouseDragged: (NSEvent *) theEvent
@@ -125,6 +133,24 @@
         
         x += width;
     }
+}
+
+- (void)addBreakpoint: (PBXBreakpoint *)breakpoint
+         atLineNumber: (int)lineNumber
+{    
+    PBXTextBookmark *marker = [[PBXTextBookmark alloc] initWithRulerView: self
+                                                          markerLocation: lineNumber];
+    [marker setRemovable: YES];
+    [marker setMovable: YES];
+    
+    [marker setDelegate: breakpoint];
+    [breakpoint setTextMark: marker];
+    
+    [self addMarker: marker];
+    
+    [marker release];
+    
+    printf("%d\n", lineNumber);
 }
 
 @end

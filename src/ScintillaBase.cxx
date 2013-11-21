@@ -463,7 +463,8 @@ void ScintillaBase::CancelModes() {
 	Editor::CancelModes();
 }
 
-void ScintillaBase::ButtonDown(Point pt, unsigned int curTime, bool shift, bool ctrl, bool alt) {
+void ScintillaBase::ButtonDown(Point pt, unsigned int curTime, bool shift, bool ctrl, bool alt)
+{
 	CancelModes();
 	Editor::ButtonDown(pt, curTime, shift, ctrl, alt);
 }

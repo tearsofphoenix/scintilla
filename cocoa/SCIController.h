@@ -1,5 +1,5 @@
 /*
- * ScintillaCocoa.h
+ * SCIController.h
  *
  * Mike Lischke <mlischke@sun.com>
  *
@@ -62,14 +62,15 @@ extern "C" NSString* ScintillaRecPboardType;
 
 @class FindHighlightLayer;
 @class TimerTarget;
-
+@class SCIDebugServer;
 
 namespace Scintilla
-{    
+{
+
     /**
      * Main scintilla class, implemented for OS X (Cocoa).
      */
-    class ScintillaCocoa : public ScintillaBase
+    class SCIController : public ScintillaBase
     {
     private:
         TimerTarget* timerTarget;
@@ -84,9 +85,9 @@ namespace Scintilla
         
         bool enteredSetScrollingSize;
         
-        // Private so ScintillaCocoa objects can not be copied
-        ScintillaCocoa(const ScintillaCocoa &) : ScintillaBase() {}
-        ScintillaCocoa &operator=(const ScintillaCocoa &) { return * this; }
+        // Private so SCIController objects can not be copied
+        SCIController(const SCIController &) : ScintillaBase() {}
+        SCIController &operator=(const SCIController &) { return * this; }
         
         bool GetPasteboardData(NSPasteboard* board, SelectionText* selectedText);
         void SetPasteboardData(NSPasteboard* board, const SelectionText& selectedText);
@@ -98,6 +99,7 @@ namespace Scintilla
         CFRunLoopObserverRef observer;
         
         FindHighlightLayer *layerFindIndicator;
+        SCIDebugServer *_debugServer;
         
     protected:
         Point GetVisibleOriginInMain();
@@ -111,8 +113,8 @@ namespace Scintilla
         virtual void CancelModes();
         
     public:
-        ScintillaCocoa(SCIContentView* view, SCIMarginView* viewMargin);
-        virtual ~ScintillaCocoa();
+        SCIController(SCIContentView* view, SCIMarginView* viewMargin);
+        virtual ~SCIController();
         
         void SetDelegate(id<ScintillaNotificationProtocol> delegate_);
         void RegisterNotifyCallback(intptr_t windowid, SciNotifyFunc callback);
@@ -161,7 +163,7 @@ namespace Scintilla
         
         NSPoint GetCaretPosition();
         
-        static sptr_t DirectFunction(ScintillaCocoa *sciThis, unsigned int iMessage, uptr_t wParam, sptr_t lParam);
+        static sptr_t DirectFunction(SCIController *sciThis, unsigned int iMessage, uptr_t wParam, sptr_t lParam);
         
         void TimerFired(NSTimer* timer);
         void IdleTimerFired();
@@ -207,6 +209,9 @@ namespace Scintilla
         void ShowFindIndicatorForRange(NSRange charRange, BOOL retaining);
         void MoveFindIndicatorWithBounce(BOOL bounce);
         void HideFindIndicator();
+        
+        //debug support
+        void didClickedMarginAtLineNumber(int lineAnchorPosition);
     };
     
     

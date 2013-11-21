@@ -52,7 +52,7 @@ extern NSString *const SCIUpdateUINotification;
 // The back end is kind of a controller and model in one.
 // It uses the content view for display.
 
-@property (nonatomic, readonly) Scintilla::ScintillaCocoa* backend;
+@property (nonatomic, readonly) Scintilla::SCIController* backend;
 @property (nonatomic, assign) id<ScintillaNotificationProtocol> delegate;
 @property (nonatomic, readonly) NSScrollView *scrollView;
 @property (nonatomic, retain) VEBundle *currentLanguageBundle;

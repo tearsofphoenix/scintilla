@@ -1,7 +1,7 @@
 
 /**
  * Scintilla source code edit control
- * ScintillaCocoa.mm - Cocoa subclass of ScintillaBase
+ * SCIController.mm - Cocoa subclass of ScintillaBase
  *
  * Written by Mike Lischke <mlischke@sun.com>
  *
@@ -21,13 +21,16 @@
 
 #import "Platform.h"
 #import "ScintillaView.h"
-#import "ScintillaCocoa.h"
+#import "SCIController.h"
 #import "PlatCocoa.h"
 #import "SCIContentView.h"
 #import "ScintillaContextMenu.h"
 #import "FindHighlightLayer.h"
 #import "TimerTarget.h"
 #import "SCICallTipView.h"
+#import "SCIMarginView.h"
+#import "SCIDebugServer.h"
+#import <DevToolsFoundation/DevToolsFoundation.h>
 
 using namespace Scintilla;
 
@@ -144,9 +147,9 @@ static const KeyToCommand macMapDefault[] =
 
 
 
-//----------------- ScintillaCocoa -----------------------------------------------------------------
+//----------------- SCIController -----------------------------------------------------------------
 
-ScintillaCocoa::ScintillaCocoa(SCIContentView* view, SCIMarginView* viewMargin)
+SCIController::SCIController(SCIContentView* view, SCIMarginView* viewMargin)
 {
     vs.marginInside = false;
     wMain = view; // Don't retain since we're owned by view, which would cause a cycle
@@ -169,7 +172,7 @@ ScintillaCocoa::ScintillaCocoa(SCIContentView* view, SCIMarginView* viewMargin)
 
 
 
-ScintillaCocoa::~ScintillaCocoa()
+SCIController::~SCIController()
 {
     Finalise();
     [timerTarget release];
@@ -180,9 +183,11 @@ ScintillaCocoa::~ScintillaCocoa()
 /**
  * Core initialization of the control. Everything that needs to be set up happens here.
  */
-void ScintillaCocoa::Initialise()
+void SCIController::Initialise()
 {
     Scintilla_LinkLexers();
+    
+    _debugServer = [[SCIDebugServer alloc] init];
     
     // Tell Scintilla not to buffer: Quartz buffers drawing for us.
     WndProc(SCI_SETBUFFEREDDRAW, 0, 0);
@@ -201,7 +206,7 @@ void ScintillaCocoa::Initialise()
 /**
  * We need some clean up. Do it here.
  */
-void ScintillaCocoa::Finalise()
+void SCIController::Finalise()
 {
     ObserverRemove();
     SetTicking(false);
@@ -210,8 +215,8 @@ void ScintillaCocoa::Finalise()
 
 
 
-void ScintillaCocoa::UpdateObserver(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info) {
-    ScintillaCocoa* sci = reinterpret_cast<ScintillaCocoa*>(info);
+void SCIController::UpdateObserver(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info) {
+    SCIController* sci = reinterpret_cast<SCIController*>(info);
     sci->IdleWork();
 }
 
@@ -221,7 +226,7 @@ void ScintillaCocoa::UpdateObserver(CFRunLoopObserverRef observer, CFRunLoopActi
  * Add an observer to the run loop to perform styling as high-priority idle task.
  */
 
-void ScintillaCocoa::ObserverAdd() {
+void SCIController::ObserverAdd() {
     if (!observer) {
         CFRunLoopObserverContext context;
         context.version = 0;
@@ -242,7 +247,7 @@ void ScintillaCocoa::ObserverAdd() {
 /**
  * Remove the run loop observer.
  */
-void ScintillaCocoa::ObserverRemove() {
+void SCIController::ObserverRemove() {
     if (observer) {
         CFRunLoopRef mainRunLoop = CFRunLoopGetMain();
         CFRunLoopRemoveObserver(mainRunLoop, observer, kCFRunLoopCommonModes);
@@ -253,14 +258,14 @@ void ScintillaCocoa::ObserverRemove() {
 
 
 
-void ScintillaCocoa::IdleWork() {
+void SCIController::IdleWork() {
     Editor::IdleWork();
     ObserverRemove();
 }
 
 
 
-void ScintillaCocoa::QueueIdleWork(WorkNeeded::workItems items, int upTo) {
+void SCIController::QueueIdleWork(WorkNeeded::workItems items, int upTo) {
     Editor::QueueIdleWork(items, upTo);
     ObserverAdd();
 }
@@ -327,7 +332,7 @@ public:
 	}
 };
 
-CaseFolder *ScintillaCocoa::CaseFolderForEncoding() {
+CaseFolder *SCIController::CaseFolderForEncoding() {
 	if (pdoc->dbcsCodePage == SC_CP_UTF8) {
 		return new CaseFolderUnicode();
 	} else {
@@ -372,7 +377,7 @@ CaseFolder *ScintillaCocoa::CaseFolderForEncoding() {
 /**
  * Case-fold the given string depending on the specified case mapping type.
  */
-std::string ScintillaCocoa::CaseMapString(const std::string &s, int caseMapping)
+std::string SCIController::CaseMapString(const std::string &s, int caseMapping)
 {
     if ((s.size() == 0) || (caseMapping == cmSame))
         return s;
@@ -417,7 +422,7 @@ std::string ScintillaCocoa::CaseMapString(const std::string &s, int caseMapping)
 /**
  * Cancel all modes, both for base class and any find indicator.
  */
-void ScintillaCocoa::CancelModes() {
+void SCIController::CancelModes() {
     ScintillaBase::CancelModes();
     HideFindIndicator();
 }
@@ -427,7 +432,7 @@ void ScintillaCocoa::CancelModes() {
 /**
  * Helper function to get the outer container which represents the Scintilla editor on application side.
  */
-ScintillaView* ScintillaCocoa::TopContainer()
+ScintillaView* SCIController::TopContainer()
 {
     NSView* container = static_cast<NSView*>(wMain.GetID());
     return static_cast<ScintillaView*>([[[container superview] superview] superview]);
@@ -438,7 +443,7 @@ ScintillaView* ScintillaCocoa::TopContainer()
 /**
  * Helper function to get the scrolling view.
  */
-NSScrollView* ScintillaCocoa::ScrollContainer() {
+NSScrollView* SCIController::ScrollContainer() {
     NSView* container = static_cast<NSView*>(wMain.GetID());
     return static_cast<NSScrollView*>([[container superview] superview]);
 }
@@ -448,7 +453,7 @@ NSScrollView* ScintillaCocoa::ScrollContainer() {
 /**
  * Helper function to get the inner container which represents the actual "canvas" we work with.
  */
-SCIContentView* ScintillaCocoa::ContentView()
+SCIContentView* SCIController::ContentView()
 {
     return static_cast<SCIContentView*>(wMain.GetID());
 }
@@ -458,7 +463,7 @@ SCIContentView* ScintillaCocoa::ContentView()
 /**
  * Return the top left visible point relative to the origin point of the whole document.
  */
-Scintilla::Point ScintillaCocoa::GetVisibleOriginInMain()
+Scintilla::Point SCIController::GetVisibleOriginInMain()
 {
     NSScrollView *scrollView = ScrollContainer();
     NSRect contentRect = [[scrollView contentView] bounds];
@@ -472,7 +477,7 @@ Scintilla::Point ScintillaCocoa::GetVisibleOriginInMain()
  * in order to make scrolling working properly.
  * The returned value is in document coordinates.
  */
-PRectangle ScintillaCocoa::GetClientRectangle()
+PRectangle SCIController::GetClientRectangle()
 {
     NSScrollView *scrollView = ScrollContainer();
     NSSize size = [[scrollView contentView] bounds].size;
@@ -487,7 +492,7 @@ PRectangle ScintillaCocoa::GetClientRectangle()
  * a native Point structure. Base coordinates are used for the top window used in the view hierarchy.
  * Returned value is in view coordinates.
  */
-Scintilla::Point ScintillaCocoa::ConvertPoint(NSPoint point)
+Scintilla::Point SCIController::ConvertPoint(NSPoint point)
 {
     NSView* container = ContentView();
     NSPoint result = [container convertPoint: point fromView: nil];
@@ -508,7 +513,7 @@ Scintilla::Point ScintillaCocoa::ConvertPoint(NSPoint point)
  *               (hence the w prefix).
  * @param lParam The other of the two free parameters. A signed long.
  */
-sptr_t ScintillaCocoa::DirectFunction(ScintillaCocoa *sciThis, unsigned int iMessage, uptr_t wParam,
+sptr_t SCIController::DirectFunction(SCIController *sciThis, unsigned int iMessage, uptr_t wParam,
                                       sptr_t lParam)
 {
     return sciThis->WndProc(iMessage, wParam, lParam);
@@ -523,7 +528,7 @@ sptr_t ScintillaCocoa::DirectFunction(ScintillaCocoa *sciThis, unsigned int iMes
 sptr_t scintilla_send_message(void* sci, unsigned int iMessage, uptr_t wParam, sptr_t lParam)
 {
     ScintillaView *control = reinterpret_cast<ScintillaView*>(sci);
-    ScintillaCocoa* scintilla = [control backend];
+    SCIController* scintilla = [control backend];
     return scintilla->WndProc(iMessage, wParam, lParam);
 }
 
@@ -537,7 +542,7 @@ sptr_t scintilla_send_message(void* sci, unsigned int iMessage, uptr_t wParam, s
  * would be system messages on Windows (e.g. for key down, mouse move etc.) are handled by
  * directly calling appropriate handlers.
  */
-sptr_t ScintillaCocoa::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam)
+sptr_t SCIController::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam)
 {
     switch (iMessage)
     {
@@ -582,7 +587,7 @@ sptr_t ScintillaCocoa::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lPar
  * In Windows lingo this is the handler which handles anything that wasn't handled in the normal
  * window proc which would usually send the message back to generic window proc that Windows uses.
  */
-sptr_t ScintillaCocoa::DefWndProc(unsigned int, uptr_t, sptr_t)
+sptr_t SCIController::DefWndProc(unsigned int, uptr_t, sptr_t)
 {
     return 0;
 }
@@ -593,7 +598,7 @@ sptr_t ScintillaCocoa::DefWndProc(unsigned int, uptr_t, sptr_t)
  * Enables or disables a timer that can trigger background processing at a regular interval, like
  * drag scrolling or caret blinking.
  */
-void ScintillaCocoa::SetTicking(bool on)
+void SCIController::SetTicking(bool on)
 {
     if (timer.ticking != on)
     {
@@ -620,7 +625,7 @@ void ScintillaCocoa::SetTicking(bool on)
 
 
 
-bool ScintillaCocoa::SetIdle(bool on)
+bool SCIController::SetIdle(bool on)
 {
     if (idler.state != on)
     {
@@ -647,14 +652,14 @@ bool ScintillaCocoa::SetIdle(bool on)
 
 
 
-void ScintillaCocoa::CopyToClipboard(const SelectionText &selectedText)
+void SCIController::CopyToClipboard(const SelectionText &selectedText)
 {
     SetPasteboardData([NSPasteboard generalPasteboard], selectedText);
 }
 
 
 
-void ScintillaCocoa::Copy()
+void SCIController::Copy()
 {
     if (!sel.Empty())
     {
@@ -666,7 +671,7 @@ void ScintillaCocoa::Copy()
 
 
 
-bool ScintillaCocoa::CanPaste()
+bool SCIController::CanPaste()
 {
     if (!Editor::CanPaste())
         return false;
@@ -676,7 +681,7 @@ bool ScintillaCocoa::CanPaste()
 
 
 
-void ScintillaCocoa::Paste()
+void SCIController::Paste()
 {
     Paste(false);
 }
@@ -686,7 +691,7 @@ void ScintillaCocoa::Paste()
 /**
  * Pastes data from the paste board into the editor.
  */
-void ScintillaCocoa::Paste(bool forceRectangular)
+void SCIController::Paste(bool forceRectangular)
 {
     SelectionText selectedText;
     bool ok = GetPasteboardData([NSPasteboard generalPasteboard], &selectedText);
@@ -717,7 +722,7 @@ void ScintillaCocoa::Paste(bool forceRectangular)
 
 
 
-void ScintillaCocoa::CTPaint(void* gc, NSRect rc) {
+void SCIController::CTPaint(void* gc, NSRect rc) {
 #pragma unused(rc)
     Surface *surfaceWindow = Surface::Allocate(SC_TECHNOLOGY_DEFAULT);
     if (surfaceWindow) {
@@ -731,14 +736,14 @@ void ScintillaCocoa::CTPaint(void* gc, NSRect rc) {
 }
 
 
-void ScintillaCocoa::CallTipMouseDown(NSPoint pt) {
+void SCIController::CallTipMouseDown(NSPoint pt) {
     NSRect rectBounds = [(NSView *)(ct.wDraw.GetID()) bounds];
     Point location(pt.x, rectBounds.size.height - pt.y);
     ct.MouseClick(location);
     CallTipClick();
 }
 
-void ScintillaCocoa::CreateCallTipWindow(PRectangle rc) {
+void SCIController::CreateCallTipWindow(PRectangle rc) {
     if (!ct.wCallTip.Created()) {
         NSRect ctRect = NSMakeRect(rc.top,rc.bottom, rc.Width(), rc.Height());
         NSWindow *callTip = [[NSWindow alloc] initWithContentRect: ctRect
@@ -758,7 +763,7 @@ void ScintillaCocoa::CreateCallTipWindow(PRectangle rc) {
     }
 }
 
-void ScintillaCocoa::AddToPopUp(const char *label, int cmd, bool enabled)
+void SCIController::AddToPopUp(const char *label, int cmd, bool enabled)
 {
     NSMenuItem* item;
     ScintillaContextMenu *menu= reinterpret_cast<ScintillaContextMenu*>(popup.GetID());
@@ -781,7 +786,7 @@ void ScintillaCocoa::AddToPopUp(const char *label, int cmd, bool enabled)
 
 // -------------------------------------------------------------------------------------------------
 
-void ScintillaCocoa::ClaimSelection()
+void SCIController::ClaimSelection()
 {
     // Mac OS X does not have a primary selection.
 }
@@ -792,7 +797,7 @@ void ScintillaCocoa::ClaimSelection()
  * Returns the current caret position (which is tracked as an offset into the entire text string)
  * as a row:column pair. The result is zero-based.
  */
-NSPoint ScintillaCocoa::GetCaretPosition()
+NSPoint SCIController::GetCaretPosition()
 {
     NSPoint result;
     
@@ -808,7 +813,7 @@ NSPoint ScintillaCocoa::GetCaretPosition()
 /**
  * Triggered by the tick timer on a regular basis to scroll the content during a drag operation.
  */
-void ScintillaCocoa::DragScroll()
+void SCIController::DragScroll()
 {
     if (!posDrag.IsValid())
     {
@@ -853,7 +858,7 @@ void ScintillaCocoa::DragScroll()
 /**
  * Called when a drag operation was initiated from within Scintilla.
  */
-void ScintillaCocoa::StartDrag()
+void SCIController::StartDrag()
 {
     if (sel.Empty())
         return;
@@ -1019,7 +1024,7 @@ void ScintillaCocoa::StartDrag()
 /**
  * Called when a drag operation reaches the control which was initiated outside.
  */
-NSDragOperation ScintillaCocoa::DraggingEntered(id <NSDraggingInfo> info)
+NSDragOperation SCIController::DraggingEntered(id <NSDraggingInfo> info)
 {
     return DraggingUpdated(info);
 }
@@ -1031,7 +1036,7 @@ NSDragOperation ScintillaCocoa::DraggingEntered(id <NSDraggingInfo> info)
  * what drag operation we accept and update the drop caret position to indicate the
  * potential insertion point of the dragged data.
  */
-NSDragOperation ScintillaCocoa::DraggingUpdated(id <NSDraggingInfo> info)
+NSDragOperation SCIController::DraggingUpdated(id <NSDraggingInfo> info)
 {
     // Convert the drag location from window coordinates to view coordinates and
     // from there to a text position to finally set the drag position.
@@ -1059,7 +1064,7 @@ NSDragOperation ScintillaCocoa::DraggingUpdated(id <NSDraggingInfo> info)
 /**
  * Resets the current drag position as we are no longer the drag target.
  */
-void ScintillaCocoa::DraggingExited(id <NSDraggingInfo> info)
+void SCIController::DraggingExited(id <NSDraggingInfo> info)
 {
 #pragma unused(info)
     SetDragPosition(SelectionPosition(invalidPosition));
@@ -1071,7 +1076,7 @@ void ScintillaCocoa::DraggingExited(id <NSDraggingInfo> info)
 /**
  * Here is where the real work is done. Insert the text from the pasteboard.
  */
-bool ScintillaCocoa::PerformDragOperation(id <NSDraggingInfo> info)
+bool SCIController::PerformDragOperation(id <NSDraggingInfo> info)
 {
     NSPasteboard* pasteboard = [info draggingPasteboard];
     
@@ -1100,7 +1105,7 @@ bool ScintillaCocoa::PerformDragOperation(id <NSDraggingInfo> info)
 
 
 
-void ScintillaCocoa::SetPasteboardData(NSPasteboard* board, const SelectionText &selectedText)
+void SCIController::SetPasteboardData(NSPasteboard* board, const SelectionText &selectedText)
 {
     if (selectedText.Length() == 0)
         return;
@@ -1135,7 +1140,7 @@ void ScintillaCocoa::SetPasteboardData(NSPasteboard* board, const SelectionText 
 /**
  * Helper method to retrieve the best fitting alternative from the general pasteboard.
  */
-bool ScintillaCocoa::GetPasteboardData(NSPasteboard* board, SelectionText* selectedText)
+bool SCIController::GetPasteboardData(NSPasteboard* board, SelectionText* selectedText)
 {
     NSArray* supportedTypes = @[ScintillaRecPboardType, NSStringPboardType];
     
@@ -1174,14 +1179,14 @@ bool ScintillaCocoa::GetPasteboardData(NSPasteboard* board, SelectionText* selec
 
 
 
-void ScintillaCocoa::SetMouseCapture(bool on)
+void SCIController::SetMouseCapture(bool on)
 {
     capturedMouse = on;
 }
 
 
 
-bool ScintillaCocoa::HaveMouseCapture()
+bool SCIController::HaveMouseCapture()
 {
     return capturedMouse;
 }
@@ -1191,7 +1196,7 @@ bool ScintillaCocoa::HaveMouseCapture()
 /**
  * Synchronously paint a rectangle of the window.
  */
-bool ScintillaCocoa::SyncPaint(void* gc, PRectangle rc)
+bool SCIController::SyncPaint(void* gc, PRectangle rc)
 {
     paintState = painting;
     rcPaint = rc;
@@ -1231,7 +1236,7 @@ bool ScintillaCocoa::SyncPaint(void* gc, PRectangle rc)
 /**
  * Paint the margin into the SCIMarginView space.
  */
-void ScintillaCocoa::PaintMargin(NSRect aRect)
+void SCIController::PaintMargin(NSRect aRect)
 {
     CGContextRef gc = (CGContextRef) [[NSGraphicsContext currentContext] graphicsPort];
     
@@ -1252,7 +1257,7 @@ void ScintillaCocoa::PaintMargin(NSRect aRect)
 /**
  * ScrollText is empty because scrolling is handled by the NSScrollView.
  */
-void ScintillaCocoa::ScrollText(int linesToMove)
+void SCIController::ScrollText(int linesToMove)
 {
 }
 
@@ -1261,7 +1266,7 @@ void ScintillaCocoa::ScrollText(int linesToMove)
 /**
  * Modifies the vertical scroll position to make the current top line show up as such.
  */
-void ScintillaCocoa::SetVerticalScrollPos()
+void SCIController::SetVerticalScrollPos()
 {
     NSScrollView *scrollView = ScrollContainer();
     if (scrollView) {
@@ -1277,7 +1282,7 @@ void ScintillaCocoa::SetVerticalScrollPos()
 /**
  * Modifies the horizontal scroll position to match xOffset.
  */
-void ScintillaCocoa::SetHorizontalScrollPos()
+void SCIController::SetHorizontalScrollPos()
 {
     PRectangle textRect = GetTextRectangle();
     
@@ -1306,13 +1311,13 @@ void ScintillaCocoa::SetHorizontalScrollPos()
  * @param nPage Number of lines per scroll page.
  * @return True if there was a change, otherwise false.
  */
-bool ScintillaCocoa::ModifyScrollBars(int nMax, int nPage)
+bool SCIController::ModifyScrollBars(int nMax, int nPage)
 {
 #pragma unused(nMax, nPage)
     return SetScrollingSize();
 }
 
-bool ScintillaCocoa::SetScrollingSize(void) {
+bool SCIController::SetScrollingSize(void) {
 	bool changes = false;
 	SCIContentView *inner = ContentView();
 	if (!enteredSetScrollingSize) {
@@ -1353,7 +1358,7 @@ bool ScintillaCocoa::SetScrollingSize(void) {
 
 
 
-void ScintillaCocoa::Resize()
+void SCIController::Resize()
 {
     SetScrollingSize();
     ChangeSize();
@@ -1364,7 +1369,7 @@ void ScintillaCocoa::Resize()
 /**
  * Update fields to match scroll position after receiving a notification that the user has scrolled.
  */
-void ScintillaCocoa::UpdateForScroll() {
+void SCIController::UpdateForScroll() {
     Point ptOrigin = GetVisibleOriginInMain();
     xOffset = ptOrigin.x;
     int newTop = Platform::Minimum(ptOrigin.y / vs.lineHeight, MaxScrollPos());
@@ -1381,7 +1386,7 @@ void ScintillaCocoa::UpdateForScroll() {
  * @param delegate_ A pointer to an object that implements ScintillaNotificationProtocol.
  */
 
-void ScintillaCocoa::SetDelegate(id<ScintillaNotificationProtocol> delegate_)
+void SCIController::SetDelegate(id<ScintillaNotificationProtocol> delegate_)
 {
     delegate = delegate_;
 }
@@ -1397,7 +1402,7 @@ void ScintillaCocoa::SetDelegate(id<ScintillaNotificationProtocol> delegate_)
  * @param callback The callback function to be used for future notifications. If NULL then no
  *                 notifications will be sent anymore.
  */
-void ScintillaCocoa::RegisterNotifyCallback(intptr_t windowid, SciNotifyFunc callback)
+void SCIController::RegisterNotifyCallback(intptr_t windowid, SciNotifyFunc callback)
 {
     notifyObj = windowid;
     notifyProc = callback;
@@ -1405,7 +1410,7 @@ void ScintillaCocoa::RegisterNotifyCallback(intptr_t windowid, SciNotifyFunc cal
 
 
 
-void ScintillaCocoa::NotifyChange()
+void SCIController::NotifyChange()
 {
     if (notifyProc != NULL)
         notifyProc(notifyObj, WM_COMMAND, Platform::LongFromTwoShorts(GetCtrlID(), SCEN_CHANGE),
@@ -1414,7 +1419,7 @@ void ScintillaCocoa::NotifyChange()
 
 
 
-void ScintillaCocoa::NotifyFocus(bool focus)
+void SCIController::NotifyFocus(bool focus)
 {
     if (notifyProc != NULL)
         notifyProc(notifyObj, WM_COMMAND, Platform::LongFromTwoShorts(GetCtrlID(), (focus ? SCEN_SETFOCUS : SCEN_KILLFOCUS)),
@@ -1431,7 +1436,7 @@ void ScintillaCocoa::NotifyFocus(bool focus)
  *
  * @param scn The notification to send.
  */
-void ScintillaCocoa::NotifyParent(SCNotification scn)
+void SCIController::NotifyParent(SCNotification scn)
 {
     scn.nmhdr.hwndFrom = (void*) this;
     scn.nmhdr.idFrom = GetCtrlID();
@@ -1443,7 +1448,7 @@ void ScintillaCocoa::NotifyParent(SCNotification scn)
 
 
 
-void ScintillaCocoa::NotifyURIDropped(const char *uri)
+void SCIController::NotifyURIDropped(const char *uri)
 {
     SCNotification scn;
     scn.nmhdr.code = SCN_URIDROPPED;
@@ -1454,28 +1459,28 @@ void ScintillaCocoa::NotifyURIDropped(const char *uri)
 
 
 
-bool ScintillaCocoa::HasSelection()
+bool SCIController::HasSelection()
 {
     return !sel.Empty();
 }
 
 
 
-bool ScintillaCocoa::CanUndo()
+bool SCIController::CanUndo()
 {
     return pdoc->CanUndo();
 }
 
 
 
-bool ScintillaCocoa::CanRedo()
+bool SCIController::CanRedo()
 {
     return pdoc->CanRedo();
 }
 
 
 
-void ScintillaCocoa::TimerFired(NSTimer* timer)
+void SCIController::TimerFired(NSTimer* timer)
 {
 #pragma unused(timer)
     Tick();
@@ -1484,7 +1489,7 @@ void ScintillaCocoa::TimerFired(NSTimer* timer)
 
 
 
-void ScintillaCocoa::IdleTimerFired()
+void SCIController::IdleTimerFired()
 {
     bool more = Idle();
     if (!more)
@@ -1499,7 +1504,7 @@ void ScintillaCocoa::IdleTimerFired()
  * @param rect The area to paint, given in the sender's coordinate system.
  * @param gc The context we can use to paint.
  */
-bool ScintillaCocoa::Draw(NSRect rect, CGContextRef gc)
+bool SCIController::Draw(NSRect rect, CGContextRef gc)
 {
     return SyncPaint(gc, NSRectToPRectangle(rect));
 }
@@ -1575,7 +1580,7 @@ static int TranslateModifierFlags(NSUInteger modifiers)
  * @param event The event instance associated with the key down event.
  * @return True if the input was handled, false otherwise.
  */
-bool ScintillaCocoa::KeyboardInput(NSEvent* event)
+bool SCIController::KeyboardInput(NSEvent* event)
 {
     // For now filter out function keys.
     NSString* input = [event characters];
@@ -1604,7 +1609,7 @@ bool ScintillaCocoa::KeyboardInput(NSEvent* event)
 /**
  * Used to insert already processed text provided by the Cocoa text input system.
  */
-int ScintillaCocoa::InsertText(NSString* input)
+int SCIController::InsertText(NSString* input)
 {
     CFStringEncoding encoding = EncodingFromCharacterSet(IsUnicodeMode(),
                                                          vs.styles[STYLE_DEFAULT].characterSet);
@@ -1629,7 +1634,7 @@ int ScintillaCocoa::InsertText(NSString* input)
  * does not support multi-typing.
  * Also drop virtual space as that is not supported by composition.
  */
-void ScintillaCocoa::SelectOnlyMainSelection()
+void SCIController::SelectOnlyMainSelection()
 {
     SelectionRange mainSel = sel.RangeMain();
     mainSel.ClearVirtualSpace();
@@ -1642,7 +1647,7 @@ void ScintillaCocoa::SelectOnlyMainSelection()
  * When switching documents discard any incomplete character composition state as otherwise tries to
  * act on the new document.
  */
-void ScintillaCocoa::SetDocPointer(Document *document)
+void SCIController::SetDocPointer(Document *document)
 {
     // Drop input composition.
     NSTextInputContext *inctxt = [NSTextInputContext currentInputContext];
@@ -1657,7 +1662,7 @@ void ScintillaCocoa::SetDocPointer(Document *document)
 /**
  * Called by the owning view when the mouse pointer enters the control.
  */
-void ScintillaCocoa::MouseEntered(NSEvent* event)
+void SCIController::MouseEntered(NSEvent* event)
 {
     if (!HaveMouseCapture())
     {
@@ -1671,14 +1676,14 @@ void ScintillaCocoa::MouseEntered(NSEvent* event)
 
 
 
-void ScintillaCocoa::MouseExited(NSEvent* /* event */)
+void SCIController::MouseExited(NSEvent* /* event */)
 {
     // Nothing to do here.
 }
 
 
 
-void ScintillaCocoa::MouseDown(NSEvent* event)
+void SCIController::MouseDown(NSEvent* event)
 {
     Point location = ConvertPoint([event locationInWindow]);
     NSTimeInterval time = [event timestamp];
@@ -1689,9 +1694,7 @@ void ScintillaCocoa::MouseDown(NSEvent* event)
     ButtonDown(Point(location.x, location.y), (int) (time * 1000), shift, command, alt);
 }
 
-
-
-void ScintillaCocoa::MouseMove(NSEvent* event)
+void SCIController::MouseMove(NSEvent* event)
 {
     lastMouseEvent = event;
     
@@ -1700,7 +1703,7 @@ void ScintillaCocoa::MouseMove(NSEvent* event)
 
 
 
-void ScintillaCocoa::MouseUp(NSEvent* event)
+void SCIController::MouseUp(NSEvent* event)
 {
     NSTimeInterval time = [event timestamp];
     bool control = ([event modifierFlags] & NSControlKeyMask) != 0;
@@ -1710,7 +1713,7 @@ void ScintillaCocoa::MouseUp(NSEvent* event)
 
 
 
-void ScintillaCocoa::MouseWheel(NSEvent* event)
+void SCIController::MouseWheel(NSEvent* event)
 {
     bool command = ([event modifierFlags] & NSCommandKeyMask) != 0;
     int dY = 0;
@@ -1740,27 +1743,27 @@ void ScintillaCocoa::MouseWheel(NSEvent* event)
 
 // Helper methods for NSResponder actions.
 
-void ScintillaCocoa::SelectAll()
+void SCIController::SelectAll()
 {
     Editor::SelectAll();
 }
 
-void ScintillaCocoa::DeleteBackward()
+void SCIController::DeleteBackward()
 {
     KeyDown(SCK_BACK, false, false, false, nil);
 }
 
-void ScintillaCocoa::Cut()
+void SCIController::Cut()
 {
     Editor::Cut();
 }
 
-void ScintillaCocoa::Undo()
+void SCIController::Undo()
 {
     Editor::Undo();
 }
 
-void ScintillaCocoa::Redo()
+void SCIController::Redo()
 {
     Editor::Redo();
 }
@@ -1770,7 +1773,7 @@ void ScintillaCocoa::Redo()
 /**
  * Creates and returns a popup menu, which is then displayed by the Cocoa framework.
  */
-NSMenu* ScintillaCocoa::CreateContextMenu(NSEvent* /* event */)
+NSMenu* SCIController::CreateContextMenu(NSEvent* /* event */)
 {
     // Call ScintillaBase to create the context menu.
     ContextMenu(Point(0, 0));
@@ -1784,14 +1787,14 @@ NSMenu* ScintillaCocoa::CreateContextMenu(NSEvent* /* event */)
  * An intermediate function to forward context menu commands from the menu action handler to
  * scintilla.
  */
-void ScintillaCocoa::HandleCommand(NSInteger command)
+void SCIController::HandleCommand(NSInteger command)
 {
     Command(static_cast<int>(command));
 }
 
 
 
-void ScintillaCocoa::ActiveStateChanged(bool isActive)
+void SCIController::ActiveStateChanged(bool isActive)
 {
     // If the window is being deactivated, lose the focus and turn off the ticking
     if (!isActive) {
@@ -1806,7 +1809,7 @@ void ScintillaCocoa::ActiveStateChanged(bool isActive)
 
 
 
-void ScintillaCocoa::ShowFindIndicatorForRange(NSRange charRange, BOOL retaining)
+void SCIController::ShowFindIndicatorForRange(NSRange charRange, BOOL retaining)
 {
     
     NSView *content = ContentView();
@@ -1853,7 +1856,7 @@ void ScintillaCocoa::ShowFindIndicatorForRange(NSRange charRange, BOOL retaining
     
 }
 
-void ScintillaCocoa::MoveFindIndicatorWithBounce(BOOL bounce)
+void SCIController::MoveFindIndicatorWithBounce(BOOL bounce)
 {
     
     if (layerFindIndicator)
@@ -1872,7 +1875,7 @@ void ScintillaCocoa::MoveFindIndicatorWithBounce(BOOL bounce)
     }
 }
 
-void ScintillaCocoa::HideFindIndicator()
+void SCIController::HideFindIndicator()
 {
     if (layerFindIndicator)
     {
@@ -1880,4 +1883,27 @@ void ScintillaCocoa::HideFindIndicator()
     }
 }
 
+void SCIController::didClickedMarginAtLineNumber(int lineAnchorPosition)
+{
+    int lineNumber = pdoc->LineFromPosition(lineAnchorPosition);
+    SCIMarginView *marginView = (SCIMarginView *)wMargin.GetID();
+    
+    PBXBreakpoint *breakpoint = [_debugServer breakpointAtLineNumber: lineNumber];
+    
+    if (breakpoint)
+    {
+        [breakpoint setEnabled: ![breakpoint isEnabled]];
+        
+    }else
+    {
+        PBXBreakpoint *breakpoint = [[PBXBreakpoint alloc] init];
+        [breakpoint setLineNumber: lineNumber];
+        
+        [_debugServer addBreakpoint: breakpoint];
+        [marginView addBreakpoint: breakpoint
+                     atLineNumber: lineNumber];
+        
+        [breakpoint release];
+    }
+}
 
