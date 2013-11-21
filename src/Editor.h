@@ -474,17 +474,21 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	void ClearSelection(bool retainMultipleSelections=false);
 	void ClearAll();
 	void ClearDocumentStyle();
-	void Cut();
 	void PasteRectangular(SelectionPosition pos, const char *ptr, int len);
+    
+public:
 	virtual void Copy() = 0;
 	virtual void CopyAllowLine();
 	virtual bool CanPaste();
 	virtual void Paste() = 0;
-	void Clear();
-	void SelectAll();
-	void Undo();
-	void Redo();
-	void DelChar();
+	virtual void Clear();
+	virtual void SelectAll();
+	virtual void Cut();
+	virtual void Undo();
+	virtual void Redo();
+	virtual void DelChar();
+    
+protected:
 	void DelCharBack(bool allowLineStartDeletion);
 	virtual void ClaimSelection() = 0;
 
@@ -560,7 +564,7 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	bool PositionInSelection(int pos);
 	bool PointInSelection(Point pt);
 	bool PointInSelMargin(Point pt);
-	Window::Cursor GetMarginCursor(Point pt) const;
+	virtual Window::Cursor GetMarginCursor(Point pt) const;
 	void TrimAndSetSelection(int currentPos_, int anchor_);
 	void LineSelection(int lineCurrentPos_, int lineAnchorPos_, bool wholeLine);
 	void WordSelection(int pos);

@@ -1743,32 +1743,10 @@ void SCIController::MouseWheel(NSEvent* event)
 
 // Helper methods for NSResponder actions.
 
-void SCIController::SelectAll()
-{
-    Editor::SelectAll();
-}
-
 void SCIController::DeleteBackward()
 {
     KeyDown(SCK_BACK, false, false, false, nil);
 }
-
-void SCIController::Cut()
-{
-    Editor::Cut();
-}
-
-void SCIController::Undo()
-{
-    Editor::Undo();
-}
-
-void SCIController::Redo()
-{
-    Editor::Redo();
-}
-
-
 
 /**
  * Creates and returns a popup menu, which is then displayed by the Cocoa framework.
@@ -1907,4 +1885,3 @@ void SCIController::didClickedMarginAtLineNumber(int lineAnchorPosition)
         [breakpoint release];
     }
 }
-

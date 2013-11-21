@@ -38,6 +38,10 @@
         }
         
         [self setClientView: [aScrollView documentView]];
+        
+        [self addBreakpoint: nil
+               atLineNumber: 1
+                 lineHeight: 16];
     }
     return self;
 }
@@ -134,7 +138,7 @@
            lineHeight: (int)lineHeight
 {    
     PBXTextBookmark *marker = [[PBXTextBookmark alloc] initWithRulerView: self
-                                                          markerLocation: (lineNumber + 1) * lineHeight];
+                                                          markerLocation: (lineNumber + 1) * lineHeight - 6];
     [marker setRemovable: YES];
     [marker setMovable: YES];
     

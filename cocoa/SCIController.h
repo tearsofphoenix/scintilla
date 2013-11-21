@@ -194,11 +194,7 @@ namespace Scintilla
         void DragScroll();
         
         // Promote some methods needed for NSResponder actions.
-        virtual void SelectAll();
         void DeleteBackward();
-        virtual void Cut();
-        virtual void Undo();
-        virtual void Redo();
         
         virtual NSMenu* CreateContextMenu(NSEvent* event);
         void HandleCommand(NSInteger command);

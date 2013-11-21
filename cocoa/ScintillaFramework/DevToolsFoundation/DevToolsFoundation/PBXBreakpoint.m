@@ -11,6 +11,16 @@
 
 @implementation PBXBreakpoint
 
+- (id)init
+{
+    if ((self = [super init]))
+    {
+        _enabled = YES;
+    }
+    
+    return self;
+}
+
 - (void)dealloc
 {
     [_comments release];
@@ -45,14 +55,7 @@
     if (_enabled != enabled)
     {
         _enabled = enabled;
-        
-        if (_enabled)
-        {
-            
-        }else
-        {
-            
-        }
+        [_textMark setNeedsDisplay];
     }
 }
 

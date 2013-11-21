@@ -16,4 +16,6 @@
 - (id)initWithRulerView: (NSRulerView *)ruler
          markerLocation: (CGFloat)location;
 
+- (void)setNeedsDisplay;
+
 @end

@@ -10,5 +10,4 @@
 #import <DevToolsFoundation/PBXProjectItem.h>
 #import <DevToolsFoundation/PBXBreakpoint.h>
 #import <DevToolsFoundation/PBXFileBreakpoint.h>
-#import <DevToolsFoundation/PBXSymbolicBreakpoint.h>
 #import <DevToolsFoundation/PBXTextBookmark.h>

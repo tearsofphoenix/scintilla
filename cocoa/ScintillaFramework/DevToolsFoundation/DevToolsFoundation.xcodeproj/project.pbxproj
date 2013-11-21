@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60D2140F183E1F7D0038D3C7 /* NSImage+resizedImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D2140D183E1F7D0038D3C7 /* NSImage+resizedImage.h */; };
+		60D21410183E1F7D0038D3C7 /* NSImage+resizedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D2140E183E1F7D0038D3C7 /* NSImage+resizedImage.m */; };
 		92D62531183D9185005E0A59 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D62530183D9185005E0A59 /* Cocoa.framework */; };
 		92D6253B183D9185005E0A59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 92D62539183D9185005E0A59 /* InfoPlist.strings */; };
 		92D62546183D9185005E0A59 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D62545183D9185005E0A59 /* XCTest.framework */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		60D2140D183E1F7D0038D3C7 /* NSImage+resizedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+resizedImage.h"; sourceTree = "<group>"; };
+		60D2140E183E1F7D0038D3C7 /* NSImage+resizedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+resizedImage.m"; sourceTree = "<group>"; };
 		92D6252D183D9185005E0A59 /* DevToolsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DevToolsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92D62530183D9185005E0A59 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		92D62533183D9185005E0A59 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -140,6 +144,8 @@
 				92D6256F183D922E005E0A59 /* PBXProjectItem.m */,
 				92DE1815183DB27B0045F8BC /* PBXTextBookmark.h */,
 				92DE1816183DB27B0045F8BC /* PBXTextBookmark.m */,
+				60D2140D183E1F7D0038D3C7 /* NSImage+resizedImage.h */,
+				60D2140E183E1F7D0038D3C7 /* NSImage+resizedImage.m */,
 				92DE1819183DC63C0045F8BC /* Resources */,
 				92D62537183D9185005E0A59 /* Supporting Files */,
 			);
@@ -196,6 +202,7 @@
 				92D62573183D9277005E0A59 /* PBXMarkerDelegateProtocol.h in Headers */,
 				92DE1817183DB27B0045F8BC /* PBXTextBookmark.h in Headers */,
 				92D62569183D9199005E0A59 /* PBXBreakpoint.h in Headers */,
+				60D2140F183E1F7D0038D3C7 /* NSImage+resizedImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +305,7 @@
 			files = (
 				92DE180A183DAB6F0045F8BC /* PBXFileBreakpoint.m in Sources */,
 				92DE1818183DB27B0045F8BC /* PBXTextBookmark.m in Sources */,
+				60D21410183E1F7D0038D3C7 /* NSImage+resizedImage.m in Sources */,
 				92D6256A183D9199005E0A59 /* PBXBreakpoint.m in Sources */,
 				92D62571183D922E005E0A59 /* PBXProjectItem.m in Sources */,
 			);
