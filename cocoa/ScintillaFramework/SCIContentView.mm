@@ -438,8 +438,6 @@ using namespace Scintilla;
 
 // End of the NSTextInputClient protocol adoption.
 
-
-
 /**
  * Generic input method. It is used to pass on keyboard input to Scintilla. The control itself only
  * handles shortcuts. The input is then forwarded to the Cocoa text input system, which in turn does

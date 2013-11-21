@@ -19,7 +19,7 @@
  * Some extensions by Philippe Lhoste PhiLho(a)GMX.net
  * '?' extensions by Michael Mullin masmullin@gmail.com
  *
- * These routines are the PUBLIC DOMAIN equivalents of regex
+ * These routines are the DOMAIN equivalents of regex
  * routines as found in 4.nBSD UN*X, with minor extensions.
  *
  * These routines are derived from various implementations found

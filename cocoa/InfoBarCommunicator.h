@@ -10,7 +10,6 @@
 
 enum IBDisplay
 {
-    IBShowZoom          = 0x01,
     IBShowCaretPosition = 0x02,
     IBShowStatusText    = 0x04,
     IBShowAll           = 0xFF

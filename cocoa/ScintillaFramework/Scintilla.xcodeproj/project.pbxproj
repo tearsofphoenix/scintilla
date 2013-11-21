@@ -205,6 +205,7 @@
 		60D21401183BB3860038D3C7 /* VTLPlatform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60D213FF183BB3860038D3C7 /* VTLPlatform.mm */; };
 		60D21404183BB5380038D3C7 /* VTLWindow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60D21403183BB5380038D3C7 /* VTLWindow.mm */; };
 		60D21413183E33AB0038D3C7 /* SCIEditorWindowProcess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60D21411183E33AB0038D3C7 /* SCIEditorWindowProcess.cpp */; };
+		60D21567183E46480038D3C7 /* OakAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D21455183E41F80038D3C7 /* OakAppKit.framework */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		925957A9183C3C920044DA6D /* ScintillaContextMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957A7183C3C920044DA6D /* ScintillaContextMenu.h */; };
@@ -249,6 +250,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 60853154183B9D3E0084C214;
 			remoteInfo = VEBundle;
+		};
+		60D21454183E41F80038D3C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 60D2144F183E41F70038D3C7 /* OakAppKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 60D21421183E41F70038D3C7;
+			remoteInfo = OakAppKit;
+		};
+		60D21456183E41F80038D3C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 60D2144F183E41F70038D3C7 /* OakAppKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 60D21438183E41F70038D3C7;
+			remoteInfo = OakAppKitTests;
+		};
+		60D21565183E46430038D3C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 60D2144F183E41F70038D3C7 /* OakAppKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 60D21420183E41F70038D3C7;
+			remoteInfo = OakAppKit;
 		};
 		92D62560183D9186005E0A59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -477,6 +499,7 @@
 		60D213FF183BB3860038D3C7 /* VTLPlatform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VTLPlatform.mm; sourceTree = "<group>"; };
 		60D21403183BB5380038D3C7 /* VTLWindow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VTLWindow.mm; sourceTree = "<group>"; };
 		60D21411183E33AB0038D3C7 /* SCIEditorWindowProcess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SCIEditorWindowProcess.cpp; sourceTree = "<group>"; };
+		60D2144F183E41F70038D3C7 /* OakAppKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OakAppKit.xcodeproj; path = OakAppKit/OakAppKit.xcodeproj; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Scintilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Scintilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		925957A7183C3C920044DA6D /* ScintillaContextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaContextMenu.h; sourceTree = "<group>"; };
@@ -506,6 +529,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60D21567183E46480038D3C7 /* OakAppKit.framework in Frameworks */,
 				92DE181C183DC85A0045F8BC /* DevToolsFoundation.framework in Frameworks */,
 				6085318E183B9D590084C214 /* VEBundle.framework in Frameworks */,
 				8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */,
@@ -527,6 +551,7 @@
 		0867D691FE84028FC02AAC07 /* Scintilla */ = {
 			isa = PBXGroup;
 			children = (
+				60D2144F183E41F70038D3C7 /* OakAppKit.xcodeproj */,
 				92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */,
 				60853183183B9D3E0084C214 /* VEBundle.xcodeproj */,
 				2744E47D0FC1674E00E85C33 /* Lexers */,
@@ -830,6 +855,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		60D21450183E41F70038D3C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				60D21455183E41F80038D3C7 /* OakAppKit.framework */,
+				60D21457183E41F80038D3C7 /* OakAppKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9291C216183CAE1800CAD257 /* VTL */ = {
 			isa = PBXGroup;
 			children = (
@@ -967,6 +1001,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				60D21566183E46430038D3C7 /* PBXTargetDependency */,
 				92DE180F183DB0160045F8BC /* PBXTargetDependency */,
 				6085318D183B9D510084C214 /* PBXTargetDependency */,
 			);
@@ -1003,6 +1038,10 @@
 					ProjectRef = 92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */;
 				},
 				{
+					ProductGroup = 60D21450183E41F70038D3C7 /* Products */;
+					ProjectRef = 60D2144F183E41F70038D3C7 /* OakAppKit.xcodeproj */;
+				},
+				{
 					ProductGroup = 60853184183B9D3E0084C214 /* Products */;
 					ProjectRef = 60853183183B9D3E0084C214 /* VEBundle.xcodeproj */;
 				},
@@ -1027,6 +1066,20 @@
 			fileType = wrapper.cfbundle;
 			path = VEBundleTests.xctest;
 			remoteRef = 6085318A183B9D3F0084C214 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		60D21455183E41F80038D3C7 /* OakAppKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OakAppKit.framework;
+			remoteRef = 60D21454183E41F80038D3C7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		60D21457183E41F80038D3C7 /* OakAppKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OakAppKitTests.xctest;
+			remoteRef = 60D21456183E41F80038D3C7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		92D62561183D9186005E0A59 /* DevToolsFoundation.framework */ = {
@@ -1222,6 +1275,11 @@
 			isa = PBXTargetDependency;
 			name = VEBundle;
 			targetProxy = 6085318C183B9D510084C214 /* PBXContainerItemProxy */;
+		};
+		60D21566183E46430038D3C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OakAppKit;
+			targetProxy = 60D21565183E46430038D3C7 /* PBXContainerItemProxy */;
 		};
 		92DE180F183DB0160045F8BC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

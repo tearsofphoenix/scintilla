@@ -14,11 +14,6 @@
  * Class to display the animated gold roundrect used on OS X for matches.
  */
 @interface FindHighlightLayer : CAGradientLayer
-{
-@private
-	NSString *sFind;
-	NSString *sFont;
-}
 
 @property (copy) NSString *sFind;
 @property (assign) int positionFind;

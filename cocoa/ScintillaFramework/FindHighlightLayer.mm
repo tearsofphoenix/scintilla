@@ -11,8 +11,6 @@
 
 @implementation FindHighlightLayer
 
-@synthesize sFind, sFont;
-
 -(id) init
 {
 	if (self = [super init])
@@ -40,21 +38,29 @@
 	
 }
 
+- (void)dealloc
+{
+    [_sFind release];
+    [_sFont release];
+    
+    [super dealloc];
+}
+
 const CGFloat paddingHighlightX = 4;
 const CGFloat paddingHighlightY = 2;
 
 - (void)drawInContext: (CGContextRef)context
 {
-	if (!sFind || !sFont)
+	if (!_sFind || !_sFont)
 		return;
 		
     NSDictionary *styleDict = (@{
                                  NSForegroundColorAttributeName : [NSColor blackColor],
-                                 NSFontAttributeName : [NSFont fontWithName: sFont
+                                 NSFontAttributeName : [NSFont fontWithName: _sFont
                                                                        size: _fontSize],
                                  });
     
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString: sFind
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString: _sFind
                                                                      attributes: styleDict];
     
 	CTLineRef textLine = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);

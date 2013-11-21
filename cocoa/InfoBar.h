@@ -11,17 +11,17 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <OakAppKit/OakAppKit.h>
+
 #import "InfoBarCommunicator.h"
 
 
-@interface InfoBar : NSView <InfoBarCommunicator>
+@interface InfoBar : OakGradientView <InfoBarCommunicator>
 {
 @private
-    NSImage* mBackground;
     IBDisplay mDisplayMask;
     
     float mScaleFactor;
-    NSPopUpButton* mZoomPopup;
     
     int mCurrentCaretX;
     int mCurrentCaretY;

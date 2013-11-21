@@ -350,10 +350,10 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
  */
 - (void) positionSubViews
 {
-    int scrollerWidth = [NSScroller scrollerWidth];
+    CGFloat scrollerWidth = 30;
     
     NSSize size = [self frame].size;
-    NSRect barFrame = {0, size.height - scrollerWidth, size.width, static_cast<CGFloat>(scrollerWidth)};
+    NSRect barFrame = {0, size.height - scrollerWidth, size.width, scrollerWidth};
     BOOL infoBarVisible = mInfoBar != nil && ![mInfoBar isHidden];
     
     // Horizontal offset of the content. Almost always 0 unless the vertical scroller
@@ -478,7 +478,13 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     return result;
 }
 
-
+//- (void)drawRect: (NSRect)dirtyRect
+//{
+//    [[NSColor colorWithCalibratedRed:0.13f green:0.13f blue:0.13f alpha:1.00f] setFill];
+//    NSRectFill(dirtyRect);
+//    
+//    [super drawRect: dirtyRect];
+//}
 
 /**
  * Setter for the current text (no formatting included).
