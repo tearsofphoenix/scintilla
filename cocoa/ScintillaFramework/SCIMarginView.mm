@@ -80,12 +80,6 @@
 - (void) mouseDown: (NSEvent *) theEvent
 {
     _owner.backend->MouseDown(theEvent);
-    
-    dispatch_async(dispatch_get_main_queue(),
-                   (^
-                    {
-                        [self setNeedsDisplay: YES];
-                    }));
 }
 
 - (void) mouseDragged: (NSEvent *) theEvent
@@ -137,9 +131,10 @@
 
 - (void)addBreakpoint: (PBXBreakpoint *)breakpoint
          atLineNumber: (int)lineNumber
+           lineHeight: (int)lineHeight
 {    
     PBXTextBookmark *marker = [[PBXTextBookmark alloc] initWithRulerView: self
-                                                          markerLocation: lineNumber];
+                                                          markerLocation: (lineNumber + 1) * lineHeight];
     [marker setRemovable: YES];
     [marker setMovable: YES];
     
@@ -150,7 +145,12 @@
     
     [marker release];
     
-    printf("%d\n", lineNumber);
+    dispatch_async(dispatch_get_main_queue(),
+                   (^
+                    {
+                        [self setNeedsDisplay: YES];
+                    }));
+
 }
 
 @end

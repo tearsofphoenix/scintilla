@@ -38,7 +38,7 @@ extern NSString *const SCIUpdateUINotification;
 @private
     
     // This is the actual content to which the backend renders itself.
-    SCIContentView* mContent;
+    SCIContentView* _contentView;
     
     SCIMarginView *marginView;
     

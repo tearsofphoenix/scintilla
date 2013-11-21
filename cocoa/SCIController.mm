@@ -1901,7 +1901,8 @@ void SCIController::didClickedMarginAtLineNumber(int lineAnchorPosition)
         
         [_debugServer addBreakpoint: breakpoint];
         [marginView addBreakpoint: breakpoint
-                     atLineNumber: lineNumber];
+                     atLineNumber: lineNumber
+                       lineHeight: vs.lineHeight];
         
         [breakpoint release];
     }

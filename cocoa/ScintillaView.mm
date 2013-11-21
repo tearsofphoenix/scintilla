@@ -247,8 +247,8 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     self = [super initWithFrame:frame];
     if (self)
     {
-        mContent = [[[[[self class] contentViewClass] alloc] initWithFrame:NSZeroRect] autorelease];
-        mContent.owner = self;
+        _contentView = [[[[[self class] contentViewClass] alloc] initWithFrame:NSZeroRect] autorelease];
+        _contentView.owner = self;
         
         // Initialize the scrollers but don't show them yet.
         // Pick an arbitrary size, just to make NSScroller selecting the proper scroller direction
@@ -256,7 +256,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         NSRect scrollerRect = NSMakeRect(0, 0, 100, 10);
         
         _scrollView = [[[NSScrollView alloc] initWithFrame: scrollerRect] autorelease];
-        [_scrollView setDocumentView: mContent];
+        [_scrollView setDocumentView: _contentView];
         [_scrollView setHasVerticalScroller:YES];
         [_scrollView setHasHorizontalScroller:YES];
         [_scrollView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
@@ -273,7 +273,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         [_scrollView setHasVerticalRuler:YES];
         [_scrollView setRulersVisible:YES];
         
-        _backend = new SCIController(mContent, marginView);
+        _backend = new SCIController(_contentView, marginView);
         
         // Establish a connection from the back end to this container so we can handle situations
         // which require our attention.
@@ -515,7 +515,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
 
 - (SCIContentView*) content
 {
-    return mContent;
+    return _contentView;
 }
 
 
@@ -818,7 +818,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
 
 - (NSRange) selectedRange
 {
-    return [mContent selectedRange];
+    return [_contentView selectedRange];
 }
 
 

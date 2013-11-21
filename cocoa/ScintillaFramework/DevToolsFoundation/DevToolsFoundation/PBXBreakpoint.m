@@ -38,14 +38,22 @@
     return NSOrderedSame;
 }
 
-- (int)state
-{
-    return _state;
-}
+@synthesize enabled = _enabled;
 
-- (BOOL)isEnabled
+- (void)setEnabled: (BOOL)enabled
 {
-    return _enabled;
+    if (_enabled != enabled)
+    {
+        _enabled = enabled;
+        
+        if (_enabled)
+        {
+            
+        }else
+        {
+            
+        }
+    }
 }
 
 - (void)markChanged

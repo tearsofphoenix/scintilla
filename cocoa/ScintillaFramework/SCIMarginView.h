@@ -21,7 +21,7 @@
 - (id)initWithScrollView: (NSScrollView *)aScrollView;
 
 - (void)addBreakpoint: (PBXBreakpoint *)breakpoint
-         atLineNumber: (int)lineNumber;
-
+         atLineNumber: (int)lineNumber
+           lineHeight: (int)lineHeight;
 @end
 

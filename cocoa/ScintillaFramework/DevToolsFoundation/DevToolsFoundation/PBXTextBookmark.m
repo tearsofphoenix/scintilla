@@ -13,9 +13,10 @@
 - (id)initWithRulerView: (NSRulerView *)ruler
          markerLocation: (CGFloat)location
 {
-    NSString *path = [[NSBundle bundleForClass: [self class]] pathForResource: @"DVTBreakpointsEnableTemplate"
+    NSString *path = [[NSBundle bundleForClass: [self class]] pathForResource: @"TB_Breakpoints-Glyph"
                                                                        ofType: @"pdf"];
     NSImage *image = [[NSImage alloc] initWithContentsOfFile: path];
+    [image setTemplate: YES];
     
     self = [super initWithRulerView: ruler
                      markerLocation: location

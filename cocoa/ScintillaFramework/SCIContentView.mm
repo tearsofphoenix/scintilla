@@ -469,14 +469,10 @@ using namespace Scintilla;
     _owner.backend->MouseMove(theEvent);
 }
 
-
-
 - (void) mouseUp: (NSEvent *) theEvent
 {
     _owner.backend->MouseUp(theEvent);
 }
-
-
 
 - (void) mouseMoved: (NSEvent *) theEvent
 {
@@ -615,8 +611,12 @@ using namespace Scintilla;
  * Finished a drag: may need to delete selection.
  */
 
-- (void)draggedImage:(NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation {
-    if (operation == NSDragOperationDelete) {
+- (void)draggedImage: (NSImage *)image
+             endedAt: (NSPoint)screenPoint
+           operation: (NSDragOperation)operation
+{
+    if (operation == NSDragOperationDelete)
+    {
         _owner.backend->WndProc(SCI_CLEAR, 0, 0);
     }
 }

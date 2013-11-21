@@ -25,6 +25,7 @@
 		92DE1817183DB27B0045F8BC /* PBXTextBookmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 92DE1815183DB27B0045F8BC /* PBXTextBookmark.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92DE1818183DB27B0045F8BC /* PBXTextBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DE1816183DB27B0045F8BC /* PBXTextBookmark.m */; };
 		92DE181B183DC63C0045F8BC /* DVTBreakpointsEnableTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92DE181A183DC63C0045F8BC /* DVTBreakpointsEnableTemplate.pdf */; };
+		92DE181E183E0E200045F8BC /* TB_Breakpoints-Glyph.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92DE181D183E0E200045F8BC /* TB_Breakpoints-Glyph.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		92DE1815183DB27B0045F8BC /* PBXTextBookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBXTextBookmark.h; sourceTree = "<group>"; };
 		92DE1816183DB27B0045F8BC /* PBXTextBookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBXTextBookmark.m; sourceTree = "<group>"; };
 		92DE181A183DC63C0045F8BC /* DVTBreakpointsEnableTemplate.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = DVTBreakpointsEnableTemplate.pdf; sourceTree = "<group>"; };
+		92DE181D183E0E200045F8BC /* TB_Breakpoints-Glyph.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "TB_Breakpoints-Glyph.pdf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 		92DE1819183DC63C0045F8BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				92DE181D183E0E200045F8BC /* TB_Breakpoints-Glyph.pdf */,
 				92DE181A183DC63C0045F8BC /* DVTBreakpointsEnableTemplate.pdf */,
 			);
 			path = Resources;
@@ -272,6 +275,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92DE181E183E0E200045F8BC /* TB_Breakpoints-Glyph.pdf in Resources */,
 				92DE181B183DC63C0045F8BC /* DVTBreakpointsEnableTemplate.pdf in Resources */,
 				92D6253B183D9185005E0A59 /* InfoPlist.strings in Resources */,
 			);
