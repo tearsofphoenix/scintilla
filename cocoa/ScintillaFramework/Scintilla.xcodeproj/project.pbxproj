@@ -196,10 +196,10 @@
 		27FEF4550FC1B413005E115A /* mac_cursor_busy.png in Resources */ = {isa = PBXBuildFile; fileRef = 27FEF4520FC1B413005E115A /* mac_cursor_busy.png */; };
 		27FEF4560FC1B413005E115A /* mac_cursor_flipped.png in Resources */ = {isa = PBXBuildFile; fileRef = 27FEF4530FC1B413005E115A /* mac_cursor_flipped.png */; };
 		6085318E183B9D590084C214 /* VEBundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60853189183B9D3F0084C214 /* VEBundle.framework */; };
-		60853191183B9ED20084C214 /* SCIContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6085318F183B9ED20084C214 /* SCIContentView.h */; };
+		60853191183B9ED20084C214 /* SCIContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6085318F183B9ED20084C214 /* SCIContentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60853192183B9ED20084C214 /* SCIContentView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60853190183B9ED20084C214 /* SCIContentView.mm */; };
 		60853198183BA2470084C214 /* ScintillaPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 60853197183BA2470084C214 /* ScintillaPrivate.h */; };
-		6085319D183BA2DE0084C214 /* SCIMarginView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6085319B183BA2DE0084C214 /* SCIMarginView.h */; };
+		6085319D183BA2DE0084C214 /* SCIMarginView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6085319B183BA2DE0084C214 /* SCIMarginView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6085319E183BA2DE0084C214 /* SCIMarginView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6085319C183BA2DE0084C214 /* SCIMarginView.mm */; };
 		60D213FE183BA90D0038D3C7 /* VTLFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60D213FD183BA90D0038D3C7 /* VTLFont.mm */; };
 		60D21401183BB3860038D3C7 /* VTLPlatform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60D213FF183BB3860038D3C7 /* VTLPlatform.mm */; };
@@ -218,12 +218,12 @@
 		925957B7183C71240044DA6D /* FindHighlightLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957B5183C71240044DA6D /* FindHighlightLayer.mm */; };
 		925957BA183C749E0044DA6D /* TimerTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957B8183C749E0044DA6D /* TimerTarget.h */; };
 		925957BB183C749E0044DA6D /* TimerTarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957B9183C749E0044DA6D /* TimerTarget.mm */; };
-		925957BE183C75A30044DA6D /* SCICallTipView.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957BC183C75A30044DA6D /* SCICallTipView.h */; };
+		925957BE183C75A30044DA6D /* SCICallTipView.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957BC183C75A30044DA6D /* SCICallTipView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		925957BF183C75A30044DA6D /* SCICallTipView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957BD183C75A30044DA6D /* SCICallTipView.mm */; };
 		9291C212183CA1BD00CAD257 /* VTLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9291C211183CA1BD00CAD257 /* VTLayout.mm */; };
 		9291C215183CA78800CAD257 /* VTLStyle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9291C214183CA78800CAD257 /* VTLStyle.mm */; };
 		92D62517183D8E00005E0A59 /* SCIDebugServer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 92D62515183D8E00005E0A59 /* SCIDebugServer.mm */; };
-		92D62518183D8E00005E0A59 /* SCIDebugServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 92D62516183D8E00005E0A59 /* SCIDebugServer.h */; };
+		92D62518183D8E00005E0A59 /* SCIDebugServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 92D62516183D8E00005E0A59 /* SCIDebugServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92DE181C183DC85A0045F8BC /* DevToolsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D62561183D9186005E0A59 /* DevToolsFoundation.framework */; };
 		92DE1821183E0FC50045F8BC /* SCIContentView+MarginViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 92DE181F183E0FC50045F8BC /* SCIContentView+MarginViewDelegate.h */; };
 		92DE1822183E0FC50045F8BC /* SCIContentView+MarginViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DE1820183E0FC50045F8BC /* SCIContentView+MarginViewDelegate.m */; };
@@ -930,6 +930,10 @@
 				2744E5AA0FC168A100E85C33 /* ScintillaView.h in Headers */,
 				2791F3C70FC19F71009DBCF9 /* Platform.h in Headers */,
 				2791F3C80FC19F71009DBCF9 /* SciLexer.h in Headers */,
+				6085319D183BA2DE0084C214 /* SCIMarginView.h in Headers */,
+				925957BE183C75A30044DA6D /* SCICallTipView.h in Headers */,
+				92D62518183D8E00005E0A59 /* SCIDebugServer.h in Headers */,
+				60853191183B9ED20084C214 /* SCIContentView.h in Headers */,
 				2791F3C90FC19F71009DBCF9 /* Scintilla.h in Headers */,
 				114B6FA111FA75DB004FB6AB /* ILexer.h in Headers */,
 				114B6FBD11FA7623004FB6AB /* AutoComplete.h in Headers */,
@@ -941,7 +945,6 @@
 				114B6FC311FA7623004FB6AB /* Decoration.h in Headers */,
 				925957A9183C3C920044DA6D /* ScintillaContextMenu.h in Headers */,
 				114B6FC411FA7623004FB6AB /* Document.h in Headers */,
-				60853191183B9ED20084C214 /* SCIContentView.h in Headers */,
 				114B6FC511FA7623004FB6AB /* Editor.h in Headers */,
 				114B6FC611FA7623004FB6AB /* ExternalLexer.h in Headers */,
 				114B6FC711FA7623004FB6AB /* FontQuality.h in Headers */,
@@ -951,10 +954,8 @@
 				114B6FCB11FA7623004FB6AB /* Partitioning.h in Headers */,
 				114B6FCC11FA7623004FB6AB /* PerLine.h in Headers */,
 				114B6FCD11FA7623004FB6AB /* PositionCache.h in Headers */,
-				6085319D183BA2DE0084C214 /* SCIMarginView.h in Headers */,
 				114B6FCE11FA7623004FB6AB /* RESearch.h in Headers */,
 				114B6FCF11FA7623004FB6AB /* RunStyles.h in Headers */,
-				925957BE183C75A30044DA6D /* SCICallTipView.h in Headers */,
 				114B6FD011FA7623004FB6AB /* ScintillaBase.h in Headers */,
 				114B6FD111FA7623004FB6AB /* Selection.h in Headers */,
 				114B6FD211FA7623004FB6AB /* SplitVector.h in Headers */,
@@ -982,7 +983,6 @@
 				1100F1EE178E393200105727 /* CaseFolder.h in Headers */,
 				1100F1EF178E393200105727 /* UnicodeFromUTF8.h in Headers */,
 				925957BA183C749E0044DA6D /* TimerTarget.h in Headers */,
-				92D62518183D8E00005E0A59 /* SCIDebugServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

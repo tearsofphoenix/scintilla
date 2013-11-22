@@ -8,7 +8,8 @@
  */
 
 #import "AppController.h"
-#import "VEBundle.h"
+#import <DevToolsFoundation/DevToolsFoundation.h>
+#import <Scintilla/SCIMarginView.h>
 
 const char major_keywords[] =
 "and       break     do        else      elseif    end "
@@ -133,15 +134,23 @@ const char major_keywords[] =
 
     [mEditor setColorProperty: SCI_STYLESETFORE parameter: SCE_LUA_IDENTIFIER value: [NSColor blackColor]];
     
-    // Line number style.
+    //symbol
+    
     [mEditor setColorProperty: SCI_STYLESETFORE parameter: STYLE_LINENUMBER fromHTML: @"#F0F0F0"];
     [mEditor setColorProperty: SCI_STYLESETBACK parameter: STYLE_LINENUMBER fromHTML: @"#808080"];
-    
     [mEditor setGeneralProperty: SCI_SETMARGINTYPEN parameter: 0 value: SC_MARGIN_NUMBER];
 	[mEditor setGeneralProperty: SCI_SETMARGINWIDTHN parameter: 0 value: 35];
+
+    // Line number style.
+//    [mEditor setColorProperty: SCI_STYLESETFORE parameter: STYLE_DEFAULT fromHTML: @"#929292"];
+//    [mEditor setColorProperty: SCI_STYLESETBACK parameter: STYLE_DEFAULT fromHTML: @"#F7F7F7"];
+    [mEditor setGeneralProperty: SCI_SETMARGINTYPEN parameter: 1 value: SC_MARGIN_SYMBOL];
+	[mEditor setGeneralProperty: SCI_SETMARGINWIDTHN parameter: 1 value: 35];
     
     // Markers.
-    [mEditor setGeneralProperty: SCI_SETMARGINWIDTHN parameter: 1 value: 16];
+    [mEditor setGeneralProperty: SCI_SETMARGINWIDTHN
+                      parameter: 1
+                          value: 16];
     
     // Some special lexer properties.
     [mEditor setLexerProperty: @"fold" value: @"1"];
@@ -172,6 +181,14 @@ const char major_keywords[] =
     [mEditor setGeneralProperty: SCI_INDICSETUNDER parameter: 0 value: 1];
     [mEditor setGeneralProperty: SCI_INDICSETSTYLE parameter: 0 value: INDIC_SQUIGGLE];
     
+    [mEditor message: SCI_MARKERSETBACK
+              wParam: PBXMarkerStateNormal
+              lParam: 0xBF8651];
+
+    [mEditor message: SCI_MARKERSETBACK
+              wParam: PBXMarkerStateDisabled
+              lParam: 0xE6D4C1];
+
     [mEditor setColorProperty: SCI_MARKERSETBACK parameter: 0 fromHTML: @"#B1151C"];
     
     [mEditor setColorProperty: SCI_SETSELBACK parameter: 1 value: [NSColor selectedTextBackgroundColor]];

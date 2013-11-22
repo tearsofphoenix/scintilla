@@ -6400,10 +6400,10 @@ void Editor::ButtonDown(Point pt, unsigned int curTime, bool shift, bool ctrl, b
             {
 				// Single click in margin: select whole line or only subline if word wrap is enabled
 				lineAnchorPos = newPos.Position();
-				//selectionType = (Wrapping() && (marginOptions & SC_MARGINOPTION_SUBLINESELECT)) ? selSubLine : selWholeLine;
+				selectionType = (Wrapping() && (marginOptions & SC_MARGINOPTION_SUBLINESELECT)) ? selSubLine : selWholeLine;
                 //Isaac: we don't select lines when clicked margin
                 //
-				//LineSelection(lineAnchorPos, lineAnchorPos, selectionType == selWholeLine);
+				LineSelection(lineAnchorPos, lineAnchorPos, selectionType == selWholeLine);
                 didClickedMarginAtLineNumber(lineAnchorPos);
                 
 			} else

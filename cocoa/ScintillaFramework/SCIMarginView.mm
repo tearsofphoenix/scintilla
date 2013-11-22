@@ -13,6 +13,8 @@
 
 #import <DevToolsFoundation/DevToolsFoundation.h>
 
+using namespace Scintilla;
+
 @interface SCIMarginView ()
 {
 @private
@@ -38,10 +40,6 @@
         }
         
         [self setClientView: [aScrollView documentView]];
-        
-        [self addBreakpoint: nil
-               atLineNumber: 1
-                 lineHeight: 16];
     }
     return self;
 }
@@ -133,28 +131,28 @@
     }
 }
 
+- (void)updateBreakpointAtLineNumber: (int)lineNumber
+                           withState: (BOOL)enabled
+{
+    SCIController *controller = _owner.backend;
+
+    controller->WndProc(SCI_MARKERDELETE, lineNumber, -1);
+    if (enabled)
+    {
+        controller->WndProc(SCI_MARKERADD, lineNumber, PBXMarkerStateNormal);
+    }else
+    {
+        controller->WndProc(SCI_MARKERADD, lineNumber, PBXMarkerStateDisabled);
+    }
+}
+
 - (void)addBreakpoint: (PBXBreakpoint *)breakpoint
          atLineNumber: (int)lineNumber
            lineHeight: (int)lineHeight
-{    
-    PBXTextBookmark *marker = [[PBXTextBookmark alloc] initWithRulerView: self
-                                                          markerLocation: (lineNumber + 1) * lineHeight - 6];
-    [marker setRemovable: YES];
-    [marker setMovable: YES];
+{
+    SCIController *controller = _owner.backend;
     
-    [marker setDelegate: breakpoint];
-    [breakpoint setTextMark: marker];
-    
-    [self addMarker: marker];
-    
-    [marker release];
-    
-    dispatch_async(dispatch_get_main_queue(),
-                   (^
-                    {
-                        [self setNeedsDisplay: YES];
-                    }));
-
+    controller->WndProc(SCI_MARKERADD, lineNumber, PBXMarkerStateNormal);
 }
 
 @end

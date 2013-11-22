@@ -20,6 +20,9 @@
 
 - (id)initWithScrollView: (NSScrollView *)aScrollView;
 
+- (void)updateBreakpointAtLineNumber: (int)lineNumber
+                           withState: (BOOL)enabled;
+
 - (void)addBreakpoint: (PBXBreakpoint *)breakpoint
          atLineNumber: (int)lineNumber
            lineHeight: (int)lineHeight;
