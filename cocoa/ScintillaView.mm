@@ -18,7 +18,6 @@
 using namespace Scintilla;
 
 // Two additional cursors we need, which aren't provided by Cocoa.
-static NSCursor* reverseArrowCursor;
 static NSCursor* waitCursor;
 
 NSString *const SCIUpdateUINotification = @"SCIUpdateUI";
@@ -41,12 +40,18 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         case Window::cursorVert:
             return [NSCursor resizeUpDownCursor];
         case Window::cursorReverseArrow:
-            return reverseArrowCursor;
+            return [NSCursor arrowCursor];
         case Window::cursorUp:
         default:
             return [NSCursor arrowCursor];
     }
 }
+
+@interface ScintillaView ()
+{
+    int _lastInsertedChar;
+}
+@end
 
 @implementation ScintillaView
 
@@ -72,10 +77,6 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         NSString* path = [bundle pathForResource: @"mac_cursor_busy" ofType: @"png" inDirectory: nil];
         NSImage* image = [[[NSImage alloc] initWithContentsOfFile: path] autorelease];
         waitCursor = [[NSCursor alloc] initWithImage: image hotSpot: NSMakePoint(2, 2)];
-        
-        path = [bundle pathForResource: @"mac_cursor_flipped" ofType: @"png" inDirectory: nil];
-        image = [[[NSImage alloc] initWithContentsOfFile: path] autorelease];
-        reverseArrowCursor = [[NSCursor alloc] initWithImage: image hotSpot: NSMakePoint(12, 2)];
     }
 }
 
@@ -89,8 +90,6 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
 {
     return [SCIContentView class];
 }
-
-
 
 /**
  * Receives zoom messages, for example when a "pinch zoom" is performed on the trackpad.
@@ -221,8 +220,76 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
             // Triggered whenever changes in the UI state need to be reflected.
             // These can be: caret changes, selection changes etc.
             NSPoint caretPosition = _backend->GetCaretPosition();
-            [mInfoBar notify: IBNCaretChanged message: nil location: caretPosition value: 0];
+            
+            [mInfoBar notify: IBNCaretChanged
+                     message: nil
+                    location: caretPosition
+                       value: 0];
+            
+            if(_lastInsertedChar != 0)
+            {
+                int pos = _backend->WndProc(SCI_GETCURRENTPOS, 0, 0); //get current positon
+                int line = _backend->WndProc(SCI_LINEFROMPOSITION, pos, 0); //get current line
+                
+                //check if this is the charactor that we need to intent
+                if( strchr("})>]", _lastInsertedChar)
+                   && isspace(_backend->WndProc(SCI_GETCHARAT, pos-2, 0)))
+                {
+                    //make the range between previous word and current postion full of white space
+                    //
+                    int startpos = _backend->WndProc(SCI_WORDSTARTPOSITION, pos-1,false);
+                    int linepos = _backend->WndProc(SCI_POSITIONFROMLINE, line, 0);
+                    
+                    if(startpos == linepos)
+                    {
+                        int othpos = _backend->WndProc(SCI_BRACEMATCH, pos-1, 0);
+                        int othline = _backend->WndProc(SCI_LINEFROMPOSITION, othpos, 0);
+                        int nIndent = _backend->WndProc(SCI_GETLINEINDENTATION, othline, 0);
+                        
+                        char space[1024];
+                        memset(space,' ',1024);
+                        _backend->WndProc(SCI_SETTARGETSTART, startpos, 0);
+                        _backend->WndProc(SCI_SETTARGETEND, pos-1, 0);
+                        _backend->WndProc(SCI_REPLACETARGET,nIndent, (sptr_t)space);
+                    }
+                }
+                
+                //'\n' make auto intent
+                if(_lastInsertedChar == '\n')
+                {
+                    if(line > 0)
+                    {
+                        int nIndent = _backend->WndProc(SCI_GETLINEINDENTATION, line-1, 0);
+                        
+                        int nPrevLinePos = _backend->WndProc(SCI_POSITIONFROMLINE, line-1, 0);
+                        int c = ' ';
+                        
+                        for(int p = pos-2;
+                            p>=nPrevLinePos && isspace(c);
+                            p--, c=_backend->WndProc(SCI_GETCHARAT, p, 0))
+                        {
+                            ;
+                        }
+                        
+                        if(c && strchr("{([<",c))
+                        {
+                            nIndent+=4;
+                        }
+                        
+                        //intent
+                        //
+                        char space[1024];
+                        memset(space,' ',1024);
+                        space[nIndent] = 0;
+                        _backend->WndProc(SCI_REPLACESEL, 0, (sptr_t)space);
+                    }
+                }
+                
+                _lastInsertedChar = 0;
+            }
+            
             [self sendNotification: SCIUpdateUINotification];
+            
             if (scn->updated & (SC_UPDATE_SELECTION | SC_UPDATE_CONTENT))
             {
                 [self sendNotification: NSTextViewDidChangeSelectionNotification];
@@ -230,10 +297,23 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
             break;
         }
         case SCN_FOCUSOUT:
+        {
             [self sendNotification: NSTextDidEndEditingNotification];
             break;
+        }
         case SCN_FOCUSIN: // Nothing to do for now.
+        {
             break;
+        }
+        case SCN_CHARADDED:
+        {
+            _lastInsertedChar = scn->ch;
+            break;
+        }
+        default:
+        {
+            break;
+        }
     }
 }
 
@@ -260,7 +340,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
         [_scrollView setHasVerticalScroller:YES];
         [_scrollView setHasHorizontalScroller:YES];
         [_scrollView setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
-
+        
         [self addSubview: _scrollView];
         
         marginView = [[SCIMarginView alloc] initWithScrollView: _scrollView];
@@ -482,7 +562,7 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
 //{
 //    [[NSColor colorWithCalibratedRed:0.13f green:0.13f blue:0.13f alpha:1.00f] setFill];
 //    NSRectFill(dirtyRect);
-//    
+//
 //    [super drawRect: dirtyRect];
 //}
 
@@ -1049,7 +1129,74 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     }
 }
 
+/* XPM */
+static const char * box_xpm[] =
+{
+	"12 12 2 1",
+	" 	c None",
+	".	c #800000",
+	"   .........",
+	"  .   .   ..",
+	" .   .   . .",
+	".........  .",
+	".   .   .  .",
+	".   .   . ..",
+	".   .   .. .",
+	".........  .",
+	".   .   .  .",
+	".   .   . . ",
+	".   .   ..  ",
+	".........   "
+};
 
+- (void) showAutocompletion
+{
+	const char *words = "Babylon-5?1 Battlestar-Galactica Millenium-Falcon?2 Moya?2 Serenity Voyager";
+	[self setGeneralProperty: SCI_AUTOCSETIGNORECASE parameter: 1 value:0];
+	[self setGeneralProperty: SCI_REGISTERIMAGE
+                   parameter: 1
+                       value: (sptr_t)box_xpm];
+	const int imSize = 12;
+	[self setGeneralProperty: SCI_RGBAIMAGESETWIDTH parameter: imSize value:0];
+	[self setGeneralProperty: SCI_RGBAIMAGESETHEIGHT parameter: imSize value:0];
+	char image[imSize * imSize * 4];
+	for (size_t y = 0; y < imSize; y++)
+    {
+		for (size_t x = 0; x < imSize; x++)
+        {
+			char *p = image + (y * imSize + x) * 4;
+			p[0] = 0xFF;
+			p[1] = 0xA0;
+			p[2] = 0;
+			p[3] = x * 23;
+		}
+	}
+    
+	[self setGeneralProperty: SCI_REGISTERRGBAIMAGE parameter: 2 value:(sptr_t)image];
+	[self setGeneralProperty: SCI_AUTOCSHOW parameter: 0 value:(sptr_t)words];
+}
+
+- (IBAction) searchText: (id) sender
+{
+    NSSearchField* searchField = (NSSearchField*) sender;
+    [self findAndHighlightText: [searchField stringValue]
+                     matchCase: NO
+                     wholeWord: NO
+                      scrollTo: YES
+                          wrap: YES];
+    
+    long matchStart = [self getGeneralProperty: SCI_GETSELECTIONSTART parameter: 0];
+    long matchEnd = [self getGeneralProperty: SCI_GETSELECTIONEND parameter: 0];
+    [self setGeneralProperty: SCI_FINDINDICATORFLASH parameter: matchStart value:matchEnd];
+    
+    if ([[searchField stringValue] isEqualToString: @"XX"])
+        [self showAutocompletion];
+}
+
+- (void)performFindPanelAction: (id)sender
+{
+    
+}
 
 @end
 

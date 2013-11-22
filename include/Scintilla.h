@@ -94,6 +94,7 @@ typedef sptr_t (*SciFnDirect)(sptr_t ptr, unsigned int iMessage, uptr_t wParam, 
 #define SC_CP_UTF8 65001
 #define SCI_SETCODEPAGE 2037
 #define MARKER_MAX 31
+
 #define SC_MARK_CIRCLE 0
 #define SC_MARK_ROUNDRECT 1
 #define SC_MARK_ARROW 2
@@ -126,6 +127,7 @@ typedef sptr_t (*SciFnDirect)(sptr_t ptr, unsigned int iMessage, uptr_t wParam, 
 #define SC_MARK_UNDERLINE 29
 #define SC_MARK_RGBAIMAGE 30
 #define SC_MARK_CHARACTER 10000
+
 #define SC_MARKNUM_FOLDEREND 25
 #define SC_MARKNUM_FOLDEROPENMID 26
 #define SC_MARKNUM_FOLDERMIDTAIL 27
@@ -133,6 +135,7 @@ typedef sptr_t (*SciFnDirect)(sptr_t ptr, unsigned int iMessage, uptr_t wParam, 
 #define SC_MARKNUM_FOLDERSUB 29
 #define SC_MARKNUM_FOLDER 30
 #define SC_MARKNUM_FOLDEROPEN 31
+
 #define SC_MASK_FOLDERS 0xFE000000
 #define SCI_MARKERDEFINE 2040
 #define SCI_MARKERSETFORE 2041

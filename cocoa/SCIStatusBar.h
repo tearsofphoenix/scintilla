@@ -1,7 +1,7 @@
 
 /**
  * Scintilla source code edit control
- * InfoBar.h - Implements special info bar with zoom info, caret position etc. to be used with
+ * SCIStatusBar.h - Implements special info bar with zoom info, caret position etc. to be used with
  *             ScintillaView.
  *
  * Mike Lischke <mlischke@sun.com>
@@ -16,7 +16,7 @@
 #import "InfoBarCommunicator.h"
 
 
-@interface InfoBar : OakGradientView <InfoBarCommunicator>
+@interface SCIStatusBar : OakGradientView <InfoBarCommunicator>
 {
 @private
     IBDisplay mDisplayMask;

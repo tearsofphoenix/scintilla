@@ -8,6 +8,9 @@
  */
 
 #import "AppController.h"
+#import "ScintillaView.h"
+#import "SCIStatusBar.h"
+
 #import <DevToolsFoundation/DevToolsFoundation.h>
 #import <Scintilla/SCIMarginView.h>
 
@@ -70,18 +73,19 @@ const char major_keywords[] =
                       parameter: SCLEX_LUA
                           value: 0];
     
+    //tab configuration
+    //
+    [mEditor message: SCI_SETTABWIDTH
+              wParam: 4
+              lParam: 0];
+    [mEditor message: SCI_SETUSETABS
+              wParam: false
+              lParam: 0];
+
     // Number of styles we use with this lexer.
     [mEditor setGeneralProperty: SCI_SETSTYLEBITS
                           value: [mEditor getGeneralProperty: SCI_GETSTYLEBITSNEEDED]];
     
-    // Keywords to highlight. Indices are:
-    // 0 - Major keywords (reserved keywords)
-    // 1 - Normal keywords (everything not reserved but integral part of the language)
-    // 2 - Database objects
-    // 3 - Function keywords
-    // 4 - System variable keywords
-    // 5 - Procedure keywords (keywords used in procedures like "begin" and "end")
-    // 6..8 - User keywords 1..3
     [mEditor setReferenceProperty: SCI_SETKEYWORDS
                         parameter: 0
                             value: major_keywords];
@@ -142,8 +146,6 @@ const char major_keywords[] =
 	[mEditor setGeneralProperty: SCI_SETMARGINWIDTHN parameter: 0 value: 35];
 
     // Line number style.
-//    [mEditor setColorProperty: SCI_STYLESETFORE parameter: STYLE_DEFAULT fromHTML: @"#929292"];
-//    [mEditor setColorProperty: SCI_STYLESETBACK parameter: STYLE_DEFAULT fromHTML: @"#F7F7F7"];
     [mEditor setGeneralProperty: SCI_SETMARGINTYPEN parameter: 1 value: SC_MARGIN_SYMBOL];
 	[mEditor setGeneralProperty: SCI_SETMARGINWIDTHN parameter: 1 value: 35];
     
@@ -162,13 +164,13 @@ const char major_keywords[] =
     [mEditor setGeneralProperty: SCI_SETMARGINWIDTHN parameter: 2 value: 16];
     [mEditor setGeneralProperty: SCI_SETMARGINMASKN parameter: 2 value: SC_MASK_FOLDERS];
     [mEditor setGeneralProperty: SCI_SETMARGINSENSITIVEN parameter: 2 value: 1];
-    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDEROPEN value: SC_MARK_BOXMINUS];
-    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDER value: SC_MARK_BOXPLUS];
+    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDEROPEN value: SC_MARK_CIRCLEMINUS];
+    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDER value: SC_MARK_CIRCLEPLUS];
     [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDERSUB value: SC_MARK_VLINE];
-    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDERTAIL value: SC_MARK_LCORNER];
-    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDEREND value: SC_MARK_BOXPLUSCONNECTED];
-    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDEROPENMID value: SC_MARK_BOXMINUSCONNECTED];
-    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDERMIDTAIL value: SC_MARK_TCORNER];
+    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDERTAIL value: SC_MARK_LCORNERCURVE];
+    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDEREND value: SC_MARK_CIRCLEPLUSCONNECTED];
+    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDEROPENMID value: SC_MARK_CIRCLEMINUSCONNECTED];
+    [mEditor setGeneralProperty: SCI_MARKERDEFINE parameter: SC_MARKNUM_FOLDERMIDTAIL value: SC_MARK_TCORNERCURVE];
     
     for (int n= 25; n < 32; ++n) // Markers 25..31 are reserved for folding.
     {
@@ -196,77 +198,23 @@ const char major_keywords[] =
     // Uncomment if you wanna see auto wrapping in action.
     //[mEditor setGeneralProperty: SCI_SETWRAPMODE parameter: SC_WRAP_WORD value: 0];
     
-    InfoBar* infoBar = [[[InfoBar alloc] initWithFrame: NSMakeRect(0, 0, 400, 0)] autorelease];
+    SCIStatusBar* infoBar = [[[SCIStatusBar alloc] initWithFrame: NSMakeRect(0, 0, 400, 0)] autorelease];
     [infoBar setDisplay: IBShowAll];
     [mEditor setInfoBar: infoBar top: NO];
     [mEditor setStatusText: @"Operation complete"];
-}
-
-
-
-/* XPM */
-static const char * box_xpm[] =
-{
-	"12 12 2 1",
-	" 	c None",
-	".	c #800000",
-	"   .........",
-	"  .   .   ..",
-	" .   .   . .",
-	".........  .",
-	".   .   .  .",
-	".   .   . ..",
-	".   .   .. .",
-	".........  .",
-	".   .   .  .",
-	".   .   . . ",
-	".   .   ..  ",
-	".........   "};
-
-
-- (void) showAutocompletion
-{
-	const char *words = "Babylon-5?1 Battlestar-Galactica Millenium-Falcon?2 Moya?2 Serenity Voyager";
-	[mEditor setGeneralProperty: SCI_AUTOCSETIGNORECASE parameter: 1 value:0];
-	[mEditor setGeneralProperty: SCI_REGISTERIMAGE parameter: 1 value:(sptr_t)box_xpm];
-	const int imSize = 12;
-	[mEditor setGeneralProperty: SCI_RGBAIMAGESETWIDTH parameter: imSize value:0];
-	[mEditor setGeneralProperty: SCI_RGBAIMAGESETHEIGHT parameter: imSize value:0];
-	char image[imSize * imSize * 4];
-	for (size_t y = 0; y < imSize; y++) {
-		for (size_t x = 0; x < imSize; x++) {
-			char *p = image + (y * imSize + x) * 4;
-			p[0] = 0xFF;
-			p[1] = 0xA0;
-			p[2] = 0;
-			p[3] = x * 23;
-		}
-	}
-	[mEditor setGeneralProperty: SCI_REGISTERRGBAIMAGE parameter: 2 value:(sptr_t)image];
-	[mEditor setGeneralProperty: SCI_AUTOCSHOW parameter: 0 value:(sptr_t)words];
-}
-
-- (IBAction) searchText: (id) sender
-{
-    NSSearchField* searchField = (NSSearchField*) sender;
-    [mEditor findAndHighlightText: [searchField stringValue]
-                        matchCase: NO
-                        wholeWord: NO
-                         scrollTo: YES
-                             wrap: YES];
-    
-    long matchStart = [mEditor getGeneralProperty: SCI_GETSELECTIONSTART parameter: 0];
-    long matchEnd = [mEditor getGeneralProperty: SCI_GETSELECTIONEND parameter: 0];
-    [mEditor setGeneralProperty: SCI_FINDINDICATORFLASH parameter: matchStart value:matchEnd];
-    
-    if ([[searchField stringValue] isEqualToString: @"XX"])
-        [self showAutocompletion];
 }
 
 -(IBAction) setFontQuality: (id) sender
 {
     [ScintillaView directCall:mEditor message:SCI_SETFONTQUALITY wParam:[sender tag] lParam:0];
 }
+
+- (IBAction)showPreferencesPanel: (id)sender
+{
+    
+}
+
+
 
 @end
 

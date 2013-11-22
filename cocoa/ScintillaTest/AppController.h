@@ -9,8 +9,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "ScintillaView.h"
-#import "InfoBar.h"
+
+@class ScintillaView;
 
 @interface AppController : NSObject
 {
@@ -22,6 +22,6 @@
 
 - (void)setupEditor;
 
-- (IBAction)searchText: (id)sender;
+- (IBAction)showPreferencesPanel: (id)sender;
 
 @end

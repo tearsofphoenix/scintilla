@@ -178,10 +178,10 @@
 		11FBA39E17817DA00048C071 /* CharacterCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 11FBA39C17817DA00048C071 /* CharacterCategory.h */; };
 		11FDAEB7174E1A9800FA161B /* LexSTTXT.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 11FDAEB6174E1A9700FA161B /* LexSTTXT.cxx */; };
 		11FDD0E017C480D4001541B9 /* LexKVIrc.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 11FDD0DF17C480D4001541B9 /* LexKVIrc.cxx */; };
-		2744E5A40FC168A100E85C33 /* InfoBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E59D0FC168A100E85C33 /* InfoBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2744E5A40FC168A100E85C33 /* SCIStatusBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E59D0FC168A100E85C33 /* SCIStatusBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2744E5AA0FC168A100E85C33 /* ScintillaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5A30FC168A100E85C33 /* ScintillaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2744E5AC0FC168B200E85C33 /* InfoBarCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2744E5B20FC168C500E85C33 /* InfoBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5AD0FC168C500E85C33 /* InfoBar.mm */; };
+		2744E5B20FC168C500E85C33 /* SCIStatusBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5AD0FC168C500E85C33 /* SCIStatusBar.mm */; };
 		2744E5B30FC168C500E85C33 /* PlatCocoa.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5AE0FC168C500E85C33 /* PlatCocoa.mm */; };
 		2744E5B50FC168C500E85C33 /* SCIController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5B00FC168C500E85C33 /* SCIController.mm */; };
 		2744E5B60FC168C500E85C33 /* ScintillaView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5B10FC168C500E85C33 /* ScintillaView.mm */; };
@@ -192,9 +192,7 @@
 		2791F3E00FC1A390009DBCF9 /* SCIController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5A20FC168A100E85C33 /* SCIController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2791F3E30FC1A3AE009DBCF9 /* VTLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E59F0FC168A100E85C33 /* VTLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2791F3E40FC1A3AE009DBCF9 /* VTLFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5A00FC168A100E85C33 /* VTLFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		27FEF4540FC1B413005E115A /* info_bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 27FEF4510FC1B413005E115A /* info_bar_bg.png */; };
 		27FEF4550FC1B413005E115A /* mac_cursor_busy.png in Resources */ = {isa = PBXBuildFile; fileRef = 27FEF4520FC1B413005E115A /* mac_cursor_busy.png */; };
-		27FEF4560FC1B413005E115A /* mac_cursor_flipped.png in Resources */ = {isa = PBXBuildFile; fileRef = 27FEF4530FC1B413005E115A /* mac_cursor_flipped.png */; };
 		6085318E183B9D590084C214 /* VEBundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60853189183B9D3F0084C214 /* VEBundle.framework */; };
 		60853191183B9ED20084C214 /* SCIContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6085318F183B9ED20084C214 /* SCIContentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60853192183B9ED20084C214 /* SCIContentView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60853190183B9ED20084C214 /* SCIContentView.mm */; };
@@ -208,6 +206,7 @@
 		60D21567183E46480038D3C7 /* OakAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D21455183E41F80038D3C7 /* OakAppKit.framework */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
+		922D73E8183EFDF700C81863 /* SCIEditorNotify.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 922D73E6183EFDF700C81863 /* SCIEditorNotify.cpp */; };
 		925957A9183C3C920044DA6D /* ScintillaContextMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957A7183C3C920044DA6D /* ScintillaContextMenu.h */; };
 		925957AA183C3C920044DA6D /* ScintillaContextMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */; };
 		925957AD183C3DEB0044DA6D /* ScintillaNotificationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */; };
@@ -474,20 +473,18 @@
 		2744E4850FC1678600E85C33 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Platform.h; path = ../../include/Platform.h; sourceTree = SOURCE_ROOT; };
 		2744E4870FC1678600E85C33 /* SciLexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SciLexer.h; path = ../../include/SciLexer.h; sourceTree = SOURCE_ROOT; };
 		2744E4880FC1678600E85C33 /* Scintilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scintilla.h; path = ../../include/Scintilla.h; sourceTree = SOURCE_ROOT; };
-		2744E59D0FC168A100E85C33 /* InfoBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoBar.h; path = ../InfoBar.h; sourceTree = SOURCE_ROOT; };
+		2744E59D0FC168A100E85C33 /* SCIStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCIStatusBar.h; path = ../SCIStatusBar.h; sourceTree = SOURCE_ROOT; };
 		2744E59E0FC168A100E85C33 /* PlatCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatCocoa.h; path = ../PlatCocoa.h; sourceTree = SOURCE_ROOT; };
 		2744E59F0FC168A100E85C33 /* VTLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTLayout.h; path = ../VTLayout.h; sourceTree = SOURCE_ROOT; };
 		2744E5A00FC168A100E85C33 /* VTLFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTLFont.h; path = ../VTLFont.h; sourceTree = SOURCE_ROOT; };
 		2744E5A20FC168A100E85C33 /* SCIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCIController.h; path = ../SCIController.h; sourceTree = "<group>"; };
 		2744E5A30FC168A100E85C33 /* ScintillaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScintillaView.h; path = ../ScintillaView.h; sourceTree = "<group>"; };
 		2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoBarCommunicator.h; path = ../InfoBarCommunicator.h; sourceTree = SOURCE_ROOT; };
-		2744E5AD0FC168C500E85C33 /* InfoBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = InfoBar.mm; path = ../InfoBar.mm; sourceTree = SOURCE_ROOT; };
+		2744E5AD0FC168C500E85C33 /* SCIStatusBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SCIStatusBar.mm; path = ../SCIStatusBar.mm; sourceTree = SOURCE_ROOT; };
 		2744E5AE0FC168C500E85C33 /* PlatCocoa.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlatCocoa.mm; path = ../PlatCocoa.mm; sourceTree = SOURCE_ROOT; };
 		2744E5B00FC168C500E85C33 /* SCIController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SCIController.mm; path = ../SCIController.mm; sourceTree = "<group>"; };
 		2744E5B10FC168C500E85C33 /* ScintillaView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ScintillaView.mm; path = ../ScintillaView.mm; sourceTree = "<group>"; };
-		27FEF4510FC1B413005E115A /* info_bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_bar_bg.png; sourceTree = "<group>"; };
 		27FEF4520FC1B413005E115A /* mac_cursor_busy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac_cursor_busy.png; sourceTree = "<group>"; };
-		27FEF4530FC1B413005E115A /* mac_cursor_flipped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac_cursor_flipped.png; sourceTree = "<group>"; };
 		32DBCF5E0370ADEE00C91783 /* Scintilla_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scintilla_Prefix.pch; sourceTree = "<group>"; };
 		60853183183B9D3E0084C214 /* VEBundle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VEBundle.xcodeproj; path = VEBundle/VEBundle.xcodeproj; sourceTree = "<group>"; };
 		6085318F183B9ED20084C214 /* SCIContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIContentView.h; sourceTree = "<group>"; };
@@ -502,6 +499,7 @@
 		60D2144F183E41F70038D3C7 /* OakAppKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OakAppKit.xcodeproj; path = OakAppKit/OakAppKit.xcodeproj; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Scintilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Scintilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		922D73E6183EFDF700C81863 /* SCIEditorNotify.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SCIEditorNotify.cpp; sourceTree = "<group>"; };
 		925957A7183C3C920044DA6D /* ScintillaContextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaContextMenu.h; sourceTree = "<group>"; };
 		925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScintillaContextMenu.mm; sourceTree = "<group>"; };
 		925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaNotificationProtocol.h; sourceTree = "<group>"; };
@@ -802,6 +800,7 @@
 				114B6F6711FA7597004FB6AB /* Document.cxx */,
 				114B6F6811FA7597004FB6AB /* Editor.cxx */,
 				60D21411183E33AB0038D3C7 /* SCIEditorWindowProcess.cpp */,
+				922D73E6183EFDF700C81863 /* SCIEditorNotify.cpp */,
 				114B6F6911FA7598004FB6AB /* ExternalLexer.cxx */,
 				114B6F6A11FA7598004FB6AB /* Indicator.cxx */,
 				114B6F6B11FA7598004FB6AB /* KeyMap.cxx */,
@@ -830,9 +829,7 @@
 		27FEF4500FC1B413005E115A /* res */ = {
 			isa = PBXGroup;
 			children = (
-				27FEF4510FC1B413005E115A /* info_bar_bg.png */,
 				27FEF4520FC1B413005E115A /* mac_cursor_busy.png */,
-				27FEF4530FC1B413005E115A /* mac_cursor_flipped.png */,
 			);
 			name = res;
 			path = ../res;
@@ -885,8 +882,8 @@
 			children = (
 				925957B4183C71240044DA6D /* FindHighlightLayer.h */,
 				925957B5183C71240044DA6D /* FindHighlightLayer.mm */,
-				2744E59D0FC168A100E85C33 /* InfoBar.h */,
-				2744E5AD0FC168C500E85C33 /* InfoBar.mm */,
+				2744E59D0FC168A100E85C33 /* SCIStatusBar.h */,
+				2744E5AD0FC168C500E85C33 /* SCIStatusBar.mm */,
 				2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */,
 				925957BC183C75A30044DA6D /* SCICallTipView.h */,
 				925957BD183C75A30044DA6D /* SCICallTipView.mm */,
@@ -920,7 +917,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2744E5A40FC168A100E85C33 /* InfoBar.h in Headers */,
+				2744E5A40FC168A100E85C33 /* SCIStatusBar.h in Headers */,
 				925957B6183C71240044DA6D /* FindHighlightLayer.h in Headers */,
 				2744E5AC0FC168B200E85C33 /* InfoBarCommunicator.h in Headers */,
 				2791F3C60FC19F71009DBCF9 /* PlatCocoa.h in Headers */,
@@ -1104,9 +1101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */,
-				27FEF4540FC1B413005E115A /* info_bar_bg.png in Resources */,
 				27FEF4550FC1B413005E115A /* mac_cursor_busy.png in Resources */,
-				27FEF4560FC1B413005E115A /* mac_cursor_flipped.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1117,7 +1112,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2744E5B20FC168C500E85C33 /* InfoBar.mm in Sources */,
+				2744E5B20FC168C500E85C33 /* SCIStatusBar.mm in Sources */,
 				2744E5B30FC168C500E85C33 /* PlatCocoa.mm in Sources */,
 				2744E5B50FC168C500E85C33 /* SCIController.mm in Sources */,
 				2744E5B60FC168C500E85C33 /* ScintillaView.mm in Sources */,
@@ -1149,6 +1144,7 @@
 				114B6F2311FA7526004FB6AB /* LexEiffel.cxx in Sources */,
 				114B6F2411FA7526004FB6AB /* LexErlang.cxx in Sources */,
 				114B6F2511FA7526004FB6AB /* LexEScript.cxx in Sources */,
+				922D73E8183EFDF700C81863 /* SCIEditorNotify.cpp in Sources */,
 				114B6F2611FA7526004FB6AB /* LexFlagship.cxx in Sources */,
 				114B6F2711FA7526004FB6AB /* LexForth.cxx in Sources */,
 				114B6F2811FA7526004FB6AB /* LexFortran.cxx in Sources */,
