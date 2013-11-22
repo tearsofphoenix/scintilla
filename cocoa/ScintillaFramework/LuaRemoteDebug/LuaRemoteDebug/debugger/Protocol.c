@@ -49,10 +49,10 @@ int SendBreak(SOCKET s, const char * file, int line)
 {
     LRDClientSocketBuffer sb;
 
-    LRDClietnSocketBufferInit(&sb, s);
+    LRDClientSocketBufferInit(&sb, s);
     SB_Print(&sb, "BR\n%s\n%d\n\n", file, line);
     SB_Add(&sb, "", 1); //Add the End-of-flow(EOF)
-    return SB_Send(&sb);
+    return LRDClientSocketBufferSend(&sb);
 }
 
 int SendQuit(SOCKET s)
@@ -65,13 +65,13 @@ int SendErr(SOCKET s, const char * fmt, ...)
     LRDClientSocketBuffer sb;
     va_list ap;
 
-    LRDClietnSocketBufferInit(&sb, s);
+    LRDClientSocketBufferInit(&sb, s);
     SB_Add(&sb, "ER\n", sizeof("ER\n") - 1);
     va_start(ap, fmt);
     SB_VPrint(&sb, fmt, ap);
     va_end(ap);
     SB_Add(&sb, "\n", sizeof("\n")); //Include the End-of-flow(EOF)
-    return SB_Send(&sb);
+    return LRDClientSocketBufferSend(&sb);
 }
 
 int SendOK(SOCKET s, Writer writer, void * writerData)
@@ -79,12 +79,12 @@ int SendOK(SOCKET s, Writer writer, void * writerData)
     LRDClientSocketBuffer sb;
     int rc = 0;
 
-    LRDClietnSocketBufferInit(&sb, s);
+    LRDClientSocketBufferInit(&sb, s);
     SB_Add(&sb, "OK\n", sizeof("OK\n") - 1);
     if (writer)
         while ((rc = writer(writerData, &sb)) == 1);
     SB_Add(&sb, "\n", sizeof("\n")); //Include the End-of-flow(EOF)
-    SB_Send(&sb);
+    LRDClientSocketBufferSend(&sb);
     return (rc == 0 && !sb.ioerr) ? 0 : (rc < 0 ? rc : -1);
 }
 

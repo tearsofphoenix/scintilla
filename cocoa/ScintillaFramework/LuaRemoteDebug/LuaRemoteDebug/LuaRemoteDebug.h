@@ -13,13 +13,19 @@
 extern "C" {
 #endif
 
+#include <LuaKit/LuaKit.h>
 #include <LuaRemoteDebug/Dump.h>
 #include <LuaRemoteDebug/Socket.h>
 #include <LuaRemoteDebug/LRDServerSocketBuffer.h>
 #include <LuaRemoteDebug/SocketBuffer.h>
 #include <LuaRemoteDebug/Protocol.h>
     
-extern int LRDStartDebugServer(int argc, char * argv[]);
+    extern int LRDStartDebugServer(const char *addrStr, int port);
+    
+#ifdef OS_WIN
+    __declspec(dllexport)
+#endif
+    int luaopen_RLdb(lua_State * L);
     
 #ifdef __cplusplus
 }

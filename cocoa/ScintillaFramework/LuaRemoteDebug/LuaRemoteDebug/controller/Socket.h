@@ -45,4 +45,9 @@ typedef int SOCKET;
 
 #endif
 
+#define LRDDefaultServerAddress  "127.0.0.1"
+#define LRDDefaultServerPort     8211
+
+extern int SendData(SOCKET s, const void * buf, size_t len);
+
 #endif

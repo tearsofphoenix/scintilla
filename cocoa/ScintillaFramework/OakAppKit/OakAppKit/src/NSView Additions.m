@@ -13,5 +13,6 @@
 	if(index >= 0)
 		[cell selectItemAtIndex:index];
 	[cell performClickWithFrame:rect inView:self];
+    [cell autorelease];
 }
 @end

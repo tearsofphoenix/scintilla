@@ -56,12 +56,7 @@ typedef struct
 /*
 ** Init a Socket Buffer
 */
-void LRDClietnSocketBufferInit(LRDClientSocketBuffer * sb, SOCKET s);
-
-/*
-** Reset a Socket Buffer, that is, clear error flag and reset buffer state to init state.
-*/
-void SB_Reset(LRDClientSocketBuffer * sb);
+void LRDClientSocketBufferInit(LRDClientSocketBuffer * sb, SOCKET s);
 
 /*
 ** Add a format string to buffer in a Socket Buffer. If the buffer is full, then
@@ -84,8 +79,6 @@ int SB_Add(LRDClientSocketBuffer * sb, const void * data, size_t len);
 /*
 ** Send the content in buffer right now.
 */
-int SB_Send(LRDClientSocketBuffer * sb);
-
-int SendData(SOCKET s, const void * buf, int len);
+int LRDClientSocketBufferSend(LRDClientSocketBuffer * sb);
 
 #endif

@@ -8,11 +8,11 @@
 
 #import "SCILuaDebugServer.h"
 #import <LuaRemoteDebug/LuaRemoteDebug.h>
-#import <LuaKit/LuaKit.h>
 
 @interface SCILuaDebugServer ()
 {
     lua_State *_luaState;
+    NSThread *_debugServerThread;
 }
 @end
 
@@ -41,15 +41,45 @@ static id gsSharedServer = nil;
         if ((self = [super init]))
         {
             _luaState = luaL_newstate();
+
+            _debugServerThread = [[NSThread alloc] initWithTarget: self
+                                                         selector: @selector(_debugServerMain)
+                                                           object: nil];
         }
         
         return self;
     }
 }
 
+- (void)_debugServerMain
+{
+    @autoreleasepool
+    {
+        LRDStartDebugServer(LRDDefaultServerAddress, LRDDefaultServerPort);
+    }
+}
+
 - (void)startDebugSource: (NSString *)sourceCode
 {
-    LRDStartDebugServer(0, NULL);
+    //start server on other thread if possible
+    //
+    if (![_debugServerThread isExecuting])
+    {
+        [_debugServerThread start];
+    }
+    
+    //
+    double delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    
+    dispatch_after(popTime, dispatch_get_main_queue(),
+                   (^(void)
+                    {
+                        luaopen_RLdb(_luaState);
+                        //luaL_requiref(_luaState, "remotedebugger", luaopen_RLdb, 0);
+                        luaL_dostring(_luaState, [sourceCode UTF8String]);
+                    }));
+    
 }
 
 @end

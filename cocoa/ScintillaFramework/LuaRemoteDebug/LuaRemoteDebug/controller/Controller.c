@@ -29,6 +29,7 @@
 #include "Socket.h"
 #include "LRDServerSocketBuffer.h"
 #include "Dump.h"
+#include <errno.h>
 
 typedef enum
 {
@@ -111,62 +112,50 @@ void uninitSocket()
 #define uninitSocket()
 #endif
 
-int LRDStartDebugServer(int argc, char * argv[])
+int LRDStartDebugServer(const char *addrStr, int port)
 {
     SOCKET s;
     SOCKET a;
     struct sockaddr_in addr;
-    char addrStr[64] = {0};
-    unsigned short port = 0;
 
-    if (argc > 1)
+    if (addrStr == 0)
     {
-        int i = 1;
-        for (; i < argc; i++)
-        {
-            if (argv[i][0] == '-')
-            {
-                if (argv[i][1] == 'a')
-                {
-                    strncpy(addrStr, argv[i] + 2, 63);
-                    addrStr[63] = 0;
-                    
-                }else if (argv[i][1] == 'p')
-                {
-                    port = (unsigned short)atoi(argv[i] + 2);
-                    
-                }else
-                {
-                    SHOW_USAGE_AND_RETURN(argv[0]);
-                }
-            }
-            else {
-                SHOW_USAGE_AND_RETURN(argv[0]);
-            }
-        }
+        addrStr = LRDDefaultServerAddress;
     }
-    if (addrStr[0] == 0)
-        strcpy(addrStr, "127.0.0.1");
+    
     if (port == 0)
-        port = 8211;
-
-    if (initSocket()) {
+    {
+        port = LRDDefaultServerPort;
+    }
+    
+    if (initSocket())
+    {
         printf("initSocket failed!\n");
         return -1;
     }
 
     s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (s == INVALID_SOCKET) {
+    
+    if (s == INVALID_SOCKET)
+    {
         printf("Socket error!\n");
         uninitSocket();
         return -1;
     }
-
+    
+    int on = 1;
+    
+    int status = setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
+    if (status != 0)
+    {
+        printf("can't make server socket reusable.\n");
+    }
+    
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = inet_addr(addrStr);
+    addr.sin_addr.s_addr = htonl(INADDR_ANY);
     addr.sin_port = htons(port);
 
-    int status = bind(s, (struct sockaddr *)&addr, sizeof(addr));
+    status = bind(s, (struct sockaddr *)&addr, sizeof(addr));
     if (status == SOCKET_ERROR
         || listen(s, 1) == SOCKET_ERROR)
     {
@@ -178,8 +167,10 @@ int LRDStartDebugServer(int argc, char * argv[])
 
     printf("RLdb 2.0.0 Copyright (C) 2009 Zhang Lei\n");
     printf("Waiting at %s:%d for remote debuggee...\n", addrStr, (int)port);
-    do {
+    do
+    {
       a = accept(s, NULL, NULL);
+        
     } while (a == SOCKET_ERROR);
 
     printf("Connected!\n");
@@ -434,18 +425,6 @@ CmdType validateArgs(char * argv[], int argc)
         }
     }
     return t;
-}
-
-static int SendData(SOCKET s, const char * buf, size_t len)
-{
-    while (len > 0) {
-        size_t sent = send(s, buf, len, 0);
-        if (sent == SOCKET_ERROR)
-            return -1;
-        len -= sent;
-        buf += sent;
-    }
-    return 0;
 }
 
 int sendCmd(SOCKET s, CmdType t, char * argv[], int argc)

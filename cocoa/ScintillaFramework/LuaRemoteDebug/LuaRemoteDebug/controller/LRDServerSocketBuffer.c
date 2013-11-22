@@ -1,25 +1,25 @@
 /******************************************************************************
-* Copyright (C) 2009 Zhang Lei.  All rights reserved.
-*
-* Permission is hereby granted, free of charge, to any person obtaining
-* a copy of this software and associated documentation files (the
-* "Software"), to deal in the Software without restriction, including
-* without limitation the rights to use, copy, modify, merge, publish,
-* distribute, sublicense, and/or sell copies of the Software, and to
-* permit persons to whom the Software is furnished to do so, subject to
-* the following conditions:
-*
-* The above copyright notice and this permission notice shall be
-* included in all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-******************************************************************************/
+ * Copyright (C) 2009 Zhang Lei.  All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ ******************************************************************************/
 
 #include <assert.h>
 #include <string.h>
@@ -37,7 +37,6 @@ void LRDSocketBufferInit(SocketBuf * sb, SOCKET s)
 
 static void SB_Reset(SocketBuf * sb)
 {
-//    sb->tempLen = 0;
     sb->end = 0;
     sb->err = 0;
 }
@@ -47,20 +46,20 @@ static int RecvData(SOCKET s, char * buf, int len)
     char * p = buf;
     int avail = len;
     int received = 0;
-
+    
     while (avail > 0) {
         ssize_t l = recv(s, p, avail, 0);
         if (l == SOCKET_ERROR)
             return -1;
-
+        
         received += l;
         if (p[l - 1] == 0)
             return received - 1;    //Return payload length, excluding the EOF character.
-
+        
         p += l;
         avail -= l;
     }
-
+    
     return len; //Buffer is full, but EOF is not reached.
 }
 
@@ -68,7 +67,7 @@ int LRDSocketBufferRead(SocketBuf * sb, int bytes)
 {
     int rc;
     SB_Reset(sb);
-
+    
     if (bytes == SB_R_LEFT) {
         rc = RecvData(sb->s, sb->lbuf, SOCKET_BUF_CAP);
     }
@@ -78,15 +77,15 @@ int LRDSocketBufferRead(SocketBuf * sb, int bytes)
     else {
         rc = RecvData(sb->s, sb->lbuf, bytes < SOCKET_BUF_CAP ? bytes : SOCKET_BUF_CAP);
     }
-
+    
     if (rc < 0) {
         sb->err = 1;
         return -1;
     }
-
+    
     if (bytes < 0 && rc < SOCKET_BUF_CAP)
         sb->end = 1;
-
+    
     return rc;
 }
 
@@ -109,10 +108,12 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
     int rc = 0;
     char temp[SOCKET_BUF_TMP];
     long tempLen = 0;    //length of available str in temp
-
+    
     SB_Reset(sb);
-    while (st != EOF && st != ERR) {
-        switch (st) {
+    while (st != EOF && st != ERR)
+    {
+        switch (st)
+        {
             case EOB:
             {
                 if (LRDSocketBufferRead(sb, inLeft ? SB_R_RIGHT : SB_R_LEFT) < 0)
@@ -124,7 +125,7 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
                 p = inLeft ? sb->rbuf : sb->lbuf;
                 inLeft = inLeft ? 0 : 1;
                 start = p;
-
+                
                 //if (isspace(*p))
                 if (*p && strchr(separaters, *p))
                     st = SEPARATERS;
@@ -133,7 +134,7 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
                 else {
                     if (tempLen > 0)
                         rc = parser(userdata, temp, tempLen);
-
+                    
                     if (rc < 0) {
                         st = ERR;
                     }
@@ -144,7 +145,7 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
                 }
                 break;
             }
-
+                
             case SEPARATERS: {
                 if (tempLen > 0) {
                     rc = parser(userdata, temp, tempLen);
@@ -157,11 +158,11 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
                     }
                     tempLen = 0;
                 }
-
+                
                 //while (isspace(*p))
                 while (*p && strchr(separaters, *p))
                     ++p;
-
+                
                 if (*p) {
                     st = TEXT;
                     start = p;
@@ -170,22 +171,22 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
                     st = EOF;
                 else
                     st = EOB;
-
+                
                 break;
             }
-
+                
             case TEXT: {
                 //while (!isspace(*p) && *p)
                 while (*p && !strchr(separaters, *p))
                     ++p;
-
+                
                 if (*p)
                     st = SEPARATERS;
                 else if (sb->end)
                     st = EOF;
                 else
                     st = EOB;
-
+                
                 if (tempLen > 0) {
                     if (p - start + tempLen > SOCKET_BUF_TMP) {
                         st = ERR;
@@ -209,7 +210,7 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
                     memcpy(temp, start, p - start);
                     tempLen = p - start;
                 }
-
+                
                 if (rc < 0) {
                     st = ERR;
                 }
@@ -217,10 +218,10 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
                     rc = 0;
                     start = p;
                 }
-
+                
                 break;
             }
-
+                
             default: {
                 assert(0 && "Impossibility!");
             }

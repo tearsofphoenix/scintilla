@@ -31,6 +31,6 @@
 	va_start(list, firstTitle);
 	[alert vAddButtons:firstTitle fromList:list];
 
-	return alert;
+	return [alert autorelease];
 }
 @end

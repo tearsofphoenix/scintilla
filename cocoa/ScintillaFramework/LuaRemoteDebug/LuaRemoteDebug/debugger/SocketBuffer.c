@@ -52,16 +52,9 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 #endif
 
 
-void LRDClietnSocketBufferInit(LRDClientSocketBuffer * sb, SOCKET s)
+void LRDClientSocketBufferInit(LRDClientSocketBuffer * sb, SOCKET s)
 {
     sb->s = s;
-    sb->avail = SOCKET_BUF_CAP;
-    sb->p = sb->buf;
-    sb->ioerr = 0;
-}
-
-void SB_Reset(LRDClientSocketBuffer * sb)
-{
     sb->avail = SOCKET_BUF_CAP;
     sb->p = sb->buf;
     sb->ioerr = 0;
@@ -314,7 +307,7 @@ int SB_Print(LRDClientSocketBuffer * sb, const char * fmt, ...)
     return rc;
 }
 
-int SB_Send(LRDClientSocketBuffer * sb)
+int LRDClientSocketBufferSend(LRDClientSocketBuffer * sb)
 {
     int rc;
     if (sb->ioerr)
@@ -323,18 +316,4 @@ int SB_Send(LRDClientSocketBuffer * sb)
     rc = SendData(sb->s, sb->buf, SOCKET_BUF_CAP - sb->avail);
     sb->ioerr = rc < 0 ? 1 : 0;
     return rc;
-}
-
-int SendData(SOCKET s, const void * buf, int len)
-{
-    const char * b = (const char *)buf;
-    while (len > 0)
-    {
-        ssize_t sent = send(s, b, len, 0);
-        if (sent == SOCKET_ERROR)
-            return -1;
-        len -= sent;
-        b += sent;
-    }
-    return 0;
 }
