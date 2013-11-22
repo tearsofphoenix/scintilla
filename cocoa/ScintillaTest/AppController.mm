@@ -214,7 +214,10 @@ const char major_keywords[] =
     
 }
 
-
+- (IBAction)startRunCurrentDocument: (id)sender
+{
+    [mEditor tryRunCurrentDocument];
+}
 
 @end
 

@@ -259,6 +259,20 @@
                 <menuItem title="View" id="295">
                     <menu key="submenu" title="View" id="296"/>
                 </menuItem>
+                <menuItem title="Run" id="En2-GM-ts4">
+                    <menu key="submenu" title="Run" id="AcV-IC-Oqw">
+                        <items>
+                            <menuItem title="Run" keyEquivalent="r" id="e4f-lo-Z4o">
+                                <connections>
+                                    <action selector="startRunCurrentDocument:" target="450" id="aXW-FV-TNa"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Debug" id="DSn-3B-dVe">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Window" id="19">
                     <menu key="submenu" title="Window" systemMenu="window" id="24">
                         <items>

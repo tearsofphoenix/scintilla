@@ -207,6 +207,10 @@
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		922D73E8183EFDF700C81863 /* SCIEditorNotify.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 922D73E6183EFDF700C81863 /* SCIEditorNotify.cpp */; };
+		922D752A183F155700C81863 /* LuaRemoteDebug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D7428183F0AB800C81863 /* LuaRemoteDebug.framework */; };
+		922D752D183F35D100C81863 /* SCILuaDebugServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 922D752B183F35D100C81863 /* SCILuaDebugServer.h */; };
+		922D752E183F35D100C81863 /* SCILuaDebugServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D752C183F35D100C81863 /* SCILuaDebugServer.m */; };
+		922D753E183F3B2600C81863 /* LuaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D753B183F3B2200C81863 /* LuaKit.framework */; };
 		925957A9183C3C920044DA6D /* ScintillaContextMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957A7183C3C920044DA6D /* ScintillaContextMenu.h */; };
 		925957AA183C3C920044DA6D /* ScintillaContextMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */; };
 		925957AD183C3DEB0044DA6D /* ScintillaNotificationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */; };
@@ -270,6 +274,41 @@
 			proxyType = 1;
 			remoteGlobalIDString = 60D21420183E41F70038D3C7;
 			remoteInfo = OakAppKit;
+		};
+		922D7427183F0AB800C81863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 922D73F4183F0AB700C81863;
+			remoteInfo = LuaRemoteDebug;
+		};
+		922D7429183F0AB800C81863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 922D740B183F0AB700C81863;
+			remoteInfo = LuaRemoteDebugTests;
+		};
+		922D7523183F155200C81863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 922D73F3183F0AB700C81863;
+			remoteInfo = LuaRemoteDebug;
+		};
+		922D753A183F3B2200C81863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 922D7535183F3B2200C81863 /* LuaKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 922D74B3183F0CAC00C81863;
+			remoteInfo = LuaKit;
+		};
+		922D753C183F3B2200C81863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 922D7535183F3B2200C81863 /* LuaKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 922D746E183F0C3300C81863;
+			remoteInfo = LuaKitTests;
 		};
 		92D62560183D9186005E0A59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -500,6 +539,10 @@
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Scintilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Scintilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		922D73E6183EFDF700C81863 /* SCIEditorNotify.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SCIEditorNotify.cpp; sourceTree = "<group>"; };
+		922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LuaRemoteDebug.xcodeproj; path = LuaRemoteDebug/LuaRemoteDebug.xcodeproj; sourceTree = "<group>"; };
+		922D752B183F35D100C81863 /* SCILuaDebugServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCILuaDebugServer.h; sourceTree = "<group>"; };
+		922D752C183F35D100C81863 /* SCILuaDebugServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCILuaDebugServer.m; sourceTree = "<group>"; };
+		922D7535183F3B2200C81863 /* LuaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LuaKit.xcodeproj; path = LuaRemoteDebug/LuaKit/LuaKit.xcodeproj; sourceTree = "<group>"; };
 		925957A7183C3C920044DA6D /* ScintillaContextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaContextMenu.h; sourceTree = "<group>"; };
 		925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScintillaContextMenu.mm; sourceTree = "<group>"; };
 		925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaNotificationProtocol.h; sourceTree = "<group>"; };
@@ -527,6 +570,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				922D753E183F3B2600C81863 /* LuaKit.framework in Frameworks */,
+				922D752A183F155700C81863 /* LuaRemoteDebug.framework in Frameworks */,
 				60D21567183E46480038D3C7 /* OakAppKit.framework in Frameworks */,
 				92DE181C183DC85A0045F8BC /* DevToolsFoundation.framework in Frameworks */,
 				6085318E183B9D590084C214 /* VEBundle.framework in Frameworks */,
@@ -549,6 +594,8 @@
 		0867D691FE84028FC02AAC07 /* Scintilla */ = {
 			isa = PBXGroup;
 			children = (
+				922D7535183F3B2200C81863 /* LuaKit.xcodeproj */,
+				922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */,
 				60D2144F183E41F70038D3C7 /* OakAppKit.xcodeproj */,
 				92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */,
 				60853183183B9D3E0084C214 /* VEBundle.xcodeproj */,
@@ -596,6 +643,8 @@
 				2744E5B00FC168C500E85C33 /* SCIController.mm */,
 				92D62516183D8E00005E0A59 /* SCIDebugServer.h */,
 				92D62515183D8E00005E0A59 /* SCIDebugServer.mm */,
+				922D752B183F35D100C81863 /* SCILuaDebugServer.h */,
+				922D752C183F35D100C81863 /* SCILuaDebugServer.m */,
 				925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */,
 				60853197183BA2470084C214 /* ScintillaPrivate.h */,
 				925957B0183C582C0044DA6D /* ScintillaPrivate.mm */,
@@ -861,6 +910,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		922D7423183F0AB700C81863 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				922D7428183F0AB800C81863 /* LuaRemoteDebug.framework */,
+				922D742A183F0AB800C81863 /* LuaRemoteDebugTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		922D7536183F3B2200C81863 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				922D753B183F3B2200C81863 /* LuaKit.framework */,
+				922D753D183F3B2200C81863 /* LuaKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9291C216183CAE1800CAD257 /* VTL */ = {
 			isa = PBXGroup;
 			children = (
@@ -925,6 +992,7 @@
 				2791F3E40FC1A3AE009DBCF9 /* VTLFont.h in Headers */,
 				2791F3E00FC1A390009DBCF9 /* SCIController.h in Headers */,
 				2744E5AA0FC168A100E85C33 /* ScintillaView.h in Headers */,
+				922D752D183F35D100C81863 /* SCILuaDebugServer.h in Headers */,
 				2791F3C70FC19F71009DBCF9 /* Platform.h in Headers */,
 				2791F3C80FC19F71009DBCF9 /* SciLexer.h in Headers */,
 				6085319D183BA2DE0084C214 /* SCIMarginView.h in Headers */,
@@ -998,6 +1066,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				922D7524183F155200C81863 /* PBXTargetDependency */,
 				60D21566183E46430038D3C7 /* PBXTargetDependency */,
 				92DE180F183DB0160045F8BC /* PBXTargetDependency */,
 				6085318D183B9D510084C214 /* PBXTargetDependency */,
@@ -1033,6 +1102,14 @@
 				{
 					ProductGroup = 92D6255C183D9186005E0A59 /* Products */;
 					ProjectRef = 92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */;
+				},
+				{
+					ProductGroup = 922D7536183F3B2200C81863 /* Products */;
+					ProjectRef = 922D7535183F3B2200C81863 /* LuaKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 922D7423183F0AB700C81863 /* Products */;
+					ProjectRef = 922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */;
 				},
 				{
 					ProductGroup = 60D21450183E41F70038D3C7 /* Products */;
@@ -1077,6 +1154,34 @@
 			fileType = wrapper.cfbundle;
 			path = OakAppKitTests.xctest;
 			remoteRef = 60D21456183E41F80038D3C7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		922D7428183F0AB800C81863 /* LuaRemoteDebug.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LuaRemoteDebug.framework;
+			remoteRef = 922D7427183F0AB800C81863 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		922D742A183F0AB800C81863 /* LuaRemoteDebugTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LuaRemoteDebugTests.xctest;
+			remoteRef = 922D7429183F0AB800C81863 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		922D753B183F3B2200C81863 /* LuaKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LuaKit.framework;
+			remoteRef = 922D753A183F3B2200C81863 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		922D753D183F3B2200C81863 /* LuaKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LuaKitTests.xctest;
+			remoteRef = 922D753C183F3B2200C81863 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		92D62561183D9186005E0A59 /* DevToolsFoundation.framework */ = {
@@ -1261,6 +1366,7 @@
 				11FDD0E017C480D4001541B9 /* LexKVIrc.cxx in Sources */,
 				925957BB183C749E0044DA6D /* TimerTarget.mm in Sources */,
 				1160E0381803651C00BCEBCB /* LexRust.cxx in Sources */,
+				922D752E183F35D100C81863 /* SCILuaDebugServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1276,6 +1382,11 @@
 			isa = PBXTargetDependency;
 			name = OakAppKit;
 			targetProxy = 60D21565183E46430038D3C7 /* PBXContainerItemProxy */;
+		};
+		922D7524183F155200C81863 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LuaRemoteDebug;
+			targetProxy = 922D7523183F155200C81863 /* PBXContainerItemProxy */;
 		};
 		92DE180F183DB0160045F8BC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1306,6 +1417,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = ".bzr *.nib *.lproj *.framework *.gch (*) CVS .svn *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/ScintillaTest-bjwinxceoraxirctqrstaqwjbdvs/Build/Products/Debug",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -1340,6 +1455,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/ScintillaTest-bjwinxceoraxirctqrstaqwjbdvs/Build/Products/Debug",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

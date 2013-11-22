@@ -12,10 +12,11 @@
 		2791F4490FC1A8E9009DBCF9 /* TestData.lua in Resources */ = {isa = PBXBuildFile; fileRef = 2791F4480FC1A8E9009DBCF9 /* TestData.lua */; };
 		605504AA183BA61500B3AB51 /* Scintilla.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 605504A7183BA5D200B3AB51 /* Scintilla.framework */; };
 		60853147183B92960084C214 /* Lua.tmbundle in Resources */ = {isa = PBXBuildFile; fileRef = 60853146183B92960084C214 /* Lua.tmbundle */; };
-		6085319A183BA2A60084C214 /* VEBundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60853199183BA2A60084C214 /* VEBundle.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		922D7530183F394A00C81863 /* Scintilla.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 605504A7183BA5D200B3AB51 /* Scintilla.framework */; };
+		922D7531183F395B00C81863 /* DevToolsFoundation.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 92DE1813183DB0210045F8BC /* DevToolsFoundation.framework */; };
 		92DE1814183DB0210045F8BC /* DevToolsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DE1813183DB0210045F8BC /* DevToolsFoundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				922D7531183F395B00C81863 /* DevToolsFoundation.framework in CopyFiles */,
+				922D7530183F394A00C81863 /* Scintilla.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,9 +65,10 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* ScintillaTest_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaTest_Prefix.pch; sourceTree = "<group>"; };
 		60853146183B92960084C214 /* Lua.tmbundle */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Lua.tmbundle; sourceTree = "<group>"; };
-		60853199183BA2A60084C214 /* VEBundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VEBundle.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/ScintillaTest-cvusymbtpzcsshgvbcavxwvcbhxz/Build/Products/Debug/VEBundle.framework"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* ScintillaTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScintillaTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		922D7489183F0C6D00C81863 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		922D749A183F0C6E00C81863 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		92DE1813183DB0210045F8BC /* DevToolsFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevToolsFoundation.framework; path = "../../../../Library/Developer/Xcode/DerivedData/ScintillaTest-bjwinxceoraxirctqrstaqwjbdvs/Build/Products/Debug/DevToolsFoundation.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +79,6 @@
 			files = (
 				92DE1814183DB0210045F8BC /* DevToolsFoundation.framework in Frameworks */,
 				605504AA183BA61500B3AB51 /* Scintilla.framework in Frameworks */,
-				6085319A183BA2A60084C214 /* VEBundle.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,8 +159,9 @@
 			isa = PBXGroup;
 			children = (
 				92DE1813183DB0210045F8BC /* DevToolsFoundation.framework */,
-				60853199183BA2A60084C214 /* VEBundle.framework */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				922D7489183F0C6D00C81863 /* Cocoa.framework */,
+				922D749A183F0C6E00C81863 /* XCTest.framework */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -211,6 +215,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* ScintillaTest */;
 			projectDirPath = "";

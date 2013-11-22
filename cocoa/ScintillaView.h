@@ -146,5 +146,7 @@ extern NSString *const SCIUpdateUINotification;
                  wholeWord: (BOOL) wholeWord
                      doAll: (BOOL) doAll;
 
+- (void)tryRunCurrentDocument;
+
 @end
 

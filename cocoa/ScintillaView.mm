@@ -15,6 +15,8 @@
 #import "SCIContentView.h"
 #import "SCIMarginView.h"
 
+#import "SCILuaDebugServer.h"
+
 using namespace Scintilla;
 
 // Two additional cursors we need, which aren't provided by Cocoa.
@@ -557,14 +559,6 @@ NSCursor *NSCursorFromEnum(Window::Cursor cursor)
     
     return result;
 }
-
-//- (void)drawRect: (NSRect)dirtyRect
-//{
-//    [[NSColor colorWithCalibratedRed:0.13f green:0.13f blue:0.13f alpha:1.00f] setFill];
-//    NSRectFill(dirtyRect);
-//
-//    [super drawRect: dirtyRect];
-//}
 
 /**
  * Setter for the current text (no formatting included).
@@ -1196,6 +1190,14 @@ static const char * box_xpm[] =
 - (void)performFindPanelAction: (id)sender
 {
     
+}
+
+- (void)tryRunCurrentDocument
+{
+    NSString *sourceCode = [self string];
+    
+    SCILuaDebugServer *debugServer = [SCILuaDebugServer sharedServer];
+    [debugServer startDebugSource: sourceCode];
 }
 
 @end

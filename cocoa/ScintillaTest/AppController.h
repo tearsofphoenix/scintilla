@@ -24,4 +24,6 @@
 
 - (IBAction)showPreferencesPanel: (id)sender;
 
+- (IBAction)startRunCurrentDocument: (id)sender;
+
 @end
