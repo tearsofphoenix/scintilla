@@ -25,7 +25,7 @@
 
 @property (nonatomic, getter = isEnabled) BOOL enabled;
 
-@property (nonatomic) int state;
+@property (nonatomic) PBXMarkerState state;
 
 @property (nonatomic, retain) PBXTextBookmark *textMark;
 

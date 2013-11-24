@@ -198,8 +198,9 @@ void SCIController::Initialise()
     
     // Add Mac specific key bindings.
     for (int i = 0; macMapDefault[i].key; i++)
+    {
         kmap.AssignCmdKey(macMapDefault[i].key, macMapDefault[i].modifiers, macMapDefault[i].msg);
-    
+    }
 }
 
 
@@ -1871,8 +1872,11 @@ void SCIController::didClickedMarginAtLineNumber(int lineAnchorPosition)
     
     if (breakpoint)
     {
-        [breakpoint setEnabled: ![breakpoint isEnabled]];
+        BOOL newState = ![breakpoint isEnabled];
+        [breakpoint setEnabled: newState];
         
+        [marginView updateBreakpointAtLineNumber: lineNumber
+                                       withState: newState];
     }else
     {
         PBXBreakpoint *breakpoint = [[PBXBreakpoint alloc] init];

@@ -178,10 +178,10 @@
 		11FBA39E17817DA00048C071 /* CharacterCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 11FBA39C17817DA00048C071 /* CharacterCategory.h */; };
 		11FDAEB7174E1A9800FA161B /* LexSTTXT.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 11FDAEB6174E1A9700FA161B /* LexSTTXT.cxx */; };
 		11FDD0E017C480D4001541B9 /* LexKVIrc.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 11FDD0DF17C480D4001541B9 /* LexKVIrc.cxx */; };
-		2744E5A40FC168A100E85C33 /* InfoBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E59D0FC168A100E85C33 /* InfoBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2744E5A40FC168A100E85C33 /* SCIStatusBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E59D0FC168A100E85C33 /* SCIStatusBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2744E5AA0FC168A100E85C33 /* ScintillaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5A30FC168A100E85C33 /* ScintillaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2744E5AC0FC168B200E85C33 /* InfoBarCommunicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2744E5B20FC168C500E85C33 /* InfoBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5AD0FC168C500E85C33 /* InfoBar.mm */; };
+		2744E5B20FC168C500E85C33 /* SCIStatusBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5AD0FC168C500E85C33 /* SCIStatusBar.mm */; };
 		2744E5B30FC168C500E85C33 /* PlatCocoa.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5AE0FC168C500E85C33 /* PlatCocoa.mm */; };
 		2744E5B50FC168C500E85C33 /* SCIController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5B00FC168C500E85C33 /* SCIController.mm */; };
 		2744E5B60FC168C500E85C33 /* ScintillaView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2744E5B10FC168C500E85C33 /* ScintillaView.mm */; };
@@ -192,14 +192,12 @@
 		2791F3E00FC1A390009DBCF9 /* SCIController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5A20FC168A100E85C33 /* SCIController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2791F3E30FC1A3AE009DBCF9 /* VTLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E59F0FC168A100E85C33 /* VTLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2791F3E40FC1A3AE009DBCF9 /* VTLFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 2744E5A00FC168A100E85C33 /* VTLFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		27FEF4540FC1B413005E115A /* info_bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 27FEF4510FC1B413005E115A /* info_bar_bg.png */; };
 		27FEF4550FC1B413005E115A /* mac_cursor_busy.png in Resources */ = {isa = PBXBuildFile; fileRef = 27FEF4520FC1B413005E115A /* mac_cursor_busy.png */; };
-		27FEF4560FC1B413005E115A /* mac_cursor_flipped.png in Resources */ = {isa = PBXBuildFile; fileRef = 27FEF4530FC1B413005E115A /* mac_cursor_flipped.png */; };
 		6085318E183B9D590084C214 /* VEBundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60853189183B9D3F0084C214 /* VEBundle.framework */; };
-		60853191183B9ED20084C214 /* SCIContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6085318F183B9ED20084C214 /* SCIContentView.h */; };
+		60853191183B9ED20084C214 /* SCIContentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6085318F183B9ED20084C214 /* SCIContentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60853192183B9ED20084C214 /* SCIContentView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60853190183B9ED20084C214 /* SCIContentView.mm */; };
 		60853198183BA2470084C214 /* ScintillaPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 60853197183BA2470084C214 /* ScintillaPrivate.h */; };
-		6085319D183BA2DE0084C214 /* SCIMarginView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6085319B183BA2DE0084C214 /* SCIMarginView.h */; };
+		6085319D183BA2DE0084C214 /* SCIMarginView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6085319B183BA2DE0084C214 /* SCIMarginView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6085319E183BA2DE0084C214 /* SCIMarginView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6085319C183BA2DE0084C214 /* SCIMarginView.mm */; };
 		60D213FE183BA90D0038D3C7 /* VTLFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60D213FD183BA90D0038D3C7 /* VTLFont.mm */; };
 		60D21401183BB3860038D3C7 /* VTLPlatform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60D213FF183BB3860038D3C7 /* VTLPlatform.mm */; };
@@ -208,6 +206,11 @@
 		60D21567183E46480038D3C7 /* OakAppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D21455183E41F80038D3C7 /* OakAppKit.framework */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
+		922D73E8183EFDF700C81863 /* SCIEditorNotify.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 922D73E6183EFDF700C81863 /* SCIEditorNotify.cpp */; };
+		922D752A183F155700C81863 /* LuaRemoteDebug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D7428183F0AB800C81863 /* LuaRemoteDebug.framework */; };
+		922D752D183F35D100C81863 /* SCILuaDebugServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 922D752B183F35D100C81863 /* SCILuaDebugServer.h */; };
+		922D752E183F35D100C81863 /* SCILuaDebugServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D752C183F35D100C81863 /* SCILuaDebugServer.m */; };
+		922D753E183F3B2600C81863 /* LuaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D753B183F3B2200C81863 /* LuaKit.framework */; };
 		925957A9183C3C920044DA6D /* ScintillaContextMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957A7183C3C920044DA6D /* ScintillaContextMenu.h */; };
 		925957AA183C3C920044DA6D /* ScintillaContextMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */; };
 		925957AD183C3DEB0044DA6D /* ScintillaNotificationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */; };
@@ -218,12 +221,12 @@
 		925957B7183C71240044DA6D /* FindHighlightLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957B5183C71240044DA6D /* FindHighlightLayer.mm */; };
 		925957BA183C749E0044DA6D /* TimerTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957B8183C749E0044DA6D /* TimerTarget.h */; };
 		925957BB183C749E0044DA6D /* TimerTarget.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957B9183C749E0044DA6D /* TimerTarget.mm */; };
-		925957BE183C75A30044DA6D /* SCICallTipView.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957BC183C75A30044DA6D /* SCICallTipView.h */; };
+		925957BE183C75A30044DA6D /* SCICallTipView.h in Headers */ = {isa = PBXBuildFile; fileRef = 925957BC183C75A30044DA6D /* SCICallTipView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		925957BF183C75A30044DA6D /* SCICallTipView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 925957BD183C75A30044DA6D /* SCICallTipView.mm */; };
 		9291C212183CA1BD00CAD257 /* VTLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9291C211183CA1BD00CAD257 /* VTLayout.mm */; };
 		9291C215183CA78800CAD257 /* VTLStyle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9291C214183CA78800CAD257 /* VTLStyle.mm */; };
 		92D62517183D8E00005E0A59 /* SCIDebugServer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 92D62515183D8E00005E0A59 /* SCIDebugServer.mm */; };
-		92D62518183D8E00005E0A59 /* SCIDebugServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 92D62516183D8E00005E0A59 /* SCIDebugServer.h */; };
+		92D62518183D8E00005E0A59 /* SCIDebugServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 92D62516183D8E00005E0A59 /* SCIDebugServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92DE181C183DC85A0045F8BC /* DevToolsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D62561183D9186005E0A59 /* DevToolsFoundation.framework */; };
 		92DE1821183E0FC50045F8BC /* SCIContentView+MarginViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 92DE181F183E0FC50045F8BC /* SCIContentView+MarginViewDelegate.h */; };
 		92DE1822183E0FC50045F8BC /* SCIContentView+MarginViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92DE1820183E0FC50045F8BC /* SCIContentView+MarginViewDelegate.m */; };
@@ -271,6 +274,41 @@
 			proxyType = 1;
 			remoteGlobalIDString = 60D21420183E41F70038D3C7;
 			remoteInfo = OakAppKit;
+		};
+		922D7427183F0AB800C81863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 922D73F4183F0AB700C81863;
+			remoteInfo = LuaRemoteDebug;
+		};
+		922D7429183F0AB800C81863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 922D740B183F0AB700C81863;
+			remoteInfo = LuaRemoteDebugTests;
+		};
+		922D7523183F155200C81863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 922D73F3183F0AB700C81863;
+			remoteInfo = LuaRemoteDebug;
+		};
+		922D753A183F3B2200C81863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 922D7535183F3B2200C81863 /* LuaKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 922D74B3183F0CAC00C81863;
+			remoteInfo = LuaKit;
+		};
+		922D753C183F3B2200C81863 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 922D7535183F3B2200C81863 /* LuaKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 922D746E183F0C3300C81863;
+			remoteInfo = LuaKitTests;
 		};
 		92D62560183D9186005E0A59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -474,20 +512,18 @@
 		2744E4850FC1678600E85C33 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Platform.h; path = ../../include/Platform.h; sourceTree = SOURCE_ROOT; };
 		2744E4870FC1678600E85C33 /* SciLexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SciLexer.h; path = ../../include/SciLexer.h; sourceTree = SOURCE_ROOT; };
 		2744E4880FC1678600E85C33 /* Scintilla.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scintilla.h; path = ../../include/Scintilla.h; sourceTree = SOURCE_ROOT; };
-		2744E59D0FC168A100E85C33 /* InfoBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoBar.h; path = ../InfoBar.h; sourceTree = SOURCE_ROOT; };
+		2744E59D0FC168A100E85C33 /* SCIStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCIStatusBar.h; path = ../SCIStatusBar.h; sourceTree = SOURCE_ROOT; };
 		2744E59E0FC168A100E85C33 /* PlatCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatCocoa.h; path = ../PlatCocoa.h; sourceTree = SOURCE_ROOT; };
 		2744E59F0FC168A100E85C33 /* VTLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTLayout.h; path = ../VTLayout.h; sourceTree = SOURCE_ROOT; };
 		2744E5A00FC168A100E85C33 /* VTLFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTLFont.h; path = ../VTLFont.h; sourceTree = SOURCE_ROOT; };
 		2744E5A20FC168A100E85C33 /* SCIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCIController.h; path = ../SCIController.h; sourceTree = "<group>"; };
 		2744E5A30FC168A100E85C33 /* ScintillaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScintillaView.h; path = ../ScintillaView.h; sourceTree = "<group>"; };
 		2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InfoBarCommunicator.h; path = ../InfoBarCommunicator.h; sourceTree = SOURCE_ROOT; };
-		2744E5AD0FC168C500E85C33 /* InfoBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = InfoBar.mm; path = ../InfoBar.mm; sourceTree = SOURCE_ROOT; };
+		2744E5AD0FC168C500E85C33 /* SCIStatusBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SCIStatusBar.mm; path = ../SCIStatusBar.mm; sourceTree = SOURCE_ROOT; };
 		2744E5AE0FC168C500E85C33 /* PlatCocoa.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlatCocoa.mm; path = ../PlatCocoa.mm; sourceTree = SOURCE_ROOT; };
 		2744E5B00FC168C500E85C33 /* SCIController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SCIController.mm; path = ../SCIController.mm; sourceTree = "<group>"; };
 		2744E5B10FC168C500E85C33 /* ScintillaView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ScintillaView.mm; path = ../ScintillaView.mm; sourceTree = "<group>"; };
-		27FEF4510FC1B413005E115A /* info_bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_bar_bg.png; sourceTree = "<group>"; };
 		27FEF4520FC1B413005E115A /* mac_cursor_busy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac_cursor_busy.png; sourceTree = "<group>"; };
-		27FEF4530FC1B413005E115A /* mac_cursor_flipped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac_cursor_flipped.png; sourceTree = "<group>"; };
 		32DBCF5E0370ADEE00C91783 /* Scintilla_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scintilla_Prefix.pch; sourceTree = "<group>"; };
 		60853183183B9D3E0084C214 /* VEBundle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VEBundle.xcodeproj; path = VEBundle/VEBundle.xcodeproj; sourceTree = "<group>"; };
 		6085318F183B9ED20084C214 /* SCIContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIContentView.h; sourceTree = "<group>"; };
@@ -502,6 +538,11 @@
 		60D2144F183E41F70038D3C7 /* OakAppKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OakAppKit.xcodeproj; path = OakAppKit/OakAppKit.xcodeproj; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Scintilla.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Scintilla.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		922D73E6183EFDF700C81863 /* SCIEditorNotify.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SCIEditorNotify.cpp; sourceTree = "<group>"; };
+		922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LuaRemoteDebug.xcodeproj; path = LuaRemoteDebug/LuaRemoteDebug.xcodeproj; sourceTree = "<group>"; };
+		922D752B183F35D100C81863 /* SCILuaDebugServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCILuaDebugServer.h; sourceTree = "<group>"; };
+		922D752C183F35D100C81863 /* SCILuaDebugServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCILuaDebugServer.m; sourceTree = "<group>"; };
+		922D7535183F3B2200C81863 /* LuaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LuaKit.xcodeproj; path = LuaRemoteDebug/LuaKit/LuaKit.xcodeproj; sourceTree = "<group>"; };
 		925957A7183C3C920044DA6D /* ScintillaContextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaContextMenu.h; sourceTree = "<group>"; };
 		925957A8183C3C920044DA6D /* ScintillaContextMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScintillaContextMenu.mm; sourceTree = "<group>"; };
 		925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScintillaNotificationProtocol.h; sourceTree = "<group>"; };
@@ -529,6 +570,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				922D753E183F3B2600C81863 /* LuaKit.framework in Frameworks */,
+				922D752A183F155700C81863 /* LuaRemoteDebug.framework in Frameworks */,
 				60D21567183E46480038D3C7 /* OakAppKit.framework in Frameworks */,
 				92DE181C183DC85A0045F8BC /* DevToolsFoundation.framework in Frameworks */,
 				6085318E183B9D590084C214 /* VEBundle.framework in Frameworks */,
@@ -551,6 +594,8 @@
 		0867D691FE84028FC02AAC07 /* Scintilla */ = {
 			isa = PBXGroup;
 			children = (
+				922D7535183F3B2200C81863 /* LuaKit.xcodeproj */,
+				922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */,
 				60D2144F183E41F70038D3C7 /* OakAppKit.xcodeproj */,
 				92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */,
 				60853183183B9D3E0084C214 /* VEBundle.xcodeproj */,
@@ -598,6 +643,8 @@
 				2744E5B00FC168C500E85C33 /* SCIController.mm */,
 				92D62516183D8E00005E0A59 /* SCIDebugServer.h */,
 				92D62515183D8E00005E0A59 /* SCIDebugServer.mm */,
+				922D752B183F35D100C81863 /* SCILuaDebugServer.h */,
+				922D752C183F35D100C81863 /* SCILuaDebugServer.m */,
 				925957AC183C3DEB0044DA6D /* ScintillaNotificationProtocol.h */,
 				60853197183BA2470084C214 /* ScintillaPrivate.h */,
 				925957B0183C582C0044DA6D /* ScintillaPrivate.mm */,
@@ -802,6 +849,7 @@
 				114B6F6711FA7597004FB6AB /* Document.cxx */,
 				114B6F6811FA7597004FB6AB /* Editor.cxx */,
 				60D21411183E33AB0038D3C7 /* SCIEditorWindowProcess.cpp */,
+				922D73E6183EFDF700C81863 /* SCIEditorNotify.cpp */,
 				114B6F6911FA7598004FB6AB /* ExternalLexer.cxx */,
 				114B6F6A11FA7598004FB6AB /* Indicator.cxx */,
 				114B6F6B11FA7598004FB6AB /* KeyMap.cxx */,
@@ -830,9 +878,7 @@
 		27FEF4500FC1B413005E115A /* res */ = {
 			isa = PBXGroup;
 			children = (
-				27FEF4510FC1B413005E115A /* info_bar_bg.png */,
 				27FEF4520FC1B413005E115A /* mac_cursor_busy.png */,
-				27FEF4530FC1B413005E115A /* mac_cursor_flipped.png */,
 			);
 			name = res;
 			path = ../res;
@@ -864,6 +910,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		922D7423183F0AB700C81863 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				922D7428183F0AB800C81863 /* LuaRemoteDebug.framework */,
+				922D742A183F0AB800C81863 /* LuaRemoteDebugTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		922D7536183F3B2200C81863 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				922D753B183F3B2200C81863 /* LuaKit.framework */,
+				922D753D183F3B2200C81863 /* LuaKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9291C216183CAE1800CAD257 /* VTL */ = {
 			isa = PBXGroup;
 			children = (
@@ -885,8 +949,8 @@
 			children = (
 				925957B4183C71240044DA6D /* FindHighlightLayer.h */,
 				925957B5183C71240044DA6D /* FindHighlightLayer.mm */,
-				2744E59D0FC168A100E85C33 /* InfoBar.h */,
-				2744E5AD0FC168C500E85C33 /* InfoBar.mm */,
+				2744E59D0FC168A100E85C33 /* SCIStatusBar.h */,
+				2744E5AD0FC168C500E85C33 /* SCIStatusBar.mm */,
 				2744E5AB0FC168B200E85C33 /* InfoBarCommunicator.h */,
 				925957BC183C75A30044DA6D /* SCICallTipView.h */,
 				925957BD183C75A30044DA6D /* SCICallTipView.mm */,
@@ -920,7 +984,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2744E5A40FC168A100E85C33 /* InfoBar.h in Headers */,
+				2744E5A40FC168A100E85C33 /* SCIStatusBar.h in Headers */,
 				925957B6183C71240044DA6D /* FindHighlightLayer.h in Headers */,
 				2744E5AC0FC168B200E85C33 /* InfoBarCommunicator.h in Headers */,
 				2791F3C60FC19F71009DBCF9 /* PlatCocoa.h in Headers */,
@@ -928,8 +992,13 @@
 				2791F3E40FC1A3AE009DBCF9 /* VTLFont.h in Headers */,
 				2791F3E00FC1A390009DBCF9 /* SCIController.h in Headers */,
 				2744E5AA0FC168A100E85C33 /* ScintillaView.h in Headers */,
+				922D752D183F35D100C81863 /* SCILuaDebugServer.h in Headers */,
 				2791F3C70FC19F71009DBCF9 /* Platform.h in Headers */,
 				2791F3C80FC19F71009DBCF9 /* SciLexer.h in Headers */,
+				6085319D183BA2DE0084C214 /* SCIMarginView.h in Headers */,
+				925957BE183C75A30044DA6D /* SCICallTipView.h in Headers */,
+				92D62518183D8E00005E0A59 /* SCIDebugServer.h in Headers */,
+				60853191183B9ED20084C214 /* SCIContentView.h in Headers */,
 				2791F3C90FC19F71009DBCF9 /* Scintilla.h in Headers */,
 				114B6FA111FA75DB004FB6AB /* ILexer.h in Headers */,
 				114B6FBD11FA7623004FB6AB /* AutoComplete.h in Headers */,
@@ -941,7 +1010,6 @@
 				114B6FC311FA7623004FB6AB /* Decoration.h in Headers */,
 				925957A9183C3C920044DA6D /* ScintillaContextMenu.h in Headers */,
 				114B6FC411FA7623004FB6AB /* Document.h in Headers */,
-				60853191183B9ED20084C214 /* SCIContentView.h in Headers */,
 				114B6FC511FA7623004FB6AB /* Editor.h in Headers */,
 				114B6FC611FA7623004FB6AB /* ExternalLexer.h in Headers */,
 				114B6FC711FA7623004FB6AB /* FontQuality.h in Headers */,
@@ -951,10 +1019,8 @@
 				114B6FCB11FA7623004FB6AB /* Partitioning.h in Headers */,
 				114B6FCC11FA7623004FB6AB /* PerLine.h in Headers */,
 				114B6FCD11FA7623004FB6AB /* PositionCache.h in Headers */,
-				6085319D183BA2DE0084C214 /* SCIMarginView.h in Headers */,
 				114B6FCE11FA7623004FB6AB /* RESearch.h in Headers */,
 				114B6FCF11FA7623004FB6AB /* RunStyles.h in Headers */,
-				925957BE183C75A30044DA6D /* SCICallTipView.h in Headers */,
 				114B6FD011FA7623004FB6AB /* ScintillaBase.h in Headers */,
 				114B6FD111FA7623004FB6AB /* Selection.h in Headers */,
 				114B6FD211FA7623004FB6AB /* SplitVector.h in Headers */,
@@ -982,7 +1048,6 @@
 				1100F1EE178E393200105727 /* CaseFolder.h in Headers */,
 				1100F1EF178E393200105727 /* UnicodeFromUTF8.h in Headers */,
 				925957BA183C749E0044DA6D /* TimerTarget.h in Headers */,
-				92D62518183D8E00005E0A59 /* SCIDebugServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,6 +1066,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				922D7524183F155200C81863 /* PBXTargetDependency */,
 				60D21566183E46430038D3C7 /* PBXTargetDependency */,
 				92DE180F183DB0160045F8BC /* PBXTargetDependency */,
 				6085318D183B9D510084C214 /* PBXTargetDependency */,
@@ -1036,6 +1102,14 @@
 				{
 					ProductGroup = 92D6255C183D9186005E0A59 /* Products */;
 					ProjectRef = 92D6255B183D9186005E0A59 /* DevToolsFoundation.xcodeproj */;
+				},
+				{
+					ProductGroup = 922D7536183F3B2200C81863 /* Products */;
+					ProjectRef = 922D7535183F3B2200C81863 /* LuaKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 922D7423183F0AB700C81863 /* Products */;
+					ProjectRef = 922D7422183F0AB700C81863 /* LuaRemoteDebug.xcodeproj */;
 				},
 				{
 					ProductGroup = 60D21450183E41F70038D3C7 /* Products */;
@@ -1082,6 +1156,34 @@
 			remoteRef = 60D21456183E41F80038D3C7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		922D7428183F0AB800C81863 /* LuaRemoteDebug.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LuaRemoteDebug.framework;
+			remoteRef = 922D7427183F0AB800C81863 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		922D742A183F0AB800C81863 /* LuaRemoteDebugTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LuaRemoteDebugTests.xctest;
+			remoteRef = 922D7429183F0AB800C81863 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		922D753B183F3B2200C81863 /* LuaKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LuaKit.framework;
+			remoteRef = 922D753A183F3B2200C81863 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		922D753D183F3B2200C81863 /* LuaKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LuaKitTests.xctest;
+			remoteRef = 922D753C183F3B2200C81863 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		92D62561183D9186005E0A59 /* DevToolsFoundation.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1104,9 +1206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */,
-				27FEF4540FC1B413005E115A /* info_bar_bg.png in Resources */,
 				27FEF4550FC1B413005E115A /* mac_cursor_busy.png in Resources */,
-				27FEF4560FC1B413005E115A /* mac_cursor_flipped.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1117,7 +1217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2744E5B20FC168C500E85C33 /* InfoBar.mm in Sources */,
+				2744E5B20FC168C500E85C33 /* SCIStatusBar.mm in Sources */,
 				2744E5B30FC168C500E85C33 /* PlatCocoa.mm in Sources */,
 				2744E5B50FC168C500E85C33 /* SCIController.mm in Sources */,
 				2744E5B60FC168C500E85C33 /* ScintillaView.mm in Sources */,
@@ -1149,6 +1249,7 @@
 				114B6F2311FA7526004FB6AB /* LexEiffel.cxx in Sources */,
 				114B6F2411FA7526004FB6AB /* LexErlang.cxx in Sources */,
 				114B6F2511FA7526004FB6AB /* LexEScript.cxx in Sources */,
+				922D73E8183EFDF700C81863 /* SCIEditorNotify.cpp in Sources */,
 				114B6F2611FA7526004FB6AB /* LexFlagship.cxx in Sources */,
 				114B6F2711FA7526004FB6AB /* LexForth.cxx in Sources */,
 				114B6F2811FA7526004FB6AB /* LexFortran.cxx in Sources */,
@@ -1265,6 +1366,7 @@
 				11FDD0E017C480D4001541B9 /* LexKVIrc.cxx in Sources */,
 				925957BB183C749E0044DA6D /* TimerTarget.mm in Sources */,
 				1160E0381803651C00BCEBCB /* LexRust.cxx in Sources */,
+				922D752E183F35D100C81863 /* SCILuaDebugServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1280,6 +1382,11 @@
 			isa = PBXTargetDependency;
 			name = OakAppKit;
 			targetProxy = 60D21565183E46430038D3C7 /* PBXContainerItemProxy */;
+		};
+		922D7524183F155200C81863 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LuaRemoteDebug;
+			targetProxy = 922D7523183F155200C81863 /* PBXContainerItemProxy */;
 		};
 		92DE180F183DB0160045F8BC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1310,6 +1417,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = ".bzr *.nib *.lproj *.framework *.gch (*) CVS .svn *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/ScintillaTest-bjwinxceoraxirctqrstaqwjbdvs/Build/Products/Debug",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
@@ -1344,6 +1455,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/ScintillaTest-bjwinxceoraxirctqrstaqwjbdvs/Build/Products/Debug",
+				);
 				FRAMEWORK_VERSION = A;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

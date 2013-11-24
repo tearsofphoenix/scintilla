@@ -125,11 +125,6 @@ static NSColor *gsBreackpointDisabledColor = nil;
     CGContextRestoreGState(c);
 }
 
-- (void)setNeedsDisplay
-{
-    [[self ruler] setNeedsDisplay: YES];
-}
-
 - (BOOL)trackMouse: (NSEvent *)mouseDownEvent
             adding: (BOOL)isAdding
 {

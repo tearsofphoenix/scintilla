@@ -50,15 +50,6 @@
 
 @synthesize enabled = _enabled;
 
-- (void)setEnabled: (BOOL)enabled
-{
-    if (_enabled != enabled)
-    {
-        _enabled = enabled;
-        [_textMark setNeedsDisplay];
-    }
-}
-
 - (void)markChanged
 {
     

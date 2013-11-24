@@ -1,7 +1,7 @@
 
 /**
  * Scintilla source code edit control
- * InfoBar.mm - Implements special info bar with zoom info, caret position etc. to be used with
+ * SCIStatusBar.mm - Implements special info bar with zoom info, caret position etc. to be used with
  *              ScintillaView.
  *
  * Mike Lischke <mlischke@sun.com>
@@ -10,7 +10,7 @@
  * This file is dual licensed under LGPL v2.1 and the Scintilla license (http://www.scintilla.org/License.txt).
  */
 
-#import "InfoBar.h"
+#import "SCIStatusBar.h"
 
 
 /**
@@ -89,7 +89,7 @@
 
 
 
-@implementation InfoBar
+@implementation SCIStatusBar
 
 @synthesize callback = _callback;
 
@@ -114,7 +114,7 @@
                                [NSColor colorWithCalibratedWhite: 1.000
                                                            alpha: 0.0],
                                1.0, nil];
-    
+
 	if(self = [super initWithGradient: startGradient
                      inactiveGradient: endGradient])
     {
@@ -209,44 +209,6 @@ static float BarFontSize = 10.0;
 
     [super dealloc];
 }
-
-
-
-/**
- * Fill the background.
- */
-//- (void) drawRect: (NSRect) rect
-//{
-//    // Draw separator lines between items.
-////    NSRect verticalLineRect;
-////    float component = 190.0 / 255.0;
-////    NSColor* lineColor = [NSColor colorWithDeviceRed: component green: component blue: component alpha: 1];
-////    
-////    if (mDisplayMask & IBShowCaretPosition)
-////    {
-////        verticalLineRect = [mCaretPositionLabel frame];
-////        verticalLineRect.origin.x += verticalLineRect.size.width + 1.0;
-////        verticalLineRect.size.width = 1.0;
-////        if (NSIntersectsRect(rect, verticalLineRect))
-////        {
-////            [lineColor set];
-////            NSRectFill(verticalLineRect);
-////        }
-////    }
-//    
-////    [[NSColor windowBackgroundColor] set];
-////    NSRectFill(rect);
-////
-////    [super drawRect: rect];
-//}
-
-
-
-//- (BOOL) isOpaque
-//{
-//    return YES;
-//}
-
 
 
 /**

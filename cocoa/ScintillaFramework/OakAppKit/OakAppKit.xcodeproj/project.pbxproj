@@ -749,6 +749,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OakAppKit/OakAppKit-Prefix.pch";
 				INFOPLIST_FILE = "OakAppKit/OakAppKit-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -765,6 +767,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OakAppKit/OakAppKit-Prefix.pch";
 				INFOPLIST_FILE = "OakAppKit/OakAppKit-Info.plist";
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -829,6 +833,7 @@
 				60D2144B183E41F70038D3C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		60D2144C183E41F70038D3C7 /* Build configuration list for PBXNativeTarget "OakAppKitTests" */ = {
 			isa = XCConfigurationList;
@@ -837,6 +842,7 @@
 				60D2144E183E41F70038D3C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
