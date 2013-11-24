@@ -66,7 +66,7 @@
 	res.base  = imageBase;
 	res.badge = badgeImage;
 	res.edge  = badgeEdge;
-	return res;
+	return [res autorelease];
 }
 
 - (id)init
@@ -77,7 +77,10 @@
 - (id)initWithSize:(NSSize)aSize
 {
 	if((self = [super initWithSize:aSize]))
-		[self addRepresentation:[[OakCustomImageRep alloc] initWithImage:self]];
+    {
+		[self addRepresentation: [[[OakCustomImageRep alloc] initWithImage: self] autorelease]];
+    }
+    
 	return self;
 }
 

@@ -78,12 +78,13 @@
         return;
     
     CGContextSetTextMatrix(_context, CGAffineTransformMakeScale(1.0, -1.0));
-    
+
     // Set the text drawing position.
     CGContextSetTextPosition(_context, x, y);
-    
-    // And finally, draw!
-    CTLineDraw(mLine, _context);
+
+    // And finally, draw string here!
+    //
+    CTLineDraw(mLine, _context);    
 }
 
 - (float)MeasureStringWidth

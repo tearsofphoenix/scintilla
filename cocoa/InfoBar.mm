@@ -124,6 +124,10 @@
         
         [self createItems];
     }
+    
+    [startGradient release];
+    [endGradient release];
+    
     return self;
 }
 

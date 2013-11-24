@@ -30,6 +30,7 @@
 #import "SCICallTipView.h"
 #import "SCIMarginView.h"
 #import "SCIDebugServer.h"
+#import "ScintillaPrivate.h"
 #import <DevToolsFoundation/DevToolsFoundation.h>
 
 using namespace Scintilla;
