@@ -22,7 +22,6 @@
 
 NSRect PRectangleToNSRect(Scintilla::PRectangle& rc);
 Scintilla::PRectangle NSRectToPRectangle(NSRect& rc);
-CFStringEncoding EncodingFromCharacterSet(bool unicode, int characterSet);
 
 @class VTLayout;
 
@@ -39,7 +38,7 @@ namespace Scintilla {
         CGContextRef gc;
         
         /** The text layout instance */
-        VTLayout*	textLayout;
+        VTLayout*	_textLayout;
         int codePage;
         int verticalDeviceResolution;
         

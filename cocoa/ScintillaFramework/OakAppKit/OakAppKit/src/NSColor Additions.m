@@ -21,9 +21,11 @@
 + (NSColor*)tmColorWithCGColor:(CGColorRef)aColor
 {
 	assert(aColor != NULL);
-	if([self respondsToSelector:@selector(colorWithCGColor:)])
-		return [self colorWithCGColor:aColor];
-	return [NSColor colorWithColorSpace: [[[NSColorSpace alloc] initWithCGColorSpace:CGColorGetColorSpace(aColor)] autorelease]
+    
+	if([self respondsToSelector: @selector(colorWithCGColor:)])
+		return [self colorWithCGColor: aColor];
+    
+	return [NSColor colorWithColorSpace: [[[NSColorSpace alloc] initWithCGColorSpace: CGColorGetColorSpace(aColor)] autorelease]
                              components: CGColorGetComponents(aColor)
                                   count: CGColorGetNumberOfComponents(aColor)];
 }

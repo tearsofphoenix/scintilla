@@ -20,7 +20,9 @@
 	[self vAddButtons:firstTitle fromList:list];
 }
 
-+ (NSAlert*)tmAlertWithMessageText:(NSString*)messageText informativeText:(NSString*)informativeText buttons:(NSString*)firstTitle, ...
++ (NSAlert*)tmAlertWithMessageText: (NSString*)messageText
+                   informativeText: (NSString*)informativeText
+                           buttons: (NSString*)firstTitle, ...
 {
 	NSAlert* alert = [NSAlert new];
 
@@ -29,7 +31,8 @@
 
 	va_list list;
 	va_start(list, firstTitle);
-	[alert vAddButtons:firstTitle fromList:list];
+	[alert vAddButtons: firstTitle
+              fromList: list];
 
 	return [alert autorelease];
 }

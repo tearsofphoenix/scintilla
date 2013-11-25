@@ -22,9 +22,15 @@
 {
     if ((self = [super init]))
     {
-        _font = NULL;
+        _font = nil;
         _styleDict = [[NSMutableDictionary alloc] init];
-    
+        
+        [_styleDict setObject: [NSColor colorWithCalibratedRed: 0.13f
+                                                         green: 0.13f
+                                                          blue: 0.13f
+                                                         alpha: 1.00f]
+                       forKey: NSBackgroundColorAttributeName];
+        
         characterSet = 0;
     }
     
@@ -35,8 +41,9 @@
 {
     VTLStyle *copy = [[self class] allocWithZone: zone];
     copy->_font = [_font retain];
+    
     // Does not copy font colour attribute
-
+    //
     copy->_styleDict =[[NSMutableDictionary alloc] init];
     [copy->_styleDict setObject: _font
                          forKey: NSFontAttributeName];
@@ -49,12 +56,7 @@
 - (void)dealloc
 {
     [_styleDict release];
-    
-    if (_font)
-    {
-        CFRelease(_font);
-        _font = NULL;
-    }
+    [_font release];
     
     [super dealloc];
 }
@@ -93,7 +95,7 @@
     
     characterSet = characterSet_;
     
-    [_styleDict removeAllObjects];
+    //[_styleDict removeAllObjects];
     [_styleDict setObject: _font
                    forKey: NSFontAttributeName];
 }

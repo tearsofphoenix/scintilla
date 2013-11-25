@@ -21,9 +21,8 @@ CTFontRef VTLFontCreate(const char* name,
     
     CTFontRef _fontRef;
     
-    CFStringRef fontName = CFStringCreateWithCString(kCFAllocatorDefault,
-                                                     name,
-                                                     kCFStringEncodingMacRoman);
+    CFStringRef fontName = (CFStringRef)[NSString stringWithCString: name
+                                                           encoding: NSUTF8StringEncoding];
     assert(fontName != NULL);
     
     bool bold = weight > SC_WEIGHT_NORMAL;
@@ -70,10 +69,8 @@ CTFontRef VTLFontCreate(const char* name,
     if (!_fontRef)
     {
         // Failed to create requested font so use font always present
-        _fontRef = CTFontCreateWithName((CFStringRef)@"Monaco", size, NULL);
+        _fontRef = CTFontCreateWithName((CFStringRef)@"Menlo-Regular", size, NULL);
     }
-    
-    CFRelease(fontName);
     
     return _fontRef;
 }

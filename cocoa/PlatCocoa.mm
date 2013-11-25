@@ -107,7 +107,7 @@ SurfaceImpl::SurfaceImpl()
     y = 0;
     gc = NULL;
     
-    textLayout = [[VTLayout alloc] initWithContext: NULL];
+    _textLayout = [[VTLayout alloc] initWithContext: NULL];
     codePage = 0;
     verticalDeviceResolution = 0;
     
@@ -123,14 +123,14 @@ SurfaceImpl::SurfaceImpl()
 SurfaceImpl::~SurfaceImpl()
 {
     Release();
-    [textLayout release];
+    [_textLayout release];
 }
 
 
 
 void SurfaceImpl::Release()
 {
-    [textLayout setContext: NULL];
+    [_textLayout setContext: NULL];
     if ( bitmapData != NULL )
     {
         delete[] bitmapData;
@@ -175,7 +175,7 @@ void SurfaceImpl::Init(SurfaceID sid, WindowID)
     Release();
     gc = reinterpret_cast<CGContextRef>(sid);
     CGContextSetLineWidth(gc, 1.0);
-    [textLayout setContext: gc];
+    [_textLayout setContext: gc];
 }
 
 
@@ -215,7 +215,7 @@ void SurfaceImpl::InitPixMap(int width, int height, Surface* /* surface_ */, Win
         bitmapData = NULL;
     }
     
-    [textLayout setContext: gc];
+    [_textLayout setContext: gc];
     
     // the context retains the color space, so we can release it
     CGColorSpaceRelease(colorSpace);
@@ -804,64 +804,6 @@ void SurfaceImpl::DrawTextClipped(PRectangle rc, Font &font_, XYPOSITION ybase, 
 }
 
 
-
-CFStringEncoding EncodingFromCharacterSet(bool unicode, int characterSet)
-{
-    if (unicode)
-        return kCFStringEncodingUTF8;
-    
-    // Unsupported -> Latin1 as reasonably safe
-    enum { notSupported = kCFStringEncodingISOLatin1};
-    
-    switch (characterSet)
-    {
-        case SC_CHARSET_ANSI:
-            return kCFStringEncodingISOLatin1;
-        case SC_CHARSET_DEFAULT:
-            return kCFStringEncodingISOLatin1;
-        case SC_CHARSET_BALTIC:
-            return kCFStringEncodingWindowsBalticRim;
-        case SC_CHARSET_CHINESEBIG5:
-            return kCFStringEncodingBig5;
-        case SC_CHARSET_EASTEUROPE:
-            return kCFStringEncodingWindowsLatin2;
-        case SC_CHARSET_GB2312:
-            return kCFStringEncodingGB_18030_2000;
-        case SC_CHARSET_GREEK:
-            return kCFStringEncodingWindowsGreek;
-        case SC_CHARSET_HANGUL:
-            return kCFStringEncodingEUC_KR;
-        case SC_CHARSET_MAC:
-            return kCFStringEncodingMacRoman;
-        case SC_CHARSET_OEM:
-            return kCFStringEncodingISOLatin1;
-        case SC_CHARSET_RUSSIAN:
-            return kCFStringEncodingKOI8_R;
-        case SC_CHARSET_CYRILLIC:
-            return kCFStringEncodingWindowsCyrillic;
-        case SC_CHARSET_SHIFTJIS:
-            return kCFStringEncodingShiftJIS;
-        case SC_CHARSET_SYMBOL:
-            return kCFStringEncodingMacSymbol;
-        case SC_CHARSET_TURKISH:
-            return kCFStringEncodingWindowsLatin5;
-        case SC_CHARSET_JOHAB:
-            return kCFStringEncodingWindowsKoreanJohab;
-        case SC_CHARSET_HEBREW:
-            return kCFStringEncodingWindowsHebrew;
-        case SC_CHARSET_ARABIC:
-            return kCFStringEncodingWindowsArabic;
-        case SC_CHARSET_VIETNAMESE:
-            return kCFStringEncodingWindowsVietnamese;
-        case SC_CHARSET_THAI:
-            return kCFStringEncodingISOLatinThai;
-        case SC_CHARSET_8859_15:
-            return kCFStringEncodingISOLatin1;
-        default:
-            return notSupported;
-    }
-}
-
 static int FontCharacterSet(Font &f)
 {
 	return [reinterpret_cast<VTLStyle *>(f.GetID()) getCharacterSet];
@@ -879,12 +821,12 @@ void SurfaceImpl::DrawTextTransparent(PRectangle rc, Font &font_, XYPOSITION yba
 	
 	CGColorRelease(color);
     
-	[textLayout setText: s
+	[_textLayout setText: s
                  length: len
                encoding: encoding
                   style:  [reinterpret_cast<VTLStyle *>(font_.GetID()) getCTStyle]];
     
-	[textLayout drawAt: rc.left
+	[_textLayout drawAt: rc.left
                      y: ybase];;
 }
 
@@ -911,18 +853,18 @@ void SurfaceImpl::MeasureWidths(Font &font_, const char *s, int len, XYPOSITION 
 {
 	CFStringEncoding encoding = EncodingFromCharacterSet(unicodeMode, FontCharacterSet(font_));
     
-	[textLayout setText: s
+	[_textLayout setText: s
                  length: len
                encoding: encoding
                   style: [reinterpret_cast<VTLStyle *>(font_.GetID()) getCTStyle]];
 	
-	CTLineRef mLine = [textLayout getCTLine];
+	CTLineRef mLine = [_textLayout getCTLine];
 	assert(mLine != NULL);
 	
 	if (unicodeMode)
     {
 		// Map the widths given for UTF-16 characters back onto the UTF-8 input string
-		CFIndex fit = [textLayout stringLength];
+		CFIndex fit = [_textLayout stringLength];
 		int ui=0;
 		const unsigned char *us = reinterpret_cast<const unsigned char *>(s);
 		int i=0;
@@ -965,12 +907,12 @@ XYPOSITION SurfaceImpl::WidthText(Font &font_, const char *s, int len) {
     {
         CFStringEncoding encoding = EncodingFromCharacterSet(unicodeMode, FontCharacterSet(font_));
         
-        [textLayout setText: s
+        [_textLayout setText: s
                      length: len
                    encoding: encoding
                       style: [reinterpret_cast<VTLStyle *>(font_.GetID()) getCTStyle]];
         
-        return [textLayout MeasureStringWidth];
+        return [_textLayout MeasureStringWidth];
     }
     return 1;
 }
@@ -983,12 +925,12 @@ XYPOSITION SurfaceImpl::WidthChar(Font &font_, char ch)
     {
         CFStringEncoding encoding = EncodingFromCharacterSet(unicodeMode, FontCharacterSet(font_));
 
-        [textLayout setText: str
+        [_textLayout setText: str
                      length: 1
                    encoding: encoding
                       style: [reinterpret_cast<VTLStyle *>(font_.GetID()) getCTStyle]];
         
-        return [textLayout MeasureStringWidth];
+        return [_textLayout MeasureStringWidth];
     }
     else
         return 1;

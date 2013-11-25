@@ -77,7 +77,10 @@
 - (id)initWithSize:(NSSize)aSize
 {
 	if((self = [super initWithSize:aSize]))
-		[self addRepresentation: [[[OakCustomImageRep alloc] initWithImage:self] autorelease]];
+    {
+		[self addRepresentation: [[[OakCustomImageRep alloc] initWithImage: self] autorelease]];
+    }
+    
 	return self;
 }
 
