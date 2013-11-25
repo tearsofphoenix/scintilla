@@ -204,7 +204,8 @@ void mainloop(SOCKET s)
         }
         printf("Break At \"%s:%s\"\n", file, lineno);
 
-        while (1) {
+        while (1)
+        {
             char buf[CMD_LINE];
             char * argv[MAX_ARGS];
             int argc;
@@ -515,31 +516,31 @@ static const char * typestr(char t)
     const char * tstr;
     switch (t) {
         case 's':
-            tstr = "STR";
+            tstr = "string";
             break;
         case 'n':
-            tstr = "NUM";
+            tstr = "number";
             break;
         case 't':
-            tstr = "TAB";
+            tstr = "table";
             break;
         case 'f':
-            tstr = "FNC";
+            tstr = "function";
             break;
         case 'u':
-            tstr = "URD";
+            tstr = "userdata";
             break;
         case 'U':
             tstr = "LUD";
             break;
         case 'b':
-            tstr = "BLN";
+            tstr = "boolean";
             break;
         case 'l':
-            tstr = "NIL";
+            tstr = "nil";
             break;
         case 'd':
-            tstr = "THD";
+            tstr = "thread";
             break;
         default:
             tstr = "";

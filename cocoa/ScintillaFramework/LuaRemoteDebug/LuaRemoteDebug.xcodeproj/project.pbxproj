@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		92269465183F57D000C2A9C7 /* Socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 92269464183F57D000C2A9C7 /* Socket.c */; };
-		922D73F8183F0AB700C81863 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D73F7183F0AB700C81863 /* Cocoa.framework */; };
+		9226946F183F5BED00C2A9C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D73FA183F0AB700C81863 /* Foundation.framework */; };
 		922D7402183F0AB700C81863 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 922D7400183F0AB700C81863 /* InfoPlist.strings */; };
 		922D740D183F0AB700C81863 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D740C183F0AB700C81863 /* XCTest.framework */; };
 		922D740E183F0AB700C81863 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D73F7183F0AB700C81863 /* Cocoa.framework */; };
@@ -96,8 +96,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9226946F183F5BED00C2A9C7 /* Foundation.framework in Frameworks */,
 				922D7522183F153500C81863 /* LuaKit.framework in Frameworks */,
-				922D73F8183F0AB700C81863 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

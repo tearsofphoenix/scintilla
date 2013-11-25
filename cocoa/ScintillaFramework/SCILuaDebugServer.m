@@ -13,7 +13,11 @@
 {
     lua_State *_luaState;
     NSThread *_debugServerThread;
+    NSThread *_clientThread;
 }
+
+@property (nonatomic, copy) dispatch_block_t clientBlock;
+
 @end
 
 @implementation SCILuaDebugServer
@@ -45,6 +49,9 @@ static id gsSharedServer = nil;
             _debugServerThread = [[NSThread alloc] initWithTarget: self
                                                          selector: @selector(_debugServerMain)
                                                            object: nil];
+            _clientThread = [[NSThread alloc] initWithTarget: self
+                                                    selector: @selector(_clientMain)
+                                                      object: nil];
         }
         
         return self;
@@ -59,6 +66,17 @@ static id gsSharedServer = nil;
     }
 }
 
+- (void)_clientMain
+{
+    @autoreleasepool
+    {
+        if (_clientBlock)
+        {
+            _clientBlock();
+        }
+    }
+}
+
 - (void)startDebugSource: (NSString *)sourceCode
 {
     //start server on other thread if possible
@@ -69,16 +87,17 @@ static id gsSharedServer = nil;
     }
     
     //
-    double delayInSeconds = 0.3;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    [self setClientBlock: (^(void)
+                           {
+                               luaopen_RLdb(_luaState);
+                               //luaL_requiref(_luaState, "remotedebugger", luaopen_RLdb, 0);
+                               luaL_dostring(_luaState, [sourceCode UTF8String]);
+                           })];
     
-    dispatch_after(popTime, dispatch_get_main_queue(),
-                   (^(void)
-                    {
-                        luaopen_RLdb(_luaState);
-                        //luaL_requiref(_luaState, "remotedebugger", luaopen_RLdb, 0);
-                        luaL_dostring(_luaState, [sourceCode UTF8String]);
-                    }));
+    if (![_clientThread isExecuting])
+    {
+        [_clientThread start];
+    }
     
 }
 
