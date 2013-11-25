@@ -24,40 +24,21 @@
 #include <assert.h>
 #include "Protocol.h"
 
-SOCKET Connect(const char * addrStr, unsigned short port)
-{
-    SOCKET s;
-    struct sockaddr_in addr;
-    assert(addrStr);
 
-    s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (s == INVALID_SOCKET) {
-        return INVALID_SOCKET;
-    }
-    addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = inet_addr(addrStr);
-    addr.sin_port = htons(port);
-
-    if (connect(s, (struct sockaddr *)&addr, sizeof(addr)) == SOCKET_ERROR) {
-        closesocket(s);
-        return INVALID_SOCKET;
-    }
-    return s;
-}
 
 int SendBreak(SOCKET s, const char * file, int line)
 {
     LRDClientSocketBuffer sb;
 
     LRDClientSocketBufferInit(&sb, s);
-    SB_Print(&sb, "BR\n%s\n%d\n\n", file, line);
-    SB_Add(&sb, "", 1); //Add the End-of-flow(EOF)
+    LRDClientSocketBufferAppendFormat(&sb, "BR\n%s\n%d\n\n", file, line);
+    LRDClientSocketBufferAppend(&sb, "", 1); //Add the End-of-flow(EOF)
     return LRDClientSocketBufferSend(&sb);
 }
 
 int SendQuit(SOCKET s)
 {
-    return SendData(s, "QT\n\n", sizeof("QT\n\n")); //Including the EOF
+    return LRDSocketSendData(s, "QT\n\n", sizeof("QT\n\n")); //Including the EOF
 }
 
 int SendErr(SOCKET s, const char * fmt, ...)
@@ -66,11 +47,11 @@ int SendErr(SOCKET s, const char * fmt, ...)
     va_list ap;
 
     LRDClientSocketBufferInit(&sb, s);
-    SB_Add(&sb, "ER\n", sizeof("ER\n") - 1);
+    LRDClientSocketBufferAppend(&sb, "ER\n", sizeof("ER\n") - 1);
     va_start(ap, fmt);
-    SB_VPrint(&sb, fmt, ap);
+    LRDClientSocketBufferAppendArguments(&sb, fmt, ap);
     va_end(ap);
-    SB_Add(&sb, "\n", sizeof("\n")); //Include the End-of-flow(EOF)
+    LRDClientSocketBufferAppend(&sb, "\n", sizeof("\n")); //Include the End-of-flow(EOF)
     return LRDClientSocketBufferSend(&sb);
 }
 
@@ -80,10 +61,10 @@ int SendOK(SOCKET s, Writer writer, void * writerData)
     int rc = 0;
 
     LRDClientSocketBufferInit(&sb, s);
-    SB_Add(&sb, "OK\n", sizeof("OK\n") - 1);
+    LRDClientSocketBufferAppend(&sb, "OK\n", sizeof("OK\n") - 1);
     if (writer)
         while ((rc = writer(writerData, &sb)) == 1);
-    SB_Add(&sb, "\n", sizeof("\n")); //Include the End-of-flow(EOF)
+    LRDClientSocketBufferAppend(&sb, "\n", sizeof("\n")); //Include the End-of-flow(EOF)
     LRDClientSocketBufferSend(&sb);
     return (rc == 0 && !sb.ioerr) ? 0 : (rc < 0 ? rc : -1);
 }

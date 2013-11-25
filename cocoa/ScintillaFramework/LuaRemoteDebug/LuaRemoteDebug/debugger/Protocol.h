@@ -44,10 +44,6 @@
 */
 #define PROT_MAX_STR_LEN 256
 
-/*
-** Connect to a remote controller.
-*/
-SOCKET Connect(const char * addr, unsigned short port);
 
 /*
 ** Send break message.
@@ -69,17 +65,6 @@ int SendBreak(SOCKET s, const char * file, int line);
 **
 */
 int SendQuit(SOCKET s);
-
-/*
-** Respond with error.
-** Return 0 when success, or -1 when socket error.
-**
-** Message format:
-** ER
-** msg-body
-**
-*/
-int SendErr(SOCKET s, const char * fmt, ...);
 
 /*
 ** User defined writer function. When called, should return 1 when there are

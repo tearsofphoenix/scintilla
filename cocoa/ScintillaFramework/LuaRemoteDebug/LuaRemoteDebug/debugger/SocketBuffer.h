@@ -65,16 +65,16 @@ void LRDClientSocketBufferInit(LRDClientSocketBuffer * sb, SOCKET s);
 ** The fmt argument specifies a format like printf does, but with more restriction
 ** and some extension.
 */
-int SB_Print(LRDClientSocketBuffer * sb, const char * fmt, ...);
+int LRDClientSocketBufferAppendFormat(LRDClientSocketBuffer * sb, const char * fmt, ...) __attribute__ ((format (printf, 2, 3)));
 
-int SB_VPrint(LRDClientSocketBuffer * sb, const char * fmt, va_list ap);
+int LRDClientSocketBufferAppendArguments(LRDClientSocketBuffer * sb, const char * fmt, va_list ap);
 
 /*
 ** Add data to buffer in a Socket Buffer. If the buffer is full, then send the
 ** buffer's content and reset the buffer and continue filling the buffer with the
 ** rest data.
 */
-int SB_Add(LRDClientSocketBuffer * sb, const void * data, size_t len);
+int LRDClientSocketBufferAppend(LRDClientSocketBuffer * sb, const void * data, size_t len);
 
 /*
 ** Send the content in buffer right now.

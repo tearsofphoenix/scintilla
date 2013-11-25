@@ -28,9 +28,6 @@
 #include <string.h>
 #include <assert.h>
 
-#ifdef OS_WIN
-#include <io.h>     //access
-#else
 #include <unistd.h> //access, getcwd
 #define _MAX_PATH PATH_MAX
 #define _access access
@@ -63,7 +60,6 @@ static char * _fullpath(char * absPath, const char * relPath, size_t maxLen)
     return ret;
 }
 
-#endif
 
 #include "Protocol.h"
 
@@ -102,38 +98,11 @@ int luaopen_RLdb(lua_State * L)
     DebuggerInfo * info;
     unsigned short port;
     const char * addr;
-    char env[64];
-    char * p;
+
+    port = LRDDefaultServerPort;
+    addr = LRDDefaultServerAddress;
     
-    //read config and set up connection with a remote controller
-    p = getenv("REMOTE_LDB");
-    if (p) {    //REMOTE_LDB's value is sth. like "192.168.0.1:6688".
-        strncpy(env, p, 63);
-        env[63] = 0;
-        p = strchr(env, ':');
-        if (p && p != env) {
-            *p++ = 0;
-            if (*p)
-                port = (unsigned short)atoi(p);
-            else
-                port = LRDDefaultServerPort;
-            addr = env;
-        }
-        else if (p) {   //p == env
-            port = (unsigned short)atoi(++p);
-            addr = LRDDefaultServerAddress;
-        }
-        else {
-            port = LRDDefaultServerPort;
-            addr = env;
-        }
-    }
-    else {
-        port = LRDDefaultServerPort;
-        addr = LRDDefaultServerAddress;
-    }
-    
-    if ((s = Connect(addr, port)) == INVALID_SOCKET)
+    if ((s = LRDSocketCreate(addr, port)) == INVALID_SOCKET)
     {
         fprintf(stderr, "Socket or protocol error!\nFailed connecting remote controller at %s:%d.\n",
                 addr, (int)port);
@@ -249,9 +218,6 @@ int checkBreakPoint(lua_State * L, lua_Debug * ar, DebuggerInfo * info)
     
     lua_getinfo(L, "Sl", ar);
     if (_fullpath(path, ar->short_src, _MAX_PATH)) {
-#ifdef OS_WIN
-        _strlwr(path);
-#endif
         
         lua_pushliteral(L, "breakpoints");
         lua_rawget(L, -2);
@@ -316,8 +282,10 @@ int prompt(lua_State * L, lua_Debug * ar, DebuggerInfo * info)
             fprintf(stderr, "Socket or protocol error!\n");
             return -1;
         }
-        if (argc == 0) {
-            if (SendErr(s, "Invalid command!") < 0) {
+        if (argc == 0)
+        {
+            if (LRDSocketSendErrorMessage(s, @"Invalid command!") < 0)
+            {
                 fprintf(stderr, "Socket error!\n");
                 return -1;
             }
@@ -383,7 +351,7 @@ int prompt(lua_State * L, lua_Debug * ar, DebuggerInfo * info)
             rc = watchMemory(pArgv, argc, s);
         }
         else {
-            rc = SendErr(s, "Invalid command!");
+            rc = LRDSocketSendErrorMessage(s, @"Invalid command!");
         }
         
         if (rc < 0) {
@@ -446,7 +414,7 @@ static void printVar(LRDClientSocketBuffer * sb, const char * name, lua_State * 
     int type = lua_type(L, -1);
     
     if (name)
-        SB_Print(sb, "%s\n", name);
+        LRDClientSocketBufferAppendFormat(sb, "%s\n", name);
     
     switch(type)
     {
@@ -455,44 +423,44 @@ static void printVar(LRDClientSocketBuffer * sb, const char * name, lua_State * 
             size_t len;
             const char * str = lua_tolstring(L, -1, &len);
             size_t truncLen = len > PROT_MAX_STR_LEN ? PROT_MAX_STR_LEN : len;
-            SB_Print(sb, "s0x%08x:%d:%d:%Q\n", str, len, truncLen,
+            LRDClientSocketBufferAppendFormat(sb, "s0x%08x:%d:%d:%Q\n", str, len, truncLen,
                      str, truncLen); //%Q requires two arguments: buf and length
             break;
         }
         case LUA_TNUMBER: {
             /*
              ** LUA_NUMBER may be double or integer, So a runtime check may be required.
-             ** Otherwise SB_Print may be crashed.
+             ** Otherwise LRDClientSocketBufferAppendFormat may be crashed.
              */
-            SB_Print(sb, "n%N\n", lua_tonumber(L, -1));
+            LRDClientSocketBufferAppendFormat(sb, "n%N\n", lua_tonumber(L, -1));
             break;
         }
         case LUA_TTABLE: {
-            SB_Print(sb, "t0x%08x\n", lua_topointer(L, -1));
+            LRDClientSocketBufferAppendFormat(sb, "t0x%08x\n", lua_topointer(L, -1));
             break;
         }
         case LUA_TFUNCTION: {
-            SB_Print(sb, "f0x%08x\n", lua_topointer(L, -1));
+            LRDClientSocketBufferAppendFormat(sb, "f0x%08x\n", lua_topointer(L, -1));
             break;
         }
         case LUA_TUSERDATA: {
-            SB_Print(sb, "u0x%08x\n", lua_touserdata(L, -1));
+            LRDClientSocketBufferAppendFormat(sb, "u0x%08x\n", lua_touserdata(L, -1));
             break;
         }
         case LUA_TLIGHTUSERDATA: {
-            SB_Print(sb, "U0x%08x\n", lua_touserdata(L, -1));
+            LRDClientSocketBufferAppendFormat(sb, "U0x%08x\n", lua_touserdata(L, -1));
             break;
         }
         case LUA_TBOOLEAN: {
-            SB_Print(sb, "b%d\n", lua_toboolean(L, -1) ? 1 : 0);
+            LRDClientSocketBufferAppendFormat(sb, "b%d\n", lua_toboolean(L, -1) ? 1 : 0);
             break;
         }
         case LUA_TTHREAD: {
-            SB_Print(sb, "d0x%08x\n", lua_topointer(L, -1));
+            LRDClientSocketBufferAppendFormat(sb, "d0x%08x\n", lua_topointer(L, -1));
             break;
         }
         case LUA_TNIL: {
-            SB_Print(sb, "l\n");
+            LRDClientSocketBufferAppendFormat(sb, "l\n");
             break;
         }
     }
@@ -536,7 +504,7 @@ int listLocals(lua_State * L, lua_Debug * ar, char * argv[], int argc, SOCKET s)
         if (!lua_getstack(L, (int)level, &AR))
         {
             const char *message = "OK\nNo local variable info available at stack level";
-            return SendData(s, message, strlen(message) + 1);
+            return LRDSocketSendData(s, message, strlen(message) + 1);
         }
         ar = &AR;
     }
@@ -585,10 +553,11 @@ int listUpVars(lua_State * L, lua_Debug * ar, char * argv[], int argc, SOCKET s)
         level = 1;
     }
     
-    if (--level != 0) {
-        if (!lua_getstack(L, (int)level, &AR)) {
-            return SendErr(s, "No up variable info available at stack level %d.",
-                           level + 1);
+    if (--level != 0)
+    {
+        if (!lua_getstack(L, (int)level, &AR))
+        {
+            return LRDSocketSendErrorMessage(s, [NSString stringWithFormat: @"No up variable info available at stack level %ld.", level + 1]);
         }
         ar = &AR;
     }
@@ -638,11 +607,13 @@ int listGlobals(lua_State * L, lua_Debug * ar, char * argv[], int argc, SOCKET s
         level = 1;
     }
     
-    if (--level != 0) {
-        if (!lua_getstack(L, (int)level, &AR)) {
-            return SendErr(s, "No global variable info available at stack level %d.",
-                           level + 1);
+    if (--level != 0)
+    {
+        if (!lua_getstack(L, (int)level, &AR))
+        {
+            return LRDSocketSendErrorMessage(s, [NSString stringWithFormat: @"No global variable info available at stack level %ld.", level + 1]);
         }
+        
         ar = &AR;
     }
     
@@ -712,11 +683,14 @@ int watch(lua_State * L, lua_Debug * ar, char * argv[], int argc, SOCKET s)
         long nameLen = nameEnd ? nameEnd - name : strlen(name);
         
         if (level < 1 || argv[1][1] != 0 || !(scope == 'l' || scope == 'u' || scope == 'g'))
-            return SendErr(s, "Invalid argument!");
-        if (!lookupVar(L, ar, (int)level, scope, name, (int)nameLen)) {
+            return LRDSocketSendErrorMessage(s, @"Invalid argument!");
+        
+        if (!lookupVar(L, ar, (int)level, scope, name, (int)nameLen))
+        {
             assert(lua_gettop(L) == top);
-            return SendErr(s, "Variable is not found!");
+            return LRDSocketSendErrorMessage(s, @"Variable is not found!");
         }
+        
         if (argc > 3 && !strcmp(argv[3], "r"))
             remember = 1;
         fields = nameEnd;
@@ -727,7 +701,7 @@ int watch(lua_State * L, lua_Debug * ar, char * argv[], int argc, SOCKET s)
         if (lua_isnil(L, 1)) {
             lua_pop(L, 1);
             assert(lua_gettop(L) == top);
-            return SendErr(s, "Variable is not found!");
+            return LRDSocketSendErrorMessage(s, @"Variable is not found!");
         }
         if (argc > 0)
             fields = argv[0];
@@ -738,7 +712,7 @@ int watch(lua_State * L, lua_Debug * ar, char * argv[], int argc, SOCKET s)
     if (fields && !lookupField(L, fields)) {
         lua_pop(L, 1);
         assert(lua_gettop(L) == top);
-        return SendErr(s, "Field is not found!");
+        return LRDSocketSendErrorMessage(s, @"Field is not found!");
     }
     
     rc = SendOK(s, (Writer)w, L);
@@ -1003,7 +977,7 @@ int w(lua_State * L, LRDClientSocketBuffer * sb)
     
     switch (t) {
         case LUA_TTABLE: {
-            SB_Print(sb, "%d\n", meta ? 1 : 0);
+            LRDClientSocketBufferAppendFormat(sb, "%d\n", meta ? 1 : 0);
             lua_pushnil(L);
             while (lua_next(L, -2)) {
                 lua_pushvalue(L, -2);
@@ -1017,36 +991,36 @@ int w(lua_State * L, LRDClientSocketBuffer * sb)
         case LUA_TUSERDATA:
         {
             size_t size = lua_rawlen(L, -1);
-            SB_Print(sb, "%d\n%d\n", meta ? 1 : 0, size);
+            LRDClientSocketBufferAppendFormat(sb, "%d\n%d\n", meta ? 1 : 0, size);
             break;
         }
         case LUA_TFUNCTION: {
             lua_Debug ar;
             lua_pushvalue(L, -1);
             lua_getinfo(L, ">S", &ar);
-            SB_Print(sb, "%d\n%s\n%s\n%d\n%d\n", meta ? 1 : 0, ar.what,
+            LRDClientSocketBufferAppendFormat(sb, "%d\n%s\n%s\n%d\n%d\n", meta ? 1 : 0, ar.what,
                      ar.short_src, ar.linedefined, ar.lastlinedefined);
             break;
         }
         case LUA_TNUMBER: {
-            SB_Print(sb, "%d\n", meta ? 1 : 0);
+            LRDClientSocketBufferAppendFormat(sb, "%d\n", meta ? 1 : 0);
             break;
         }
         case LUA_TSTRING: {
-            SB_Print(sb, "%d\n", meta ? 1 : 0);
+            LRDClientSocketBufferAppendFormat(sb, "%d\n", meta ? 1 : 0);
             break;
         }
         case LUA_TBOOLEAN: {
-            SB_Print(sb, "%d\n", meta ? 1 : 0);
+            LRDClientSocketBufferAppendFormat(sb, "%d\n", meta ? 1 : 0);
             break;
         }
         case LUA_TLIGHTUSERDATA: {
-            SB_Print(sb, "%d\n", meta ? 1 : 0);
+            LRDClientSocketBufferAppendFormat(sb, "%d\n", meta ? 1 : 0);
             break;
         }
         case LUA_TTHREAD: {
             int status = lua_status(lua_tothread(L, -1));
-            SB_Print(sb, "%d\n%d\n", meta ? 1 : 0, status);
+            LRDClientSocketBufferAppendFormat(sb, "%d\n%d\n", meta ? 1 : 0, status);
             break;
         }
     }
@@ -1085,7 +1059,7 @@ int ps(lua_State * L, LRDClientSocketBuffer * sb)
     
     while (lua_getstack(L, i, &ar)) {
         lua_getinfo(L, "nSl", &ar);
-        SB_Print(sb, "%s\n%d\n%s\n%s\n", ar.short_src, ar.currentline,
+        LRDClientSocketBufferAppendFormat(sb, "%s\n%d\n%s\n%s\n", ar.short_src, ar.currentline,
                  ar.name ? ar.name : "[N/A]", *ar.what ? ar.what : "[N/A]");
         i++;
     }
@@ -1110,8 +1084,9 @@ int setBreakPoint(lua_State * L, const char * src, char * argv[], int argc, int 
     const char * file;
     char path[_MAX_PATH + 1];
     
-    if (argc < 2 || (line = strtol(argv[1], NULL, 10)) <= 0) {
-        return SendErr(s, "Invalid argument!");
+    if (argc < 2 || (line = strtol(argv[1], NULL, 10)) <= 0)
+    {
+        return LRDSocketSendErrorMessage(s, @"Invalid argument!");
     }
     
     if (!strcmp(argv[0], "."))
@@ -1119,12 +1094,10 @@ int setBreakPoint(lua_State * L, const char * src, char * argv[], int argc, int 
     else
         file = argv[0];
     
-    if (!_fullpath(path, file, _MAX_PATH) || _access(path, 0)) {
-        return SendErr(s, "Invalid path!");
+    if (!_fullpath(path, file, _MAX_PATH) || _access(path, 0))
+    {
+        return LRDSocketSendErrorMessage(s, @"Invalid path!");
     }
-#ifdef OS_WIN
-    _strlwr(path);
-#endif
     
     lua_pushliteral(L, "breakpoints");
     lua_rawget(L, -2);
@@ -1202,7 +1175,7 @@ int lb(lua_State * L, LRDClientSocketBuffer * sb)
         m = sortKey(L);
         for (j = 1; j <= m; j++) {
             lua_rawgeti(L, -1, j);
-            SB_Print(sb, "%s\n%d\n", path, lua_tointeger(L, -1));
+            LRDClientSocketBufferAppendFormat(sb, "%s\n%d\n", path, lua_tointeger(L, -1));
             lua_pop(L, 1);
         }
         lua_pop(L, 2);
@@ -1265,11 +1238,11 @@ int watchMemory(char * argv[], int argc, SOCKET s)
         || (len = strtoul(argv[1], NULL, 0)) <= 0
         || (unsigned int)((unsigned int)addr + len) < (unsigned int)addr) //overflow!
     {
-        return SendErr(s, "Invalid argument!");
+        return LRDSocketSendErrorMessage(s, @"Invalid argument!");
     }
     
     LRDClientSocketBufferInit(&sb, s);
-    SB_Print(&sb, "OK\n%08x\n", len);
-    SB_Add(&sb, addr, (int)len);
+    LRDClientSocketBufferAppendFormat(&sb, "OK\n%08x\n", len);
+    LRDClientSocketBufferAppend(&sb, addr, (int)len);
     return LRDClientSocketBufferSend(&sb);
 }

@@ -24,17 +24,12 @@
 #ifndef __SOCKET_H__
 #define __SOCKET_H__
 
-#if defined(OS_WIN)
-
-#include <winsock2.h>
-
-#else
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h> //sockaddr_in
 #include <arpa/inet.h>  //inet_addr
 #include <unistd.h>     //close
+#import <Foundation/Foundation.h>
 
 typedef int SOCKET;
 
@@ -43,11 +38,35 @@ typedef int SOCKET;
 
 #define closesocket(s) close(s)
 
-#endif
-
 #define LRDDefaultServerAddress  "127.0.0.1"
 #define LRDDefaultServerPort     8211
 
-extern int SendData(SOCKET s, const void * buf, size_t len);
+/*
+ ** Connect to a remote controller.
+ */
+extern SOCKET LRDSocketCreate(const char * addr, unsigned short port);
+
+extern int LRDSocketSendData(SOCKET s, const void * buf, size_t len);
+
+extern int LRDSocketSendErrorMessage(SOCKET s, NSString *message);
+
+extern int LRDSocketSendObject(SOCKET s, id object);
+
+#define LRDPrefix               "com.veritas.lua.remote-debugger"
+
+#define LRDMessageTypeKey       LRDPrefix ".message-type"
+#define LRDMessageTypeNormal    "normal"
+#define LRDMessageTypeError     "error"
+#define LRDMessageTypeCommand   "command"
+
+#define LRDMessageContentKey    LRDPrefix ".content"
+
+#define LRDStatusKey            LRDPrefix ".status"
+
+#define LRDStatusOK             "ok"
+#define LRDStatusError          "error"
+
+#define LRDReasonKey            LRDPrefix ".reason"
+
 
 #endif

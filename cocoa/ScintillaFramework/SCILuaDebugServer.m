@@ -12,6 +12,7 @@
 @interface SCILuaDebugServer ()
 {
     lua_State *_luaState;
+    LRDServer *_server;
     NSThread *_debugServerThread;
     NSThread *_clientThread;
 }
@@ -49,9 +50,14 @@ static id gsSharedServer = nil;
             _debugServerThread = [[NSThread alloc] initWithTarget: self
                                                          selector: @selector(_debugServerMain)
                                                            object: nil];
+            
+            [_debugServerThread setName: @"com.veritas.thread.lua.debug-server"];
+            
             _clientThread = [[NSThread alloc] initWithTarget: self
                                                     selector: @selector(_clientMain)
                                                       object: nil];
+            
+            [_clientThread setName: @"com.veritas.thread.lua.debug-client"];
         }
         
         return self;
@@ -62,6 +68,9 @@ static id gsSharedServer = nil;
 {
     @autoreleasepool
     {
+        NSLog(@"2");
+//        _server = [[LRDServer alloc] initWithHotName: @(LRDDefaultServerAddress)
+//                                                port: LRDDefaultServerPort];
         LRDStartDebugServer(LRDDefaultServerAddress, LRDDefaultServerPort);
     }
 }
@@ -79,6 +88,13 @@ static id gsSharedServer = nil;
 
 - (void)startDebugSource: (NSString *)sourceCode
 {
+    [self setClientBlock: (^(void)
+                           {
+                               NSLog(@"1");
+                               luaopen_RLdb(_luaState);
+                               luaL_dostring(_luaState, [sourceCode UTF8String]);
+                           })];
+    
     //start server on other thread if possible
     //
     if (![_debugServerThread isExecuting])
@@ -86,19 +102,10 @@ static id gsSharedServer = nil;
         [_debugServerThread start];
     }
     
-    //
-    [self setClientBlock: (^(void)
-                           {
-                               luaopen_RLdb(_luaState);
-                               //luaL_requiref(_luaState, "remotedebugger", luaopen_RLdb, 0);
-                               luaL_dostring(_luaState, [sourceCode UTF8String]);
-                           })];
-    
     if (![_clientThread isExecuting])
     {
         [_clientThread start];
     }
-    
 }
 
 @end

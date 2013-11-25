@@ -31,6 +31,8 @@
 #include "Dump.h"
 #include <errno.h>
 
+#import <CFNetwork/CFNetwork.h>
+
 typedef enum
 {
     CMD_INVALID = -1,
@@ -95,27 +97,15 @@ static void showHelp();
         return -1;\
     } while (0);
 
-#ifdef OS_WIN
-static int initSocket()
-{
-    WSADATA wsaData;
-    return WSAStartup(MAKEWORD(2, 2), &wsaData) ? -1 : 0;
-}
 
-void uninitSocket()
-{
-    WSACleanup();
-}
-
-#else
 #define initSocket() 0
 #define uninitSocket()
-#endif
 
 int LRDStartDebugServer(const char *addrStr, int port)
 {
     SOCKET s;
     SOCKET a;
+
     struct sockaddr_in addr;
 
     if (addrStr == 0)
@@ -442,7 +432,7 @@ int sendCmd(SOCKET s, CmdType t, char * argv[], int argc)
         strcat(cmdline, argv[i]);
     }
 
-    return SendData(s, cmdline, strlen(cmdline) + 1);
+    return LRDSocketSendData(s, cmdline, strlen(cmdline) + 1);
 }
 
 int waitForBreakOrQuit(SocketBuf * sb, const char ** file, const char ** lineno)

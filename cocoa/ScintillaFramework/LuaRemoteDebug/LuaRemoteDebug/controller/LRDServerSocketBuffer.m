@@ -94,7 +94,7 @@ typedef enum
     ERR = -1,
     INIT = 0,
     EOB,
-    EOF,
+    EOFFILE,
     SEPARATERS,
     TEXT
 } ParserState;
@@ -110,7 +110,7 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
     long tempLen = 0;    //length of available str in temp
     
     SB_Reset(sb);
-    while (st != EOF && st != ERR)
+    while (st != EOFFILE && st != ERR)
     {
         switch (st)
         {
@@ -140,7 +140,7 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
                     }
                     else {
                         rc = 0;
-                        st = EOF;
+                        st = EOFFILE;
                     }
                 }
                 break;
@@ -168,7 +168,7 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
                     start = p;
                 }
                 else if (sb->end)
-                    st = EOF;
+                    st = EOFFILE;
                 else
                     st = EOB;
                 
@@ -183,7 +183,7 @@ int LRDSocketBufferReadAndParse(SocketBuf * sb, const char * separaters, UserPar
                 if (*p)
                     st = SEPARATERS;
                 else if (sb->end)
-                    st = EOF;
+                    st = EOFFILE;
                 else
                     st = EOB;
                 

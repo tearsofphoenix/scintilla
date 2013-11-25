@@ -28,28 +28,8 @@
 #include <ctype.h>
 #include "SocketBuffer.h"
 
-#ifndef OS_WIN
 #define _gcvt gcvt
 #define _CVTBUFSIZE 512
-#endif
-
-#ifdef OS_WIN
-static int g_socketInited = 0;
-BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
-{
-    if (fdwReason == DLL_PROCESS_ATTACH) {
-        WSADATA wsaData;
-        if (WSAStartup(MAKEWORD(2, 2), &wsaData))
-            return FALSE;
-        g_socketInited = 1;
-    }
-    else if (fdwReason == DLL_PROCESS_DETACH) {
-        if (g_socketInited)
-            WSACleanup();
-    }
-    return TRUE;
-}
-#endif
 
 
 void LRDClientSocketBufferInit(LRDClientSocketBuffer * sb, SOCKET s)
@@ -60,7 +40,7 @@ void LRDClientSocketBufferInit(LRDClientSocketBuffer * sb, SOCKET s)
     sb->ioerr = 0;
 }
 
-int SB_Add(LRDClientSocketBuffer * sb, const void * data, size_t len)
+int LRDClientSocketBufferAppend(LRDClientSocketBuffer * sb, const void * data, size_t len)
 {
     const char * d = (const char *)data;
     while (len > 0) {
@@ -74,7 +54,7 @@ int SB_Add(LRDClientSocketBuffer * sb, const void * data, size_t len)
         if (!len)
             break;
 
-        if (SendData(sb->s, sb->buf, SOCKET_BUF_CAP) < 0) {
+        if (LRDSocketSendData(sb->s, sb->buf, SOCKET_BUF_CAP) < 0) {
             sb->ioerr = 1;
             return -1;
         }
@@ -86,10 +66,10 @@ int SB_Add(LRDClientSocketBuffer * sb, const void * data, size_t len)
 }
 
 /*
-** Functions like SB_Add except that SB_AddRepeat repeats adding character ch count count,
+** Functions like LRDClientSocketBufferAppend except that LRDClientSocketBufferAppendRepeat repeats adding character ch count count,
 ** rather than adds a block of memory.
 */
-static int SB_AddRepeat(LRDClientSocketBuffer * sb, char ch, size_t count)
+static int LRDClientSocketBufferAppendRepeat(LRDClientSocketBuffer * sb, char ch, size_t count)
 {
     while (count > 0) {
         size_t l = sb->avail >= count ? count : sb->avail;
@@ -101,7 +81,7 @@ static int SB_AddRepeat(LRDClientSocketBuffer * sb, char ch, size_t count)
         if (!count)
             break;
 
-        if (SendData(sb->s, sb->buf, SOCKET_BUF_CAP) < 0) {
+        if (LRDSocketSendData(sb->s, sb->buf, SOCKET_BUF_CAP) < 0) {
             sb->ioerr = 1;
             return -1;
         }
@@ -124,13 +104,13 @@ static char g_map[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 
     } while (0);
 
 /*
-** Functions like SB_Add, but SB_AddQuote first encodes the input str, then adds
+** Functions like LRDClientSocketBufferAppend, but LRDClientSocketBufferAppendQuote first encodes the input str, then adds
 ** the encoded string to buffer. The encoding method is simple: represent the value
 ** of a char variable in two ANSI readable characters. For example, if there's
 ** char a = 0x80;
 ** then encode(a) == "80"
 */
-static int SB_AddQuote(LRDClientSocketBuffer * sb, const char * str, int len)
+static int LRDClientSocketBufferAppendQuote(LRDClientSocketBuffer * sb, const char * str, int len)
 {
     const char * end = str + len;
     while (str < end) {
@@ -146,7 +126,7 @@ static int SB_AddQuote(LRDClientSocketBuffer * sb, const char * str, int len)
             break;
 
         //Send current full buf in sb if there's more data in str.
-        if (SendData(sb->s, sb->buf, SOCKET_BUF_CAP - sb->avail) < 0) {
+        if (LRDSocketSendData(sb->s, sb->buf, SOCKET_BUF_CAP - sb->avail) < 0) {
             sb->ioerr = 1;
             return -1;
         }
@@ -215,22 +195,27 @@ static const char * nextArg(const char * fmt, char * flag, int * width,
     return beginArg;
 }
 
-int SB_VPrint(LRDClientSocketBuffer * sb, const char * fmt, va_list ap)
+int LRDClientSocketBufferAppendArguments(LRDClientSocketBuffer * sb, const char * fmt, va_list ap)
 {
     const char * p = fmt;
-    int rc = 0;
 
-    while (*p) {
+    NSString *str = [[NSString alloc] initWithFormat: [NSString stringWithUTF8String: fmt]
+                                           arguments: ap];
+    
+    int rc = LRDClientSocketBufferAppend(sb, [str UTF8String], [str length]);
+    
+    while (*p)
+    {
         char flag;
         int width;
         char type;
         const char * argEnd;
         const char * arg = nextArg(p, &flag, &width, &type, &argEnd);
         if (!arg) {
-            rc = SB_Add(sb, p, strlen(p));
+            rc = LRDClientSocketBufferAppend(sb, p, strlen(p));
             break;
         }
-        if ((rc = SB_Add(sb, p, arg - p)) < 0)
+        if ((rc = LRDClientSocketBufferAppend(sb, p, arg - p)) < 0)
             break;
         p = argEnd;
 
@@ -241,7 +226,7 @@ int SB_VPrint(LRDClientSocketBuffer * sb, const char * fmt, va_list ap)
             assert(!flag && width == -1);
             num = va_arg(ap, int);
             sprintf(buf, "%d", num);
-            rc = SB_Add(sb, buf, strlen(buf));
+            rc = LRDClientSocketBufferAppend(sb, buf, strlen(buf));
         }
         else if (type == 'x') {
             unsigned int num;
@@ -252,16 +237,16 @@ int SB_VPrint(LRDClientSocketBuffer * sb, const char * fmt, va_list ap)
             num = va_arg(ap, unsigned int);
             sprintf(buf, "%x", num);
             len = strlen(buf);
-            if (len < width && (rc = SB_AddRepeat(sb, '0', width - len)) < 0)
+            if (len < width && (rc = LRDClientSocketBufferAppendRepeat(sb, '0', width - len)) < 0)
                 break;
-            rc = SB_Add(sb, buf, len);
+            rc = LRDClientSocketBufferAppend(sb, buf, len);
         }
         else if (type == 's') {
             const char * str;
 
             assert(!flag && width == -1);
             str = va_arg(ap, const char *);
-            rc = SB_Add(sb, str, strlen(str));
+            rc = LRDClientSocketBufferAppend(sb, str, strlen(str));
         }
         else if (type == 'N') {
             double d;
@@ -274,7 +259,7 @@ int SB_VPrint(LRDClientSocketBuffer * sb, const char * fmt, va_list ap)
             len = strlen(buf);
             if (buf[len - 1] == '.')
                 --len;
-            rc = SB_Add(sb, buf, len);
+            rc = LRDClientSocketBufferAppend(sb, buf, len);
         }
         else if (type == 'Q') {
             const char * str;
@@ -283,7 +268,7 @@ int SB_VPrint(LRDClientSocketBuffer * sb, const char * fmt, va_list ap)
             assert(!flag && width == -1);
             str = va_arg(ap, const char *);
             len = va_arg(ap, int);
-            rc = SB_AddQuote(sb, str, len);
+            rc = LRDClientSocketBufferAppendQuote(sb, str, len);
         }
 
         if (rc < 0)
@@ -293,7 +278,7 @@ int SB_VPrint(LRDClientSocketBuffer * sb, const char * fmt, va_list ap)
     return rc;
 }
 
-int SB_Print(LRDClientSocketBuffer * sb, const char * fmt, ...)
+int LRDClientSocketBufferAppendFormat(LRDClientSocketBuffer * sb, const char * fmt, ...)
 {
     int rc = 0;
     va_list ap;
@@ -302,7 +287,7 @@ int SB_Print(LRDClientSocketBuffer * sb, const char * fmt, ...)
         return -1;
 
     va_start(ap, fmt);
-    rc = SB_VPrint(sb, fmt, ap);
+    rc = LRDClientSocketBufferAppendArguments(sb, fmt, ap);
     va_end(ap);
     return rc;
 }
@@ -313,7 +298,7 @@ int LRDClientSocketBufferSend(LRDClientSocketBuffer * sb)
     if (sb->ioerr)
         return -1;
 
-    rc = SendData(sb->s, sb->buf, SOCKET_BUF_CAP - sb->avail);
+    rc = LRDSocketSendData(sb->s, sb->buf, SOCKET_BUF_CAP - sb->avail);
     sb->ioerr = rc < 0 ? 1 : 0;
     return rc;
 }

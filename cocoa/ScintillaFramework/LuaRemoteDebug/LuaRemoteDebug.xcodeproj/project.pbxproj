@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		92269465183F57D000C2A9C7 /* Socket.c in Sources */ = {isa = PBXBuildFile; fileRef = 92269464183F57D000C2A9C7 /* Socket.c */; };
+		9211EC87184331A7001064DB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9211EC86184331A7001064DB /* CFNetwork.framework */; };
+		9211EC8B18433254001064DB /* LRDServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9211EC8918433254001064DB /* LRDServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9211EC8C18433254001064DB /* LRDServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211EC8A18433254001064DB /* LRDServer.m */; };
+		9211EC8F1843462F001064DB /* EchoConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 9211EC8D1843462F001064DB /* EchoConnection.h */; };
+		9211EC901843462F001064DB /* EchoConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9211EC8E1843462F001064DB /* EchoConnection.m */; };
+		92269465183F57D000C2A9C7 /* Socket.m in Sources */ = {isa = PBXBuildFile; fileRef = 92269464183F57D000C2A9C7 /* Socket.m */; };
 		9226946F183F5BED00C2A9C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D73FA183F0AB700C81863 /* Foundation.framework */; };
 		922D7402183F0AB700C81863 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 922D7400183F0AB700C81863 /* InfoPlist.strings */; };
 		922D740D183F0AB700C81863 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D740C183F0AB700C81863 /* XCTest.framework */; };
@@ -15,16 +20,16 @@
 		922D7411183F0AB700C81863 /* LuaRemoteDebug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D73F4183F0AB700C81863 /* LuaRemoteDebug.framework */; };
 		922D7417183F0AB700C81863 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 922D7415183F0AB700C81863 /* InfoPlist.strings */; };
 		922D7419183F0AB700C81863 /* LuaRemoteDebugTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D7418183F0AB700C81863 /* LuaRemoteDebugTests.m */; };
-		922D743D183F0AE600C81863 /* Controller.c in Sources */ = {isa = PBXBuildFile; fileRef = 922D742C183F0AE600C81863 /* Controller.c */; };
-		922D743E183F0AE600C81863 /* Dump.c in Sources */ = {isa = PBXBuildFile; fileRef = 922D742D183F0AE600C81863 /* Dump.c */; };
+		922D743D183F0AE600C81863 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D742C183F0AE600C81863 /* Controller.m */; };
+		922D743E183F0AE600C81863 /* Dump.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D742D183F0AE600C81863 /* Dump.m */; };
 		922D743F183F0AE600C81863 /* Dump.h in Headers */ = {isa = PBXBuildFile; fileRef = 922D742E183F0AE600C81863 /* Dump.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		922D7442183F0AE600C81863 /* Socket.h in Headers */ = {isa = PBXBuildFile; fileRef = 922D7431183F0AE600C81863 /* Socket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		922D7443183F0AE600C81863 /* LRDServerSocketBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 922D7432183F0AE600C81863 /* LRDServerSocketBuffer.c */; };
+		922D7443183F0AE600C81863 /* LRDServerSocketBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D7432183F0AE600C81863 /* LRDServerSocketBuffer.m */; };
 		922D7444183F0AE600C81863 /* LRDServerSocketBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 922D7433183F0AE600C81863 /* LRDServerSocketBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		922D7445183F0AE600C81863 /* Debugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 922D7435183F0AE600C81863 /* Debugger.c */; };
-		922D7448183F0AE600C81863 /* Protocol.c in Sources */ = {isa = PBXBuildFile; fileRef = 922D7438183F0AE600C81863 /* Protocol.c */; };
+		922D7445183F0AE600C81863 /* Debugger.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D7435183F0AE600C81863 /* Debugger.m */; };
+		922D7448183F0AE600C81863 /* Protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D7438183F0AE600C81863 /* Protocol.m */; };
 		922D7449183F0AE600C81863 /* Protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 922D7439183F0AE600C81863 /* Protocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		922D744B183F0AE600C81863 /* SocketBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 922D743B183F0AE600C81863 /* SocketBuffer.c */; };
+		922D744B183F0AE600C81863 /* SocketBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 922D743B183F0AE600C81863 /* SocketBuffer.m */; };
 		922D744C183F0AE600C81863 /* SocketBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 922D743C183F0AE600C81863 /* SocketBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		922D7522183F153500C81863 /* LuaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922D751F183F152C00C81863 /* LuaKit.framework */; };
 		922D752F183F36B000C81863 /* LuaRemoteDebug.h in Headers */ = {isa = PBXBuildFile; fileRef = 922D7404183F0AB700C81863 /* LuaRemoteDebug.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -62,7 +67,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		92269464183F57D000C2A9C7 /* Socket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Socket.c; sourceTree = "<group>"; };
+		9211EC86184331A7001064DB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		9211EC8918433254001064DB /* LRDServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRDServer.h; sourceTree = "<group>"; };
+		9211EC8A18433254001064DB /* LRDServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRDServer.m; sourceTree = "<group>"; };
+		9211EC8D1843462F001064DB /* EchoConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EchoConnection.h; sourceTree = "<group>"; };
+		9211EC8E1843462F001064DB /* EchoConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EchoConnection.m; sourceTree = "<group>"; };
+		92269464183F57D000C2A9C7 /* Socket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Socket.m; sourceTree = "<group>"; };
 		922D73F4183F0AB700C81863 /* LuaRemoteDebug.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LuaRemoteDebug.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		922D73F7183F0AB700C81863 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		922D73FA183F0AB700C81863 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -77,16 +87,16 @@
 		922D7414183F0AB700C81863 /* LuaRemoteDebugTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LuaRemoteDebugTests-Info.plist"; sourceTree = "<group>"; };
 		922D7416183F0AB700C81863 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		922D7418183F0AB700C81863 /* LuaRemoteDebugTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuaRemoteDebugTests.m; sourceTree = "<group>"; };
-		922D742C183F0AE600C81863 /* Controller.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Controller.c; sourceTree = "<group>"; };
-		922D742D183F0AE600C81863 /* Dump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Dump.c; sourceTree = "<group>"; };
+		922D742C183F0AE600C81863 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
+		922D742D183F0AE600C81863 /* Dump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dump.m; sourceTree = "<group>"; };
 		922D742E183F0AE600C81863 /* Dump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dump.h; sourceTree = "<group>"; };
 		922D7431183F0AE600C81863 /* Socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Socket.h; sourceTree = "<group>"; };
-		922D7432183F0AE600C81863 /* LRDServerSocketBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LRDServerSocketBuffer.c; sourceTree = "<group>"; };
+		922D7432183F0AE600C81863 /* LRDServerSocketBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRDServerSocketBuffer.m; sourceTree = "<group>"; };
 		922D7433183F0AE600C81863 /* LRDServerSocketBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRDServerSocketBuffer.h; sourceTree = "<group>"; };
-		922D7435183F0AE600C81863 /* Debugger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Debugger.c; sourceTree = "<group>"; };
-		922D7438183F0AE600C81863 /* Protocol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Protocol.c; sourceTree = "<group>"; };
+		922D7435183F0AE600C81863 /* Debugger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Debugger.m; sourceTree = "<group>"; };
+		922D7438183F0AE600C81863 /* Protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Protocol.m; sourceTree = "<group>"; };
 		922D7439183F0AE600C81863 /* Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protocol.h; sourceTree = "<group>"; };
-		922D743B183F0AE600C81863 /* SocketBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SocketBuffer.c; sourceTree = "<group>"; };
+		922D743B183F0AE600C81863 /* SocketBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketBuffer.m; sourceTree = "<group>"; };
 		922D743C183F0AE600C81863 /* SocketBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketBuffer.h; sourceTree = "<group>"; };
 		922D744D183F0C1300C81863 /* LuaKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LuaKit.xcodeproj; path = LuaKit/LuaKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9211EC87184331A7001064DB /* CFNetwork.framework in Frameworks */,
 				9226946F183F5BED00C2A9C7 /* Foundation.framework in Frameworks */,
 				922D7522183F153500C81863 /* LuaKit.framework in Frameworks */,
 			);
@@ -137,6 +148,7 @@
 		922D73F6183F0AB700C81863 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9211EC86184331A7001064DB /* CFNetwork.framework */,
 				922D73F7183F0AB700C81863 /* Cocoa.framework */,
 				922D740C183F0AB700C81863 /* XCTest.framework */,
 				922D73F9183F0AB700C81863 /* Other Frameworks */,
@@ -196,13 +208,17 @@
 		922D742B183F0AE600C81863 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				922D742C183F0AE600C81863 /* Controller.c */,
-				922D742D183F0AE600C81863 /* Dump.c */,
+				922D742C183F0AE600C81863 /* Controller.m */,
+				922D742D183F0AE600C81863 /* Dump.m */,
 				922D742E183F0AE600C81863 /* Dump.h */,
 				922D7431183F0AE600C81863 /* Socket.h */,
-				92269464183F57D000C2A9C7 /* Socket.c */,
-				922D7432183F0AE600C81863 /* LRDServerSocketBuffer.c */,
+				92269464183F57D000C2A9C7 /* Socket.m */,
+				922D7432183F0AE600C81863 /* LRDServerSocketBuffer.m */,
 				922D7433183F0AE600C81863 /* LRDServerSocketBuffer.h */,
+				9211EC8918433254001064DB /* LRDServer.h */,
+				9211EC8A18433254001064DB /* LRDServer.m */,
+				9211EC8D1843462F001064DB /* EchoConnection.h */,
+				9211EC8E1843462F001064DB /* EchoConnection.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -210,10 +226,10 @@
 		922D7434183F0AE600C81863 /* debugger */ = {
 			isa = PBXGroup;
 			children = (
-				922D7435183F0AE600C81863 /* Debugger.c */,
-				922D7438183F0AE600C81863 /* Protocol.c */,
+				922D7435183F0AE600C81863 /* Debugger.m */,
+				922D7438183F0AE600C81863 /* Protocol.m */,
 				922D7439183F0AE600C81863 /* Protocol.h */,
-				922D743B183F0AE600C81863 /* SocketBuffer.c */,
+				922D743B183F0AE600C81863 /* SocketBuffer.m */,
 				922D743C183F0AE600C81863 /* SocketBuffer.h */,
 			);
 			path = debugger;
@@ -240,7 +256,9 @@
 				922D7449183F0AE600C81863 /* Protocol.h in Headers */,
 				922D7444183F0AE600C81863 /* LRDServerSocketBuffer.h in Headers */,
 				922D744C183F0AE600C81863 /* SocketBuffer.h in Headers */,
+				9211EC8F1843462F001064DB /* EchoConnection.h in Headers */,
 				922D752F183F36B000C81863 /* LuaRemoteDebug.h in Headers */,
+				9211EC8B18433254001064DB /* LRDServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,13 +381,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				922D7448183F0AE600C81863 /* Protocol.c in Sources */,
-				92269465183F57D000C2A9C7 /* Socket.c in Sources */,
-				922D7445183F0AE600C81863 /* Debugger.c in Sources */,
-				922D744B183F0AE600C81863 /* SocketBuffer.c in Sources */,
-				922D743D183F0AE600C81863 /* Controller.c in Sources */,
-				922D743E183F0AE600C81863 /* Dump.c in Sources */,
-				922D7443183F0AE600C81863 /* LRDServerSocketBuffer.c in Sources */,
+				922D7448183F0AE600C81863 /* Protocol.m in Sources */,
+				9211EC901843462F001064DB /* EchoConnection.m in Sources */,
+				92269465183F57D000C2A9C7 /* Socket.m in Sources */,
+				922D7445183F0AE600C81863 /* Debugger.m in Sources */,
+				922D744B183F0AE600C81863 /* SocketBuffer.m in Sources */,
+				922D743D183F0AE600C81863 /* Controller.m in Sources */,
+				922D743E183F0AE600C81863 /* Dump.m in Sources */,
+				922D7443183F0AE600C81863 /* LRDServerSocketBuffer.m in Sources */,
+				9211EC8C18433254001064DB /* LRDServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +507,7 @@
 		922D741D183F0AB700C81863 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -503,6 +524,7 @@
 		922D741E183F0AB700C81863 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
